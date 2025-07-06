@@ -17,48 +17,50 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 import 'package:ffmpeg_kit_flutter_min_gpl/ffmpeg_kit.dart';
 
 Future<dynamic> getLocalfileUrl(String? localfile) async {
   try {
+    // Validate input
     if (localfile == null || localfile.isEmpty) {
       return {'error': 'No file path provided'};
     }
 
-    final File inputFile = File(localfile);
-    if (!await inputFile.exists()) {
+    final File originalFile = File(localfile);
+    if (!await originalFile.exists()) {
       return {'error': 'File does not exist at the given path'};
     }
 
-    // Generate output mp3 file path in the same directory
-    final String dirPath = inputFile.parent.path;
+    // Create output .mp3 file path
     final String currentDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
-    final String fileName = 'Voixr_$currentDate.mp3';
-    final String outputPath = '$dirPath/$fileName';
+    final Directory tempDir = await getTemporaryDirectory();
+    final String mp3FilePath = p.join(tempDir.path, 'Voixr_$currentDate.mp3');
 
-    // Convert to MP3 using FFmpeg
-    final String command =
-        '-y -i "${inputFile.path}" -codec:a libmp3lame "$outputPath"';
-    await FFmpegKit.execute(command);
+    // Run FFmpeg to convert to MP3
+    final String ffmpegCommand =
+        '-i "${originalFile.path}" -vn -ar 44100 -ac 2 -b:a 192k "$mp3FilePath"';
+    final session = await FFmpegKit.execute(ffmpegCommand);
 
-    final File outputFile = File(outputPath);
-    if (!await outputFile.exists()) {
+    final File convertedFile = File(mp3FilePath);
+    if (!await convertedFile.exists()) {
       return {'error': 'MP3 conversion failed'};
     }
 
-    // Upload to Firebase Storage
+    // Upload converted MP3 file to Firebase Storage
+    final FirebaseStorage storage = FirebaseStorage.instance;
     final Reference ref =
-        FirebaseStorage.instance.ref().child('audio_uploads/$fileName');
-    final UploadTask uploadTask = ref.putFile(outputFile);
+        storage.ref().child('audio_uploads/Voixr_$currentDate.mp3');
+    final UploadTask uploadTask = ref.putFile(convertedFile);
     final TaskSnapshot snapshot = await uploadTask;
     final String downloadUrl = await snapshot.ref.getDownloadURL();
 
     // Get audio duration
     final AudioPlayer player = AudioPlayer();
     Duration? duration;
-
     try {
-      await player.setFilePath(outputPath);
+      await player.setFilePath(mp3FilePath);
       duration = player.duration ?? Duration.zero;
     } catch (_) {
       duration = Duration.zero;
