@@ -14,7 +14,6 @@ import 'dart:convert';
 import 'dart:ui';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
-import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
 import '/index.dart';
@@ -71,8 +70,11 @@ class TranscribeModel extends FlutterFlowModel<TranscribeWidget> {
   String? rectsrnew;
   FFUploadedFile recordedFileBytes =
       FFUploadedFile(bytes: Uint8List.fromList([]));
-  // Stores action output result for [Custom Action - getLocalfileUrl] action in IconButton widget.
-  dynamic? recurl;
+  bool isDataUploading_daddimFg7 = false;
+  FFUploadedFile uploadedLocalFile_daddimFg7 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl_daddimFg7 = '';
+
   AudioPlayer? soundPlayer;
   // State field(s) for DropDown widget.
   String? dropDownValue;

@@ -15,7 +15,6 @@ import 'dart:convert';
 import 'dart:ui';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
-import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/permissions_util.dart';
 import '/flutter_flow/random_data_util.dart' as random_data;
 import '/index.dart';
@@ -839,28 +838,82 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
 
                                                       _model.timerController
                                                           .onStopTimer();
-                                                      _model.recurlnow =
-                                                          await actions
-                                                              .getLocalfileUrl(
-                                                        _model.fullaudio,
-                                                      );
+                                                      {
+                                                        safeSetState(() => _model
+                                                                .isDataUploading_odogwumGtb =
+                                                            true);
+                                                        var selectedUploadedFiles =
+                                                            <FFUploadedFile>[];
+                                                        var selectedFiles =
+                                                            <SelectedFile>[];
+                                                        var downloadUrls =
+                                                            <String>[];
+                                                        try {
+                                                          selectedUploadedFiles = _model
+                                                                  .recordedFileBytes
+                                                                  .bytes!
+                                                                  .isNotEmpty
+                                                              ? [
+                                                                  _model
+                                                                      .recordedFileBytes
+                                                                ]
+                                                              : <FFUploadedFile>[];
+                                                          selectedFiles =
+                                                              selectedFilesFromUploadedFiles(
+                                                            selectedUploadedFiles,
+                                                          );
+                                                          downloadUrls =
+                                                              (await Future
+                                                                      .wait(
+                                                            selectedFiles.map(
+                                                              (f) async =>
+                                                                  await uploadData(
+                                                                      f.storagePath,
+                                                                      f.bytes),
+                                                            ),
+                                                          ))
+                                                                  .where((u) =>
+                                                                      u != null)
+                                                                  .map(
+                                                                      (u) => u!)
+                                                                  .toList();
+                                                        } finally {
+                                                          _model.isDataUploading_odogwumGtb =
+                                                              false;
+                                                        }
+                                                        if (selectedUploadedFiles
+                                                                    .length ==
+                                                                selectedFiles
+                                                                    .length &&
+                                                            downloadUrls
+                                                                    .length ==
+                                                                selectedFiles
+                                                                    .length) {
+                                                          safeSetState(() {
+                                                            _model.uploadedLocalFile_odogwumGtb =
+                                                                selectedUploadedFiles
+                                                                    .first;
+                                                            _model.uploadedFileUrl_odogwumGtb =
+                                                                downloadUrls
+                                                                    .first;
+                                                          });
+                                                        } else {
+                                                          safeSetState(() {});
+                                                          return;
+                                                        }
+                                                      }
+
                                                       FFAppState()
                                                               .InstlyRecorded =
-                                                          utility_functions_library_8g4bud_functions
-                                                              .convertStringToAudioPath(
-                                                                  getJsonField(
-                                                        _model.recurlnow,
-                                                        r'''$..url''',
-                                                      ).toString())!;
+                                                          _model
+                                                              .uploadedFileUrl_odogwumGtb;
                                                       FFAppState()
                                                               .isrecordingNow =
                                                           false;
                                                       FFAppState()
                                                               .UploadedAudio =
-                                                          getJsonField(
-                                                        _model.recurlnow,
-                                                        r'''$..url''',
-                                                      ).toString();
+                                                          _model
+                                                              .uploadedFileUrl_odogwumGtb;
                                                       FFAppState()
                                                           .update(() {});
                                                       HapticFeedback

@@ -15,7 +15,6 @@ import 'dart:convert';
 import 'dart:ui';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
-import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/permissions_util.dart';
 import '/flutter_flow/random_data_util.dart' as random_data;
 import '/index.dart';
@@ -73,8 +72,11 @@ class RecordAudioModel extends FlutterFlowModel<RecordAudioWidget> {
   String? fullaudio;
   FFUploadedFile recordedFileBytes =
       FFUploadedFile(bytes: Uint8List.fromList([]));
-  // Stores action output result for [Custom Action - getLocalfileUrl] action in IconButton widget.
-  dynamic? recurlnow;
+  bool isDataUploading_odogwumGtb = false;
+  FFUploadedFile uploadedLocalFile_odogwumGtb =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl_odogwumGtb = '';
+
   AudioPlayer? soundPlayer;
   // Stores action output result for [Backend Call - API (Buildship VoiceChanger)] action in Button widget.
   ApiCallResponse? stsresult;
