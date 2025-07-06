@@ -1,0 +1,3 @@
+PermissionGroupNotification = "Voixr 需要您的许可发送通知";
+NSPhotoLibraryUsageDescription = "Voixr 需要您的许可访问图书馆";
+NSBluetoothAlwaysUsageDescription = "此应用需要蓝牙访问才能通过蓝牙设备录制音频";

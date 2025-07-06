@@ -1,0 +1,3 @@
+PermissionGroupNotification = "Voixr a besoin de votre permission pour envoyer des notifications";
+NSPhotoLibraryUsageDescription = "Voixr a besoin de votre permission pour accéder à la bibliothèque";
+NSBluetoothAlwaysUsageDescription = "Cette application nécessite un accès Bluetooth pour enregistrer l'audio via un appareil Bluetooth";

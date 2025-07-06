@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>852801047875-j6nmkv98bsh5lp2mba5vnjat54q2upns.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.852801047875-j6nmkv98bsh5lp2mba5vnjat54q2upns</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>852801047875-3jf4h6bs37gnc56v0i6vjt8m9rvpqnso.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAL4omeNH0Pg0dIwTRdID18l9Bsn-ecceM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>852801047875</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.voixr.app</string>
+	<key>PROJECT_ID</key>
+	<string>iconic-54951</string>
+	<key>STORAGE_BUCKET</key>
+	<string>iconic-54951.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:852801047875:ios:1142e9b06c63049f0333f6</string>
+	<key>DATABASE_URL</key>
+	<string>https://iconic-54951-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

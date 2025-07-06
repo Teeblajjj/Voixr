@@ -1,0 +1,5 @@
+NSMicrophoneUsageDescription = "This app needs your permission to use  mic on this device  for audio recording";
+PermissionGroupNotification = "Voixr needs your permission to send notifications";
+NSPhotoLibraryUsageDescription = "Voixr needs your permission to access library";
+NSBluetoothAlwaysUsageDescription = "This app requires Bluetooth access to record audio through a Bluetooth device";
+NSCameraUsageDescription = "Voixr needs your permission to use you device camera";
