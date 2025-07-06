@@ -2,6 +2,11 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:ui';
+import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
+    as utility_functions_library_8g4bud_data_schema;
+import 'package:utility_functions_library_8g4bud/app_constants.dart'
+    as utility_functions_library_8g4bud_app_constant;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +14,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:text_search/text_search.dart';
 import 'created_audio_history_model.dart';
 export 'created_audio_history_model.dart';
@@ -143,7 +149,7 @@ class _CreatedAudioHistoryWidgetState extends State<CreatedAudioHistoryWidget> {
                                             .map(
                                               (record) =>
                                                   TextSearchItem.fromTerms(
-                                                      record, [record.title]),
+                                                      record, [record.title!]),
                                             )
                                             .toList(),
                                       )
@@ -250,7 +256,8 @@ class _CreatedAudioHistoryWidgetState extends State<CreatedAudioHistoryWidget> {
                           ),
                         ),
                       ),
-                      if (_model.textController.text != '')
+                      if (_model.textController.text != null &&
+                          _model.textController.text != '')
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
@@ -568,7 +575,8 @@ class _CreatedAudioHistoryWidgetState extends State<CreatedAudioHistoryWidget> {
                             },
                           ),
                         ),
-                      if (_model.textController.text == '')
+                      if (_model.textController.text == null ||
+                          _model.textController.text == '')
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),

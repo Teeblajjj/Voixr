@@ -4,12 +4,21 @@ import '/components/emptylist_widget.dart';
 import '/flutter_flow/flutter_flow_audio_player.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
+    as utility_functions_library_8g4bud_data_schema;
+import '/index.dart';
+import 'package:utility_functions_library_8g4bud/app_constants.dart'
+    as utility_functions_library_8g4bud_app_constant;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'single_model.dart';
 export 'single_model.dart';
 
@@ -56,10 +65,10 @@ class _SingleWidgetState extends State<SingleWidget> {
     return FutureBuilder<TranscriptionsRecord>(
       future: FFAppState().podref(
         uniqueQueryKey: valueOrDefault<String>(
-          widget.docref?.id,
+          widget!.docref?.id,
           '23445',
         ),
-        requestFn: () => TranscriptionsRecord.getDocumentOnce(widget.docref!),
+        requestFn: () => TranscriptionsRecord.getDocumentOnce(widget!.docref!),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.

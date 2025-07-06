@@ -1,12 +1,16 @@
 import '/components/actionsheet1_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+import 'package:utility_functions_library_8g4bud/app_constants.dart'
+    as utility_functions_library_8g4bud_app_constant;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:provider/provider.dart';
 import 'voice2comp_model.dart';
 export 'voice2comp_model.dart';
 
@@ -67,15 +71,15 @@ class _Voice2compWidgetState extends State<Voice2compWidget> {
             return Padding(
               padding: MediaQuery.viewInsetsOf(context),
               child: Actionsheet1Widget(
-                voiceid: widget.id?.toString(),
-                voicename: widget.name?.toString(),
-                usecase: widget.usecase?.toString(),
+                voiceid: widget!.id?.toString(),
+                voicename: widget!.name?.toString(),
+                usecase: widget!.usecase?.toString(),
               ),
             );
           },
         ).then((value) => safeSetState(() {}));
 
-        FFAppState().Voiceid = widget.id!.toString();
+        FFAppState().Voiceid = widget!.id!.toString();
         safeSetState(() {});
       },
       child: Container(
@@ -115,7 +119,7 @@ class _Voice2compWidgetState extends State<Voice2compWidget> {
                     children: [
                       Text(
                         valueOrDefault<String>(
-                          widget.name?.toString(),
+                          widget!.name?.toString(),
                           'name',
                         ).maybeHandleOverflow(
                           maxChars: 11,
@@ -138,7 +142,7 @@ class _Voice2compWidgetState extends State<Voice2compWidget> {
                       ),
                       Text(
                         valueOrDefault<String>(
-                          widget.usecase?.toString(),
+                          widget!.usecase?.toString(),
                           'usecase',
                         ).maybeHandleOverflow(
                           maxChars: 10,
@@ -175,7 +179,7 @@ class _Voice2compWidgetState extends State<Voice2compWidget> {
                     }
                     _model.soundPlayer!.setVolume(1.0);
                     _model.soundPlayer!
-                        .setUrl(widget.link!.toString())
+                        .setUrl(widget!.link!.toString())
                         .then((_) => _model.soundPlayer!.play());
 
                     await Future.delayed(const Duration(milliseconds: 3500));

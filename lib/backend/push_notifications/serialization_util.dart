@@ -1,12 +1,18 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:from_css_color/from_css_color.dart';
 
 import '/backend/backend.dart';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
+import '/backend/schema/structs/index.dart';
 
+import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
+    as utility_functions_library_8g4bud_data_schema;
 
+import 'package:ff_commons/flutter_flow/lat_lng.dart';
 import 'package:ff_commons/flutter_flow/place.dart';
 import 'package:ff_commons/flutter_flow/uploaded_file.dart';
 
@@ -65,7 +71,7 @@ String serializeParameterData(Map<String, dynamic> parameterData) => jsonEncode(
           key,
           serializeParameter(value),
         ),
-      )..removeWhere((k, v) => v == null),
+      )..removeWhere((k, v) => k == null || v == null),
     );
 
 /// END SERIALIZATION HELPERS

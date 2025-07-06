@@ -1,7 +1,10 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
+import 'dart:ui';
 import '/index.dart';
+import 'package:utility_functions_library_8g4bud/app_constants.dart'
+    as utility_functions_library_8g4bud_app_constant;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
@@ -69,22 +72,22 @@ class _Voice2comprecWidgetState extends State<Voice2comprecWidget> {
               RecordAudioWidget.routeName,
               queryParameters: {
                 'name': serializeParam(
-                  widget.name?.toString(),
+                  widget!.name?.toString(),
                   ParamType.String,
                 ),
                 'usecase': serializeParam(
-                  widget.usecase?.toString(),
+                  widget!.usecase?.toString(),
                   ParamType.String,
                 ),
                 'id': serializeParam(
-                  widget.id?.toString(),
+                  widget!.id?.toString(),
                   ParamType.String,
                 ),
               }.withoutNulls,
             );
           }(),
         );
-        FFAppState().Voiceid = widget.id!.toString();
+        FFAppState().Voiceid = widget!.id!.toString();
         safeSetState(() {});
       },
       child: Container(
@@ -124,7 +127,7 @@ class _Voice2comprecWidgetState extends State<Voice2comprecWidget> {
                     children: [
                       Text(
                         valueOrDefault<String>(
-                          widget.name?.toString(),
+                          widget!.name?.toString(),
                           'name',
                         ).maybeHandleOverflow(
                           maxChars: 11,
@@ -147,7 +150,7 @@ class _Voice2comprecWidgetState extends State<Voice2comprecWidget> {
                       ),
                       Text(
                         valueOrDefault<String>(
-                          widget.usecase?.toString(),
+                          widget!.usecase?.toString(),
                           'usecase',
                         ).maybeHandleOverflow(
                           maxChars: 10,
@@ -178,7 +181,7 @@ class _Voice2comprecWidgetState extends State<Voice2comprecWidget> {
                   onPressed: () async {
                     _model.isplaying = true;
                     safeSetState(() {});
-                    FFAppState().audiopath = widget.link!.toString();
+                    FFAppState().audiopath = widget!.link!.toString();
                     safeSetState(() {});
                     _model.soundPlayer ??= AudioPlayer();
                     if (_model.soundPlayer!.playing) {

@@ -11,16 +11,24 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:async';
+import 'dart:convert';
+import 'dart:ui';
+import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
+    as utility_functions_library_8g4bud_data_schema;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/permissions_util.dart';
 import '/flutter_flow/random_data_util.dart' as random_data;
 import '/index.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'package:utility_functions_library_8g4bud/app_constants.dart'
+    as utility_functions_library_8g4bud_app_constant;
 import 'package:utility_functions_library_8g4bud/flutter_flow/custom_functions.dart'
     as utility_functions_library_8g4bud_functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
@@ -901,10 +909,15 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                       onTap: () async {
                                                         if (valueOrDefault<
                                                             bool>(
-                                                          (FFAppState()
+                                                          (FFAppState().UploadedAudio !=
+                                                                      null &&
+                                                                  FFAppState()
                                                                           .UploadedAudio !=
                                                                       '') ||
                                                               (FFAppState()
+                                                                          .InstlyRecorded !=
+                                                                      null &&
+                                                                  FFAppState()
                                                                           .InstlyRecorded !=
                                                                       ''),
                                                           false,
@@ -1132,7 +1145,7 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                             ),
                                             Text(
                                               valueOrDefault<String>(
-                                                widget.name,
+                                                widget!.name,
                                                 'voixr',
                                               ).maybeHandleOverflow(
                                                 maxChars: 11,
@@ -1272,7 +1285,9 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         18.0, 12.0, 18.0, 12.0),
                                     child: FFButtonWidget(
-                                      onPressed: (FFAppState().InstlyRecorded == '')
+                                      onPressed: (FFAppState().InstlyRecorded ==
+                                                  null ||
+                                              FFAppState().InstlyRecorded == '')
                                           ? null
                                           : () async {
                                               _model.soundPlayer?.stop();
@@ -1287,7 +1302,7 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                       .call(
                                                 audio:
                                                     FFAppState().InstlyRecorded,
-                                                voiceId: widget.id,
+                                                voiceId: widget!.id,
                                               );
 
                                               if ((_model.stsresult
@@ -1307,7 +1322,7 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                           ?.bodyText ??
                                                       ''),
                                                   sourceType: 'STS',
-                                                  voiceId: widget.id,
+                                                  voiceId: widget!.id,
                                                   createdAt:
                                                       getCurrentTimestamp,
                                                   userId:
@@ -1332,7 +1347,7 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                                   ?.bodyText ??
                                                               ''),
                                                           sourceType: 'STS',
-                                                          voiceId: widget.id,
+                                                          voiceId: widget!.id,
                                                           createdAt:
                                                               getCurrentTimestamp,
                                                           userId:

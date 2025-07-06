@@ -1,6 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/index.dart';
+import 'package:utility_functions_library_8g4bud/app_constants.dart'
+    as utility_functions_library_8g4bud_app_constant;
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -122,15 +125,15 @@ class _Actionsheet1WidgetState extends State<Actionsheet1Widget> {
                   TexttoSpeechWidget.routeName,
                   queryParameters: {
                     'voicename': serializeParam(
-                      widget.voicename,
+                      widget!.voicename,
                       ParamType.String,
                     ),
                     'usecase': serializeParam(
-                      widget.usecase,
+                      widget!.usecase,
                       ParamType.String,
                     ),
                     'id': serializeParam(
-                      widget.voiceid,
+                      widget!.voiceid,
                       ParamType.String,
                     ),
                   }.withoutNulls,
@@ -175,11 +178,11 @@ class _Actionsheet1WidgetState extends State<Actionsheet1Widget> {
                     RecordAudioWidget.routeName,
                     queryParameters: {
                       'name': serializeParam(
-                        widget.voicename,
+                        widget!.voicename,
                         ParamType.String,
                       ),
                       'usecase': serializeParam(
-                        widget.usecase,
+                        widget!.usecase,
                         ParamType.String,
                       ),
                       'id': serializeParam(

@@ -5,16 +5,24 @@ import '/components/nointernet_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
+    as utility_functions_library_8g4bud_data_schema;
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
+import 'package:utility_functions_library_8g4bud/app_constants.dart'
+    as utility_functions_library_8g4bud_app_constant;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
+import 'package:provider/provider.dart';
 import 'package:text_search/text_search.dart';
 import 'librarypage_model.dart';
 export 'librarypage_model.dart';
@@ -357,7 +365,7 @@ class _LibrarypageWidgetState extends State<LibrarypageWidget>
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     if ((currentUserDocument?.myFavs
-                                                    .toList() ??
+                                                    ?.toList() ??
                                                 [])
                                             .length >
                                         0)
@@ -469,7 +477,7 @@ class _LibrarypageWidgetState extends State<LibrarypageWidget>
                                               return Visibility(
                                                 visible: (currentUserDocument
                                                                 ?.myFavs
-                                                                .toList() ??
+                                                                ?.toList() ??
                                                             [])
                                                         .contains(
                                                             bosavedPodcastsRecord
@@ -642,7 +650,7 @@ class _LibrarypageWidgetState extends State<LibrarypageWidget>
                                                             bosavedIndex];
                                                     return (currentUserDocument
                                                                     ?.myFavs
-                                                                    .toList() ??
+                                                                    ?.toList() ??
                                                                 [])
                                                             .contains(
                                                                 bosavedPodcastsRecord
@@ -1060,11 +1068,11 @@ class _LibrarypageWidgetState extends State<LibrarypageWidget>
                                                                     .fromTerms(
                                                                         record,
                                                                         [
-                                                                  record.title,
+                                                                  record.title!,
                                                                   record
-                                                                      .byname,
+                                                                      .byname!,
                                                                   record
-                                                                      .originalText
+                                                                      .originalText!
                                                                 ]),
                                                           )
                                                           .toList(),
@@ -1227,7 +1235,8 @@ class _LibrarypageWidgetState extends State<LibrarypageWidget>
                                   ].divide(SizedBox(width: 8.0)),
                                 ),
                               ),
-                              if (_model.textController2.text != '')
+                              if (_model.textController2.text != null &&
+                                  _model.textController2.text != '')
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 16.0, 0.0),
@@ -1529,7 +1538,8 @@ class _LibrarypageWidgetState extends State<LibrarypageWidget>
                                     },
                                   ),
                                 ),
-                              if (_model.textController2.text == '')
+                              if (_model.textController2.text == null ||
+                                  _model.textController2.text == '')
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 16.0, 0.0),

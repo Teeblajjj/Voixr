@@ -1,10 +1,14 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+import 'package:utility_functions_library_8g4bud/app_constants.dart'
+    as utility_functions_library_8g4bud_app_constant;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:provider/provider.dart';
 import 'voice2comppocast_model.dart';
 export 'voice2comppocast_model.dart';
 
@@ -58,14 +62,14 @@ class _Voice2comppocastWidgetState extends State<Voice2comppocastWidget> {
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
-        if (widget.whos == 'Host' ? true : false) {
-          FFAppState().HostName = widget.name!.toString();
-          FFAppState().HostVid = widget.id!.toString();
+        if (widget!.whos == 'Host' ? true : false) {
+          FFAppState().HostName = widget!.name!.toString();
+          FFAppState().HostVid = widget!.id!.toString();
           safeSetState(() {});
           Navigator.pop(context);
         } else {
-          FFAppState().GuestName = widget.name!.toString();
-          FFAppState().GuestVid = widget.id!.toString();
+          FFAppState().GuestName = widget!.name!.toString();
+          FFAppState().GuestVid = widget!.id!.toString();
           safeSetState(() {});
           Navigator.pop(context);
         }
@@ -107,7 +111,7 @@ class _Voice2comppocastWidgetState extends State<Voice2comppocastWidget> {
                     children: [
                       Text(
                         valueOrDefault<String>(
-                          widget.name?.toString(),
+                          widget!.name?.toString(),
                           'name',
                         ).maybeHandleOverflow(
                           maxChars: 11,
@@ -130,7 +134,7 @@ class _Voice2comppocastWidgetState extends State<Voice2comppocastWidget> {
                       ),
                       Text(
                         valueOrDefault<String>(
-                          widget.usecase?.toString(),
+                          widget!.usecase?.toString(),
                           'usecase',
                         ).maybeHandleOverflow(
                           maxChars: 10,
@@ -167,7 +171,7 @@ class _Voice2comppocastWidgetState extends State<Voice2comppocastWidget> {
                     }
                     _model.soundPlayer!.setVolume(1.0);
                     _model.soundPlayer!
-                        .setUrl(widget.link!.toString())
+                        .setUrl(widget!.link!.toString())
                         .then((_) => _model.soundPlayer!.play());
 
                     await Future.delayed(const Duration(milliseconds: 3500));

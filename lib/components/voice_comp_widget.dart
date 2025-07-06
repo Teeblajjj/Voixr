@@ -1,6 +1,9 @@
 import '/components/actionsheet1_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:ui';
+import 'package:utility_functions_library_8g4bud/app_constants.dart'
+    as utility_functions_library_8g4bud_app_constant;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
@@ -113,15 +116,15 @@ class _VoiceCompWidgetState extends State<VoiceCompWidget> {
                       return Padding(
                         padding: MediaQuery.viewInsetsOf(context),
                         child: Actionsheet1Widget(
-                          voiceid: widget.voiceId?.toString(),
-                          voicename: widget.parameter1?.toString(),
-                          usecase: widget.parameter4?.toString(),
+                          voiceid: widget!.voiceId?.toString(),
+                          voicename: widget!.parameter1?.toString(),
+                          usecase: widget!.parameter4?.toString(),
                         ),
                       );
                     },
                   ).then((value) => safeSetState(() {}));
 
-                  FFAppState().Voiceid = widget.voiceId!.toString();
+                  FFAppState().Voiceid = widget!.voiceId!.toString();
                   safeSetState(() {});
                 },
                 child: Column(
@@ -129,7 +132,7 @@ class _VoiceCompWidgetState extends State<VoiceCompWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.parameter1!.toString().maybeHandleOverflow(
+                      widget!.parameter1!.toString().maybeHandleOverflow(
                             maxChars: 23,
                             replacement: '…',
                           ),
@@ -149,8 +152,8 @@ class _VoiceCompWidgetState extends State<VoiceCompWidget> {
                           ),
                     ),
                     Text(
-                      '${widget.parameter4?.toString()} • ${valueOrDefault<String>(
-                        widget.parameter2?.toString(),
+                      '${widget!.parameter4?.toString()} • ${valueOrDefault<String>(
+                        widget!.parameter2?.toString(),
                         'Voixr',
                       )}'
                           .maybeHandleOverflow(
@@ -218,7 +221,7 @@ class _VoiceCompWidgetState extends State<VoiceCompWidget> {
                             highlightColor: Colors.transparent,
                             onTap: () async {
                               _model.soundPlayer?.stop();
-                              FFAppState().audiopath = widget.url!.toString();
+                              FFAppState().audiopath = widget!.url!.toString();
                               safeSetState(() {});
                               _model.isplaying = true;
                               safeSetState(() {});
@@ -265,15 +268,15 @@ class _VoiceCompWidgetState extends State<VoiceCompWidget> {
                         return Padding(
                           padding: MediaQuery.viewInsetsOf(context),
                           child: Actionsheet1Widget(
-                            voiceid: widget.voiceId?.toString(),
-                            voicename: widget.parameter1?.toString(),
-                            usecase: widget.parameter4?.toString(),
+                            voiceid: widget!.voiceId?.toString(),
+                            voicename: widget!.parameter1?.toString(),
+                            usecase: widget!.parameter4?.toString(),
                           ),
                         );
                       },
                     ).then((value) => safeSetState(() {}));
 
-                    FFAppState().Voiceid = widget.voiceId!.toString();
+                    FFAppState().Voiceid = widget!.voiceId!.toString();
                     safeSetState(() {});
                   },
                 ),

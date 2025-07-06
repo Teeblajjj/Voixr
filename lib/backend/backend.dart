@@ -13,6 +13,8 @@ import 'schema/collction_record.dart';
 import 'schema/transcriptions_record.dart';
 import 'schema/languages_record.dart';
 import 'schema/recordedfiles_record.dart';
+import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
+    as utility_functions_library_8g4bud_data_schema;
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;

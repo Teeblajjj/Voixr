@@ -5,12 +5,18 @@ import '/components/voice2comppocast_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
+    as utility_functions_library_8g4bud_data_schema;
+import 'package:utility_functions_library_8g4bud/app_constants.dart'
+    as utility_functions_library_8g4bud_app_constant;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:provider/provider.dart';
 import 'choosepodcaster1_model.dart';
 export 'choosepodcaster1_model.dart';
 
@@ -79,7 +85,7 @@ class _Choosepodcaster1WidgetState extends State<Choosepodcaster1Widget> {
                         alignment: AlignmentDirectional(0.0, 0.0),
                         child: Text(
                           valueOrDefault<String>(
-                            widget.whoSvoice,
+                            widget!.whoSvoice,
                             'Host',
                           ),
                           style: FlutterFlowTheme.of(context)
@@ -172,7 +178,7 @@ class _Choosepodcaster1WidgetState extends State<Choosepodcaster1Widget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          if (widget.whoSvoice == 'Host' ? true : false) {
+                          if (widget!.whoSvoice == 'Host' ? true : false) {
                             FFAppState().HostName = 'Odessey';
                             FFAppState().HostVid = '6F5Zhi321D3Oq7v1oNT4';
                             safeSetState(() {});
@@ -366,7 +372,7 @@ class _Choosepodcaster1WidgetState extends State<Choosepodcaster1Widget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          if (widget.whoSvoice == 'Host' ? true : false) {
+                          if (widget!.whoSvoice == 'Host' ? true : false) {
                             FFAppState().HostName = 'Tessy';
                             FFAppState().HostVid = '56AoDkrOh6qfVPDXZ7Pt';
                             safeSetState(() {});
@@ -560,7 +566,7 @@ class _Choosepodcaster1WidgetState extends State<Choosepodcaster1Widget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          if (widget.whoSvoice == 'Host' ? true : false) {
+                          if (widget!.whoSvoice == 'Host' ? true : false) {
                             FFAppState().HostName = 'Grandpa';
                             FFAppState().HostVid = 'NOpBlnGInO9m6vDvFkFC';
                             safeSetState(() {});
@@ -754,7 +760,7 @@ class _Choosepodcaster1WidgetState extends State<Choosepodcaster1Widget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          if (widget.whoSvoice == 'Host' ? true : false) {
+                          if (widget!.whoSvoice == 'Host' ? true : false) {
                             FFAppState().HostName = 'Fredie';
                             FFAppState().HostVid = 'QTGiyJvep6bcx4WD1qAq';
                             safeSetState(() {});
@@ -1001,7 +1007,7 @@ class _Choosepodcaster1WidgetState extends State<Choosepodcaster1Widget> {
                               usecase: gridViewVoicesRecord.accent,
                               link: gridViewVoicesRecord.previewUrl,
                               id: gridViewVoicesRecord.id,
-                              whos: widget.whoSvoice!,
+                              whos: widget!.whoSvoice!,
                               audio: gridViewVoicesRecord.preview2,
                             ),
                           );
@@ -1049,7 +1055,7 @@ class _Choosepodcaster1WidgetState extends State<Choosepodcaster1Widget> {
                                   )
                                   ?.map((e) => e)
                                   .toList()
-                                  .toList() ??
+                                  ?.toList() ??
                               [];
 
                           return GridView.builder(
@@ -1098,7 +1104,7 @@ class _Choosepodcaster1WidgetState extends State<Choosepodcaster1Widget> {
                                     allItem,
                                     r'''$.voice_id''',
                                   ),
-                                  whos: widget.whoSvoice!,
+                                  whos: widget!.whoSvoice!,
                                 ),
                               );
                             },

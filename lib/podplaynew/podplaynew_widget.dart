@@ -1,14 +1,23 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_audio_player.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
+    as utility_functions_library_8g4bud_data_schema;
 import '/flutter_flow/random_data_util.dart' as random_data;
+import 'package:utility_functions_library_8g4bud/app_constants.dart'
+    as utility_functions_library_8g4bud_app_constant;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'podplaynew_model.dart';
 export 'podplaynew_model.dart';
 
@@ -41,7 +50,7 @@ class _PodplaynewWidgetState extends State<PodplaynewWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await widget.voicref!.update({
+      await widget!.voicref!.update({
         ...mapToFirestore(
           {
             'playa': FieldValue.increment(1),
@@ -63,10 +72,10 @@ class _PodplaynewWidgetState extends State<PodplaynewWidget> {
     return FutureBuilder<PodcastsRecord>(
       future: FFAppState().podxx(
         uniqueQueryKey: valueOrDefault<String>(
-          widget.voicref?.id,
+          widget!.voicref?.id,
           '67564546576879',
         ),
-        requestFn: () => PodcastsRecord.getDocumentOnce(widget.voicref!),
+        requestFn: () => PodcastsRecord.getDocumentOnce(widget!.voicref!),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.

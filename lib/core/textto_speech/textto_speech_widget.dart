@@ -7,10 +7,17 @@ import '/flutter_flow/flutter_flow_audio_player.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:convert';
+import 'dart:ui';
+import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
+    as utility_functions_library_8g4bud_data_schema;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import '/index.dart';
+import 'package:utility_functions_library_8g4bud/app_constants.dart'
+    as utility_functions_library_8g4bud_app_constant;
 import 'package:utility_functions_library_8g4bud/flutter_flow/custom_functions.dart'
     as utility_functions_library_8g4bud_functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
@@ -630,7 +637,7 @@ class _TexttoSpeechWidgetState extends State<TexttoSpeechWidget> {
                                               Flexible(
                                                 child: Text(
                                                   valueOrDefault<String>(
-                                                    widget.voicename,
+                                                    widget!.voicename,
                                                     'Ai voix',
                                                   ),
                                                   style: FlutterFlowTheme.of(
@@ -668,7 +675,7 @@ class _TexttoSpeechWidgetState extends State<TexttoSpeechWidget> {
                                               ))
                                                 Text(
                                                   valueOrDefault<String>(
-                                                    widget.usecase,
+                                                    widget!.usecase,
                                                     'professional',
                                                   ),
                                                   style: FlutterFlowTheme.of(
@@ -853,7 +860,11 @@ class _TexttoSpeechWidgetState extends State<TexttoSpeechWidget> {
                                                     BorderRadius.circular(44.0),
                                               ),
                                               child: FFButtonWidget(
-                                                onPressed: (_model.textController
+                                                onPressed: (_model
+                                                                .textController
+                                                                .text ==
+                                                            null ||
+                                                        _model.textController
                                                                 .text ==
                                                             '')
                                                     ? null
@@ -872,7 +883,7 @@ class _TexttoSpeechWidgetState extends State<TexttoSpeechWidget> {
                                                           text: _model
                                                               .textController
                                                               .text,
-                                                          voiceId: widget.id,
+                                                          voiceId: widget!.id,
                                                         );
 
                                                         if ((_model.bsresult
@@ -893,7 +904,7 @@ class _TexttoSpeechWidgetState extends State<TexttoSpeechWidget> {
                                                                         ?.bodyText ??
                                                                     ''),
                                                             sourceType: 'TTS',
-                                                            voiceId: widget.id,
+                                                            voiceId: widget!.id,
                                                             createdAt:
                                                                 getCurrentTimestamp,
                                                             userId:
@@ -922,7 +933,7 @@ class _TexttoSpeechWidgetState extends State<TexttoSpeechWidget> {
                                                                         sourceType:
                                                                             'TTS',
                                                                         voiceId:
-                                                                            widget.id,
+                                                                            widget!.id,
                                                                         createdAt:
                                                                             getCurrentTimestamp,
                                                                         userId:

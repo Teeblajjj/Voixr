@@ -10,13 +10,20 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:convert';
+import 'dart:ui';
+import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
+    as utility_functions_library_8g4bud_data_schema;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
 import '/index.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'package:utility_functions_library_8g4bud/app_constants.dart'
+    as utility_functions_library_8g4bud_app_constant;
 import 'package:utility_functions_library_8g4bud/flutter_flow/custom_functions.dart'
     as utility_functions_library_8g4bud_functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
@@ -809,10 +816,15 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                     ),
                                                     onPressed: () async {
                                                       if (valueOrDefault<bool>(
-                                                        (FFAppState()
+                                                        (FFAppState().UploadedAudio !=
+                                                                    null &&
+                                                                FFAppState()
                                                                         .UploadedAudio !=
                                                                     '') ||
                                                             (FFAppState()
+                                                                        .InstlyRecorded !=
+                                                                    null &&
+                                                                FFAppState()
                                                                         .InstlyRecorded !=
                                                                     ''),
                                                         false,
@@ -1275,6 +1287,8 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           if (FFAppState().InstlyRecorded !=
+                                                  null &&
+                                              FFAppState().InstlyRecorded !=
                                                   '') {
                                             _model.created = false;
                                             _model.isworking = true;
