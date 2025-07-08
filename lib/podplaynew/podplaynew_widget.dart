@@ -69,13 +69,13 @@ class _PodplaynewWidgetState extends State<PodplaynewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<PodcastsRecord>(
-      future: FFAppState().podxx(
+    return StreamBuilder<PodcastsRecord>(
+      stream: FFAppState().podxx(
         uniqueQueryKey: valueOrDefault<String>(
           widget!.voicref?.id,
           '67564546576879',
         ),
-        requestFn: () => PodcastsRecord.getDocumentOnce(widget!.voicref!),
+        requestFn: () => PodcastsRecord.getDocument(widget!.voicref!),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.

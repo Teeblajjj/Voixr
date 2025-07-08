@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
+import '/components/nointernet_widget.dart';
 import '/components/voice2comptextsp_copy_widget.dart';
 import '/components/voice2comptextsp_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -8,12 +9,14 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
-import '/index.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:utility_functions_library_8g4bud/app_constants.dart'
     as utility_functions_library_8g4bud_app_constant;
 import 'voices_textspch_widget.dart' show VoicesTextspchWidget;
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +28,8 @@ class VoicesTextspchModel extends FlutterFlowModel<VoicesTextspchWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  // Stores action output result for [Custom Action - checkInternetConnection] action in voicesTextspch widget.
+  bool? network3;
   // Models for voice2comptextsp dynamic component.
   late FlutterFlowDynamicModels<Voice2comptextspModel> voice2comptextspModels;
   // Models for voice2comptextspCopy dynamic component.

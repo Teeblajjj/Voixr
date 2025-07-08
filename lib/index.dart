@@ -20,3 +20,5 @@ export '/single/single_widget.dart' show SingleWidget;
 export '/payvo1/payvo1_widget.dart' show Payvo1Widget;
 export '/choosetype/choosetype_widget.dart' show ChoosetypeWidget;
 export '/podplaynew/podplaynew_widget.dart' show PodplaynewWidget;
+export '/pricing/pricing_widget.dart' show PricingWidget;
+export '/copytocb/copytocb_widget.dart' show CopytocbWidget;

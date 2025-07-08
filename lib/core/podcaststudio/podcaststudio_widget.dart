@@ -2,7 +2,6 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/components/choosepodcaster1_widget.dart';
-import '/components/created_audio_history_widget.dart';
 import '/components/loading_screen_widget.dart';
 import '/flutter_flow/flutter_flow_audio_player.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
@@ -193,25 +192,50 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 0.0, 2.0, 0.0),
                                             child: AuthUserStreamWidget(
-                                              builder: (context) => Text(
-                                                valueOrDefault<String>(
-                                                  formatNumber(
-                                                    valueOrDefault(
-                                                        currentUserDocument
-                                                            ?.credits,
-                                                        0),
-                                                    formatType:
-                                                        FormatType.decimal,
-                                                    decimalType:
-                                                        DecimalType.automatic,
+                                              builder: (context) => InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  context.pushNamed(
+                                                      PricingWidget.routeName);
+                                                },
+                                                child: Text(
+                                                  valueOrDefault<String>(
+                                                    formatNumber(
+                                                      valueOrDefault(
+                                                          currentUserDocument
+                                                              ?.credits,
+                                                          0),
+                                                      formatType:
+                                                          FormatType.decimal,
+                                                      decimalType:
+                                                          DecimalType.automatic,
+                                                    ),
+                                                    '0',
                                                   ),
-                                                  '0',
-                                                ),
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      font: GoogleFonts.manrope(
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font:
+                                                            GoogleFonts.manrope(
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        fontSize: 16.0,
+                                                        letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.w800,
                                                         fontStyle:
@@ -220,20 +244,7 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
                                                                 .bodyMedium
                                                                 .fontStyle,
                                                       ),
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      fontSize: 16.0,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .fontStyle,
-                                                    ),
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -245,12 +256,23 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 4.0, 0.0),
-                                            child: Icon(
-                                              Icons.stars,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .warning,
-                                              size: 22.0,
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                    PricingWidget.routeName);
+                                              },
+                                              child: Icon(
+                                                Icons.toll_outlined,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .warning,
+                                                size: 25.0,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -260,34 +282,15 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
-                                            await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              context: context,
-                                              builder: (context) {
-                                                return GestureDetector(
-                                                  onTap: () {
-                                                    FocusScope.of(context)
-                                                        .unfocus();
-                                                    FocusManager
-                                                        .instance.primaryFocus
-                                                        ?.unfocus();
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        MediaQuery.viewInsetsOf(
-                                                            context),
-                                                    child: Container(
-                                                      height: 650.0,
-                                                      child:
-                                                          CreatedAudioHistoryWidget(),
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ).then(
-                                                (value) => safeSetState(() {}));
+                                            context.pushNamed(
+                                              LibrarypageWidget.routeName,
+                                              queryParameters: {
+                                                'tabControl': serializeParam(
+                                                  'p',
+                                                  ParamType.String,
+                                                ),
+                                              }.withoutNulls,
+                                            );
                                           },
                                           child: Container(
                                             width: 40.0,

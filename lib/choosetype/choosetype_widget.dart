@@ -188,8 +188,8 @@ class _ChoosetypeWidgetState extends State<ChoosetypeWidget> {
                                   width: 60.0,
                                   height: 60.0,
                                   decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
                                     shape: BoxShape.circle,
                                   ),
                                   child: Align(
@@ -312,7 +312,8 @@ class _ChoosetypeWidgetState extends State<ChoosetypeWidget> {
                                   width: 60.0,
                                   height: 60.0,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
                                     shape: BoxShape.circle,
                                   ),
                                   child: Align(

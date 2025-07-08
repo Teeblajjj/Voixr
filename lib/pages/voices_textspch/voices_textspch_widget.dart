@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
+import '/components/nointernet_widget.dart';
 import '/components/voice2comptextsp_copy_widget.dart';
 import '/components/voice2comptextsp_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -8,11 +9,13 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
-import '/index.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:utility_functions_library_8g4bud/app_constants.dart'
     as utility_functions_library_8g4bud_app_constant;
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +41,33 @@ class _VoicesTextspchWidgetState extends State<VoicesTextspchWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => VoicesTextspchModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      HapticFeedback.lightImpact();
+      _model.network3 = await actions.checkInternetConnection();
+      if (_model.network3 != true) {
+        await showModalBottomSheet(
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          enableDrag: false,
+          useSafeArea: true,
+          context: context,
+          builder: (context) {
+            return GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
+              child: Padding(
+                padding: MediaQuery.viewInsetsOf(context),
+                child: NointernetWidget(),
+              ),
+            );
+          },
+        ).then((value) => safeSetState(() {}));
+      }
+    });
   }
 
   @override
@@ -71,7 +101,7 @@ class _VoicesTextspchWidgetState extends State<VoicesTextspchWidget> {
               size: 30.0,
             ),
             onPressed: () async {
-              context.pushNamed(HomeWidget.routeName);
+              context.safePop();
             },
           ),
           title: Padding(

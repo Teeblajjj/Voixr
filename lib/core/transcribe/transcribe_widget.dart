@@ -170,28 +170,59 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                       .fromSTEB(
                                                           8.0, 0.0, 2.0, 0.0),
                                                   child: AuthUserStreamWidget(
-                                                    builder: (context) => Text(
-                                                      valueOrDefault<String>(
-                                                        formatNumber(
-                                                          valueOrDefault(
-                                                              currentUserDocument
-                                                                  ?.credits,
-                                                              0),
-                                                          formatType: FormatType
-                                                              .decimal,
-                                                          decimalType:
-                                                              DecimalType
-                                                                  .automatic,
+                                                    builder: (context) =>
+                                                        InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        context.pushNamed(
+                                                            PricingWidget
+                                                                .routeName);
+                                                      },
+                                                      child: Text(
+                                                        valueOrDefault<String>(
+                                                          formatNumber(
+                                                            valueOrDefault(
+                                                                currentUserDocument
+                                                                    ?.credits,
+                                                                0),
+                                                            formatType:
+                                                                FormatType
+                                                                    .decimal,
+                                                            decimalType:
+                                                                DecimalType
+                                                                    .automatic,
+                                                          ),
+                                                          '0',
                                                         ),
-                                                        '0',
-                                                      ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                font: GoogleFonts
-                                                                    .manrope(
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .manrope(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w800,
@@ -200,20 +231,7 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                                       .bodyMedium
                                                                       .fontStyle,
                                                                 ),
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                                fontSize: 16.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w800,
-                                                                fontStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                              ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -225,12 +243,28 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 4.0, 0.0),
-                                                  child: Icon(
-                                                    Icons.stars,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .warning,
-                                                    size: 22.0,
+                                                  child: InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      context.pushNamed(
+                                                          PricingWidget
+                                                              .routeName);
+                                                    },
+                                                    child: Icon(
+                                                      Icons.toll_outlined,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .warning,
+                                                      size: 25.0,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -242,8 +276,15 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                     Colors.transparent,
                                                 onTap: () async {
                                                   context.pushNamed(
-                                                      LibrarypageWidget
-                                                          .routeName);
+                                                    LibrarypageWidget.routeName,
+                                                    queryParameters: {
+                                                      'tabControl':
+                                                          serializeParam(
+                                                        't',
+                                                        ParamType.String,
+                                                      ),
+                                                    }.withoutNulls,
+                                                  );
                                                 },
                                                 child: Container(
                                                   width: 40.0,
@@ -545,7 +586,6 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                               onPressed: () async {
                                                 final selectedFiles =
                                                     await selectFiles(
-                                                  allowedExtensions: ['mp3'],
                                                   multiFile: false,
                                                 );
                                                 if (selectedFiles != null) {
@@ -741,8 +781,37 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                         },
                                                       );
 
+                                                      HapticFeedback
+                                                          .lightImpact();
                                                       _model.timer1Controller
                                                           .onStopTimer();
+                                                      _model.isRecording =
+                                                          false;
+                                                      safeSetState(() {});
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .clearSnackBars();
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          content: Text(
+                                                            '...Please wait! Saving audio file.',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 18.0,
+                                                            ),
+                                                          ),
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  4000),
+                                                          backgroundColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primary,
+                                                        ),
+                                                      );
                                                       {
                                                         safeSetState(() => _model
                                                                 .isDataUploading_daddimFg7 =
@@ -754,6 +823,11 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                         var downloadUrls =
                                                             <String>[];
                                                         try {
+                                                          showUploadMessage(
+                                                            context,
+                                                            'Uploading file...',
+                                                            showLoading: true,
+                                                          );
                                                           selectedUploadedFiles = _model
                                                                   .recordedFileBytes
                                                                   .bytes!
@@ -783,6 +857,9 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                                       (u) => u!)
                                                                   .toList();
                                                         } finally {
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .hideCurrentSnackBar();
                                                           _model.isDataUploading_daddimFg7 =
                                                               false;
                                                         }
@@ -802,8 +879,16 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                                 downloadUrls
                                                                     .first;
                                                           });
+                                                          showUploadMessage(
+                                                            context,
+                                                            'Success!',
+                                                          );
                                                         } else {
                                                           safeSetState(() {});
+                                                          showUploadMessage(
+                                                            context,
+                                                            'Failed to upload file',
+                                                          );
                                                           return;
                                                         }
                                                       }
@@ -818,9 +903,6 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                               .UploadedAudio =
                                                           _model
                                                               .uploadedFileUrl_uploadDataTrnscrb;
-                                                      safeSetState(() {});
-                                                      _model.isRecording =
-                                                          false;
                                                       safeSetState(() {});
                                                       HapticFeedback
                                                           .lightImpact();
@@ -896,17 +978,16 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                         }
                                                         _model.soundPlayer!
                                                             .setVolume(1.0);
-                                                        await _model
-                                                            .soundPlayer!
+                                                        _model.soundPlayer!
                                                             .setUrl(FFAppState()
                                                                 .InstlyRecorded)
                                                             .then((_) => _model
                                                                 .soundPlayer!
                                                                 .play());
-
-                                                        _model.soundPlayer
-                                                            ?.stop();
                                                       } else {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .clearSnackBars();
                                                         ScaffoldMessenger.of(
                                                                 context)
                                                             .showSnackBar(
@@ -947,6 +1028,10 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                       size: 35.0,
                                                     ),
                                                     onPressed: () async {
+                                                      _model.soundPlayer
+                                                          ?.stop();
+                                                      _model.isPlaying = false;
+                                                      safeSetState(() {});
                                                       _model.soundPlayer
                                                           ?.stop();
                                                       _model.isPlaying = false;
@@ -1559,27 +1644,6 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                           borderRadius:
                                               BorderRadius.circular(32.0),
                                         ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 60.0,
-                                    height: 60.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(14.0),
-                                      border: Border.all(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 1.0,
-                                      ),
-                                    ),
-                                    child: Align(
-                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                      child: Icon(
-                                        Icons.download,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        size: 30.0,
                                       ),
                                     ),
                                   ),

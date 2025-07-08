@@ -31,7 +31,12 @@ export 'librarypage_model.dart';
 /// podcasts, voiceovers and transcriptions
 ///
 class LibrarypageWidget extends StatefulWidget {
-  const LibrarypageWidget({super.key});
+  const LibrarypageWidget({
+    super.key,
+    String? tabControl,
+  }) : this.tabControl = tabControl ?? 'p';
+
+  final String tabControl;
 
   static String routeName = 'LIBRARYPAGE';
   static String routePath = 'librarypage';
@@ -54,6 +59,44 @@ class _LibrarypageWidgetState extends State<LibrarypageWidget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       HapticFeedback.lightImpact();
+      if (widget!.tabControl == 'p') {
+        safeSetState(() {
+          _model.tabBarController!.animateTo(
+            0,
+            duration: Duration(milliseconds: 300),
+            curve: Curves.ease,
+          );
+        });
+      } else {
+        if (widget!.tabControl == 'v') {
+          safeSetState(() {
+            _model.tabBarController!.animateTo(
+              2,
+              duration: Duration(milliseconds: 300),
+              curve: Curves.ease,
+            );
+          });
+        } else {
+          if (widget!.tabControl == 't') {
+            safeSetState(() {
+              _model.tabBarController!.animateTo(
+                _model.tabBarController!.length - 1,
+                duration: Duration(milliseconds: 300),
+                curve: Curves.ease,
+              );
+            });
+          } else {
+            safeSetState(() {
+              _model.tabBarController!.animateTo(
+                0,
+                duration: Duration(milliseconds: 300),
+                curve: Curves.ease,
+              );
+            });
+          }
+        }
+      }
+
       _model.networklib = await actions.checkInternetConnection();
       if (_model.networklib != true) {
         await showModalBottomSheet(
@@ -352,7 +395,7 @@ class _LibrarypageWidgetState extends State<LibrarypageWidget>
                                       ),
                                       onPressed: () async {
                                         context.pushNamed(
-                                            PodcaststudioWidget.routeName);
+                                            ChoosetypeWidget.routeName);
                                       },
                                     ),
                                   ].divide(SizedBox(width: 8.0)),

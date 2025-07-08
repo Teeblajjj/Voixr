@@ -11,6 +11,7 @@ import 'dart:convert';
 import 'dart:ui';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import '/index.dart';
 import 'package:utility_functions_library_8g4bud/app_constants.dart'
@@ -220,11 +221,11 @@ class _TexttoSpeechWidgetState extends State<TexttoSpeechWidget> {
                                                       .fromSTEB(
                                                           0.0, 0.0, 4.0, 0.0),
                                                   child: Icon(
-                                                    Icons.stars,
+                                                    Icons.toll_outlined,
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .warning,
-                                                    size: 22.0,
+                                                    size: 25.0,
                                                   ),
                                                 ),
                                               ),
@@ -329,69 +330,92 @@ class _TexttoSpeechWidgetState extends State<TexttoSpeechWidget> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                      child: Container(
-                        width: double.infinity,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (responsiveVisibility(
-                              context: context,
-                              phone: false,
-                              tablet: false,
-                            ))
-                              Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 5.0, 16.0, 0.0),
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'vn9uwr75' /* Transform Text to Natural Spee... */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .headlineSmall
-                                        .override(
-                                          font: GoogleFonts.outfit(
-                                            fontWeight: FontWeight.w600,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .headlineSmall
-                                                    .fontStyle,
-                                          ),
-                                          fontSize: 18.0,
-                                          letterSpacing: 0.0,
+                    Container(
+                      width: double.infinity,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (responsiveVisibility(
+                            context: context,
+                            phone: false,
+                            tablet: false,
+                          ))
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 5.0, 16.0, 0.0),
+                                child: Text(
+                                  FFLocalizations.of(context).getText(
+                                    'vn9uwr75' /* Transform Text to Natural Spee... */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .headlineSmall
+                                      .override(
+                                        font: GoogleFonts.outfit(
                                           fontWeight: FontWeight.w600,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
                                                   .headlineSmall
                                                   .fontStyle,
                                         ),
-                                  ),
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineSmall
+                                            .fontStyle,
+                                      ),
                                 ),
                               ),
-                            if (responsiveVisibility(
-                              context: context,
-                              phone: false,
-                            ))
-                              Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 0.0),
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'up4ldybs' /* Create lifelike voiceovers for... */,
+                            ),
+                          Material(
+                            color: Colors.transparent,
+                            elevation: 0.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(0.0),
+                            ),
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                borderRadius: BorderRadius.circular(0.0),
+                                border: Border.all(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  width: 1.0,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    5.0, 5.0, 5.0, 5.0),
+                                child: TextFormField(
+                                  controller: _model.textController,
+                                  focusNode: _model.textFieldFocusNode,
+                                  onChanged: (_) => EasyDebounce.debounce(
+                                    '_model.textController',
+                                    Duration(milliseconds: 1500),
+                                    () async {
+                                      FFAppState().text =
+                                          _model.textController.text;
+                                      safeSetState(() {});
+                                    },
+                                  ),
+                                  autofocus: false,
+                                  textInputAction: TextInputAction.done,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    hintText:
+                                        FFLocalizations.of(context).getText(
+                                      'c0a47lco' /* Type or paste your text here, ... */,
                                     ),
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
+                                    hintStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
                                           font: GoogleFonts.manrope(
-                                            fontWeight: FontWeight.w600,
+                                            fontWeight: FontWeight.bold,
                                             fontStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMedium
@@ -399,125 +423,6 @@ class _TexttoSpeechWidgetState extends State<TexttoSpeechWidget> {
                                           ),
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryText,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w600,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                            Material(
-                              color: Colors.transparent,
-                              elevation: 0.0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      FlutterFlowTheme.of(context).customColor3,
-                                      FlutterFlowTheme.of(context)
-                                          .secondaryBackground
-                                    ],
-                                    stops: [0.0, 1.0],
-                                    begin: AlignmentDirectional(0.0, 1.0),
-                                    end: AlignmentDirectional(0, -1.0),
-                                  ),
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  border: Border.all(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      5.0, 5.0, 5.0, 5.0),
-                                  child: TextFormField(
-                                    controller: _model.textController,
-                                    focusNode: _model.textFieldFocusNode,
-                                    onChanged: (_) => EasyDebounce.debounce(
-                                      '_model.textController',
-                                      Duration(milliseconds: 1500),
-                                      () async {
-                                        FFAppState().text =
-                                            _model.textController.text;
-                                        safeSetState(() {});
-                                      },
-                                    ),
-                                    autofocus: false,
-                                    textInputAction: TextInputAction.done,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      hintText:
-                                          FFLocalizations.of(context).getText(
-                                        'c0a47lco' /* Type or paste your text here, ... */,
-                                      ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            font: GoogleFonts.manrope(
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 18.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
-                                      counterStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            font: GoogleFonts.manrope(
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontSize: 14.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
-                                      enabledBorder: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      focusedErrorBorder: InputBorder.none,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              8.0, 8.0, 8.0, 0.0),
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          font: GoogleFonts.manrope(
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
                                           fontSize: 18.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
@@ -526,20 +431,66 @@ class _TexttoSpeechWidgetState extends State<TexttoSpeechWidget> {
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                    maxLines: 13,
-                                    maxLength: 3000,
-                                    maxLengthEnforcement:
-                                        MaxLengthEnforcement.enforced,
-                                    cursorColor:
-                                        FlutterFlowTheme.of(context).primary,
-                                    validator: _model.textControllerValidator
-                                        .asValidator(context),
+                                    counterStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.manrope(
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                    enabledBorder: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    errorBorder: InputBorder.none,
+                                    focusedErrorBorder: InputBorder.none,
+                                    contentPadding:
+                                        EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 8.0, 8.0, 0.0),
                                   ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        font: GoogleFonts.manrope(
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                  maxLines: 13,
+                                  maxLength: 3000,
+                                  maxLengthEnforcement:
+                                      MaxLengthEnforcement.enforced,
+                                  cursorColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  validator: _model.textControllerValidator
+                                      .asValidator(context),
                                 ),
                               ),
                             ),
-                          ].divide(SizedBox(height: 12.0)),
-                        ),
+                          ),
+                        ].divide(SizedBox(height: 12.0)),
                       ),
                     ),
                     Padding(
@@ -599,11 +550,6 @@ class _TexttoSpeechWidgetState extends State<TexttoSpeechWidget> {
                                               .secondaryBackground,
                                           borderRadius:
                                               BorderRadius.circular(12.0),
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            width: 1.0,
-                                          ),
                                         ),
                                         alignment:
                                             AlignmentDirectional(0.0, 1.0),
@@ -733,12 +679,6 @@ class _TexttoSpeechWidgetState extends State<TexttoSpeechWidget> {
                                                 .secondaryBackground,
                                             borderRadius:
                                                 BorderRadius.circular(12.0),
-                                            border: Border.all(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              width: 1.0,
-                                            ),
                                           ),
                                           alignment:
                                               AlignmentDirectional(0.0, 0.0),
@@ -956,6 +896,23 @@ class _TexttoSpeechWidgetState extends State<TexttoSpeechWidget> {
                                                                   ?.title;
                                                           _model.isgen = false;
                                                           safeSetState(() {});
+
+                                                          await currentUserReference!
+                                                              .update({
+                                                            ...mapToFirestore(
+                                                              {
+                                                                'Credits': FieldValue
+                                                                    .increment(-(functions
+                                                                        .textCount(
+                                                                            valueOrDefault<String>(
+                                                                  _model
+                                                                      .newCreation
+                                                                      ?.originalText,
+                                                                  'Original text',
+                                                                ))!)),
+                                                              },
+                                                            ),
+                                                          });
                                                           HapticFeedback
                                                               .mediumImpact();
                                                         } else {

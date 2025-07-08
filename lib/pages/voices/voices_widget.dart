@@ -1,10 +1,12 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/actionsheet1_widget.dart';
+import '/components/nointernet_widget.dart';
 import '/components/voice2comp_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:utility_functions_library_8g4bud/app_constants.dart'
     as utility_functions_library_8g4bud_app_constant;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -42,6 +44,28 @@ class _VoicesWidgetState extends State<VoicesWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       HapticFeedback.lightImpact();
+      _model.network1 = await actions.checkInternetConnection();
+      if (_model.network1 != true) {
+        await showModalBottomSheet(
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          enableDrag: false,
+          useSafeArea: true,
+          context: context,
+          builder: (context) {
+            return GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
+              child: Padding(
+                padding: MediaQuery.viewInsetsOf(context),
+                child: NointernetWidget(),
+              ),
+            );
+          },
+        ).then((value) => safeSetState(() {}));
+      }
     });
   }
 

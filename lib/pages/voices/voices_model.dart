@@ -1,10 +1,12 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/actionsheet1_widget.dart';
+import '/components/nointernet_widget.dart';
 import '/components/voice2comp_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:utility_functions_library_8g4bud/app_constants.dart'
     as utility_functions_library_8g4bud_app_constant;
 import 'voices_widget.dart' show VoicesWidget;
@@ -33,6 +35,8 @@ class VoicesModel extends FlutterFlowModel<VoicesWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  // Stores action output result for [Custom Action - checkInternetConnection] action in voices widget.
+  bool? network1;
   AudioPlayer? soundPlayer1;
   AudioPlayer? soundPlayer2;
   AudioPlayer? soundPlayer3;

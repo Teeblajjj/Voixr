@@ -62,13 +62,13 @@ class _SingleWidgetState extends State<SingleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<TranscriptionsRecord>(
-      future: FFAppState().podref(
+    return StreamBuilder<TranscriptionsRecord>(
+      stream: FFAppState().podref(
         uniqueQueryKey: valueOrDefault<String>(
           widget!.docref?.id,
           '23445',
         ),
-        requestFn: () => TranscriptionsRecord.getDocumentOnce(widget!.docref!),
+        requestFn: () => TranscriptionsRecord.getDocument(widget!.docref!),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -154,32 +154,18 @@ class _SingleWidgetState extends State<SingleWidget> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        5.0, 0.0, 0.0, 0.0),
-                                                child: Text(
-                                                  valueOrDefault<String>(
-                                                    singleTranscriptionsRecord
-                                                        .translatedTranscript,
-                                                    'Episode 41: Quantum Computing Breakthroughs',
-                                                  ),
-                                                  maxLines: 2,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.manrope(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
+                                              Text(
+                                                valueOrDefault<String>(
+                                                  singleTranscriptionsRecord
+                                                      .translatedTranscript,
+                                                  'Episode 41: Quantum Computing Breakthroughs',
+                                                ),
+                                                maxLines: 2,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.manrope(
                                                         fontWeight:
                                                             FontWeight.w600,
                                                         fontStyle:
@@ -188,7 +174,15 @@ class _SingleWidgetState extends State<SingleWidget> {
                                                                 .bodyMedium
                                                                 .fontStyle,
                                                       ),
-                                                ),
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
                                               ),
                                               Padding(
                                                 padding: EdgeInsetsDirectional
@@ -269,8 +263,22 @@ class _SingleWidgetState extends State<SingleWidget> {
                                         .secondaryText,
                                     size: 27.0,
                                   ),
-                                  onPressed: () {
-                                    print('IconButton pressed ...');
+                                  onPressed: () async {
+                                    context.pushNamed(
+                                      CopytocbWidget.routeName,
+                                      queryParameters: {
+                                        'text': serializeParam(
+                                          singleTranscriptionsRecord
+                                              .translatedTranscript,
+                                          ParamType.String,
+                                        ),
+                                        'textCountNum': serializeParam(
+                                          singleTranscriptionsRecord
+                                              .numberOfWords,
+                                          ParamType.int,
+                                        ),
+                                      }.withoutNulls,
+                                    );
                                   },
                                 ),
                               ].divide(SizedBox(width: 8.0)),
@@ -286,11 +294,11 @@ class _SingleWidgetState extends State<SingleWidget> {
                                       0.0, 6.0, 0.0, 0.0),
                                   child: Container(
                                     width: double.infinity,
-                                    height: 380.0,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(0.0),
                                     ),
                                     child: Stack(
+                                      alignment: AlignmentDirectional(0.0, 1.0),
                                       children: [
                                         Padding(
                                           padding:
@@ -469,7 +477,7 @@ class _SingleWidgetState extends State<SingleWidget> {
                                   ),
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(0.0, 1.0),
+                                  alignment: AlignmentDirectional(0.0, -1.0),
                                   child: Container(
                                     width:
                                         MediaQuery.sizeOf(context).width * 1.0,

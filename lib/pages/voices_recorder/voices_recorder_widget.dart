@@ -1,15 +1,18 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/nointernet_widget.dart';
 import '/components/voice2comprec_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
-import '/index.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'dart:async';
 import 'package:utility_functions_library_8g4bud/app_constants.dart'
     as utility_functions_library_8g4bud_app_constant;
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +38,33 @@ class _VoicesRecorderWidgetState extends State<VoicesRecorderWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => VoicesRecorderModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      HapticFeedback.lightImpact();
+      _model.network2 = await actions.checkInternetConnection();
+      if (_model.network2 != true) {
+        await showModalBottomSheet(
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          enableDrag: false,
+          useSafeArea: true,
+          context: context,
+          builder: (context) {
+            return GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
+              child: Padding(
+                padding: MediaQuery.viewInsetsOf(context),
+                child: NointernetWidget(),
+              ),
+            );
+          },
+        ).then((value) => safeSetState(() {}));
+      }
+    });
   }
 
   @override
@@ -68,7 +98,7 @@ class _VoicesRecorderWidgetState extends State<VoicesRecorderWidget> {
               size: 30.0,
             ),
             onPressed: () async {
-              context.pushNamed(HomeWidget.routeName);
+              context.safePop();
             },
           ),
           title: Padding(

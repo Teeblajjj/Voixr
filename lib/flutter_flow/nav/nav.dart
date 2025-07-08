@@ -221,7 +221,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) {
             requireAuth: true,
             builder: (context, params) => params.isEmpty
                 ? NavBarPage(initialPage: 'LIBRARYPAGE')
-                : LibrarypageWidget(),
+                : LibrarypageWidget(
+                    tabControl: params.getParam(
+                      'tabControl',
+                      ParamType.String,
+                    ),
+                  ),
           ),
           FFRoute(
             name: DiscoverWidget.routeName,
@@ -273,6 +278,27 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) {
                 ParamType.DocumentReference,
                 isList: false,
                 collectionNamePath: ['Podcasts'],
+              ),
+            ),
+          ),
+          FFRoute(
+            name: PricingWidget.routeName,
+            path: PricingWidget.routePath,
+            requireAuth: true,
+            builder: (context, params) => PricingWidget(),
+          ),
+          FFRoute(
+            name: CopytocbWidget.routeName,
+            path: CopytocbWidget.routePath,
+            requireAuth: true,
+            builder: (context, params) => CopytocbWidget(
+              text: params.getParam(
+                'text',
+                ParamType.String,
+              ),
+              textCountNum: params.getParam(
+                'textCountNum',
+                ParamType.int,
               ),
             ),
           ),

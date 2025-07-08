@@ -564,11 +564,11 @@ class FFAppState extends ChangeNotifier {
   void clearTrendinglistCacheKey(String? uniqueKey) =>
       _trendinglistManager.clearRequest(uniqueKey);
 
-  final _podrefManager = FutureRequestManager<TranscriptionsRecord>();
-  Future<TranscriptionsRecord> podref({
+  final _podrefManager = StreamRequestManager<TranscriptionsRecord>();
+  Stream<TranscriptionsRecord> podref({
     String? uniqueQueryKey,
     bool? overrideCache,
-    required Future<TranscriptionsRecord> Function() requestFn,
+    required Stream<TranscriptionsRecord> Function() requestFn,
   }) =>
       _podrefManager.performRequest(
         uniqueQueryKey: uniqueQueryKey,
@@ -579,11 +579,11 @@ class FFAppState extends ChangeNotifier {
   void clearPodrefCacheKey(String? uniqueKey) =>
       _podrefManager.clearRequest(uniqueKey);
 
-  final _voiceoverManager = FutureRequestManager<SpeechDataRecord>();
-  Future<SpeechDataRecord> voiceover({
+  final _voiceoverManager = StreamRequestManager<SpeechDataRecord>();
+  Stream<SpeechDataRecord> voiceover({
     String? uniqueQueryKey,
     bool? overrideCache,
-    required Future<SpeechDataRecord> Function() requestFn,
+    required Stream<SpeechDataRecord> Function() requestFn,
   }) =>
       _voiceoverManager.performRequest(
         uniqueQueryKey: uniqueQueryKey,
@@ -654,11 +654,11 @@ class FFAppState extends ChangeNotifier {
   void clearLanguageCacheKey(String? uniqueKey) =>
       _languageManager.clearRequest(uniqueKey);
 
-  final _podxxManager = FutureRequestManager<PodcastsRecord>();
-  Future<PodcastsRecord> podxx({
+  final _podxxManager = StreamRequestManager<PodcastsRecord>();
+  Stream<PodcastsRecord> podxx({
     String? uniqueQueryKey,
     bool? overrideCache,
-    required Future<PodcastsRecord> Function() requestFn,
+    required Stream<PodcastsRecord> Function() requestFn,
   }) =>
       _podxxManager.performRequest(
         uniqueQueryKey: uniqueQueryKey,

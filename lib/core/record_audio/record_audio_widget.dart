@@ -219,29 +219,58 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                       child:
                                                           AuthUserStreamWidget(
                                                         builder: (context) =>
-                                                            Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            formatNumber(
-                                                              valueOrDefault(
-                                                                  currentUserDocument
-                                                                      ?.credits,
-                                                                  0),
-                                                              formatType:
-                                                                  FormatType
-                                                                      .decimal,
-                                                              decimalType:
-                                                                  DecimalType
-                                                                      .automatic,
+                                                            InkWell(
+                                                          splashColor: Colors
+                                                              .transparent,
+                                                          focusColor: Colors
+                                                              .transparent,
+                                                          hoverColor: Colors
+                                                              .transparent,
+                                                          highlightColor: Colors
+                                                              .transparent,
+                                                          onTap: () async {
+                                                            context.pushNamed(
+                                                                PricingWidget
+                                                                    .routeName);
+                                                          },
+                                                          child: Text(
+                                                            valueOrDefault<
+                                                                String>(
+                                                              formatNumber(
+                                                                valueOrDefault(
+                                                                    currentUserDocument
+                                                                        ?.credits,
+                                                                    0),
+                                                                formatType:
+                                                                    FormatType
+                                                                        .decimal,
+                                                                decimalType:
+                                                                    DecimalType
+                                                                        .automatic,
+                                                              ),
+                                                              '0',
                                                             ),
-                                                            '0',
-                                                          ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                font: GoogleFonts
-                                                                    .manrope(
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .manrope(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w800,
@@ -250,20 +279,7 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                                       .bodyMedium
                                                                       .fontStyle,
                                                                 ),
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                                fontSize: 16.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w800,
-                                                                fontStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                              ),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
@@ -280,13 +296,27 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                                   0.0,
                                                                   4.0,
                                                                   0.0),
-                                                      child: Icon(
-                                                        Icons.stars,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .warning,
-                                                        size: 22.0,
+                                                      child: InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          context.pushNamed(
+                                                              PricingWidget
+                                                                  .routeName);
+                                                        },
+                                                        child: Icon(
+                                                          Icons.toll_outlined,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .warning,
+                                                          size: 25.0,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -797,6 +827,26 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
 
                                                       _model.timerController
                                                           .onStartTimer();
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          content: Text(
+                                                            '...Recording!',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ),
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  4000),
+                                                          backgroundColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .secondary,
+                                                        ),
+                                                      );
                                                     },
                                                   ),
                                                 if (FFAppState()
@@ -836,8 +886,38 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                         },
                                                       );
 
+                                                      HapticFeedback
+                                                          .lightImpact();
                                                       _model.timerController
                                                           .onStopTimer();
+                                                      FFAppState()
+                                                              .isrecordingNow =
+                                                          false;
+                                                      safeSetState(() {});
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .clearSnackBars();
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          content: Text(
+                                                            '...Please wait! Saving audio file.',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 18.0,
+                                                            ),
+                                                          ),
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  4000),
+                                                          backgroundColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primary,
+                                                        ),
+                                                      );
                                                       {
                                                         safeSetState(() => _model
                                                                 .isDataUploading_odogwumGtb =
@@ -849,6 +929,11 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                         var downloadUrls =
                                                             <String>[];
                                                         try {
+                                                          showUploadMessage(
+                                                            context,
+                                                            'Uploading file...',
+                                                            showLoading: true,
+                                                          );
                                                           selectedUploadedFiles = _model
                                                                   .recordedFileBytes
                                                                   .bytes!
@@ -878,6 +963,9 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                                       (u) => u!)
                                                                   .toList();
                                                         } finally {
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .hideCurrentSnackBar();
                                                           _model.isDataUploading_odogwumGtb =
                                                               false;
                                                         }
@@ -897,8 +985,16 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                                 downloadUrls
                                                                     .first;
                                                           });
+                                                          showUploadMessage(
+                                                            context,
+                                                            'Success!',
+                                                          );
                                                         } else {
                                                           safeSetState(() {});
+                                                          showUploadMessage(
+                                                            context,
+                                                            'Failed to upload file',
+                                                          );
                                                           return;
                                                         }
                                                       }
@@ -914,8 +1010,7 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                               .UploadedAudio =
                                                           _model
                                                               .uploadedFileUrl_odogwumGtb;
-                                                      FFAppState()
-                                                          .update(() {});
+                                                      safeSetState(() {});
                                                       HapticFeedback
                                                           .lightImpact();
 

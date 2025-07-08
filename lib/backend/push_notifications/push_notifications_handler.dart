@@ -146,7 +146,11 @@ final parametersBuilderMap =
   'voicesTextspch': ParameterData.none(),
   'Podcaststudio': ParameterData.none(),
   'transcribe': ParameterData.none(),
-  'LIBRARYPAGE': ParameterData.none(),
+  'LIBRARYPAGE': (data) async => ParameterData(
+        allParams: {
+          'tabControl': getParameter<String>(data, 'tabControl'),
+        },
+      ),
   'Discover': ParameterData.none(),
   'single': (data) async => ParameterData(
         allParams: {
@@ -162,6 +166,13 @@ final parametersBuilderMap =
   'podplaynew': (data) async => ParameterData(
         allParams: {
           'voicref': getParameter<DocumentReference>(data, 'voicref'),
+        },
+      ),
+  'pricing': ParameterData.none(),
+  'COPYTOCB': (data) async => ParameterData(
+        allParams: {
+          'text': getParameter<String>(data, 'text'),
+          'textCountNum': getParameter<int>(data, 'textCountNum'),
         },
       ),
 };

@@ -56,13 +56,13 @@ class _Payvo1WidgetState extends State<Payvo1Widget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<SpeechDataRecord>(
-      future: FFAppState().voiceover(
+    return StreamBuilder<SpeechDataRecord>(
+      stream: FFAppState().voiceover(
         uniqueQueryKey: valueOrDefault<String>(
           widget!.voicref?.id,
-          '67564546576879',
+          '098709098',
         ),
-        requestFn: () => SpeechDataRecord.getDocumentOnce(widget!.voicref!),
+        requestFn: () => SpeechDataRecord.getDocument(widget!.voicref!),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
