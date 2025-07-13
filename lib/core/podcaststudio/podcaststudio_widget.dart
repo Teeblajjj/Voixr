@@ -13,6 +13,7 @@ import 'dart:convert';
 import 'dart:ui';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import '/index.dart';
 import 'package:utility_functions_library_8g4bud/app_constants.dart'
@@ -200,7 +201,8 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
                                                     Colors.transparent,
                                                 onTap: () async {
                                                   context.pushNamed(
-                                                      PricingWidget.routeName);
+                                                      ManagesubWidget
+                                                          .routeName);
                                                 },
                                                 child: Text(
                                                   valueOrDefault<String>(
@@ -255,7 +257,7 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 4.0, 0.0),
+                                                    0.0, 0.0, 8.0, 0.0),
                                             child: InkWell(
                                               splashColor: Colors.transparent,
                                               focusColor: Colors.transparent,
@@ -264,7 +266,7 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
                                                   Colors.transparent,
                                               onTap: () async {
                                                 context.pushNamed(
-                                                    PricingWidget.routeName);
+                                                    ManagesubWidget.routeName);
                                               },
                                               child: Icon(
                                                 Icons.toll_outlined,
@@ -283,14 +285,8 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
                                             context.pushNamed(
-                                              LibrarypageWidget.routeName,
-                                              queryParameters: {
-                                                'tabControl': serializeParam(
-                                                  'p',
-                                                  ParamType.String,
-                                                ),
-                                              }.withoutNulls,
-                                            );
+                                                PodcasthistroryWidget
+                                                    .routeName);
                                           },
                                           child: Container(
                                             width: 40.0,
@@ -2171,6 +2167,19 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
                               _model.audio =
                                   _model.newpodDataDIALOGUE?.audioUrl2;
                               safeSetState(() {});
+
+                              await currentUserReference!.update({
+                                ...mapToFirestore(
+                                  {
+                                    'Credits': FieldValue.increment(
+                                        -(valueOrDefault<int>(
+                                      functions.textCount(
+                                          _model.newpodDataDIALOGUE!.dialogue),
+                                      0,
+                                    ))),
+                                  },
+                                ),
+                              });
                               HapticFeedback.mediumImpact();
                               await Future.delayed(
                                   const Duration(milliseconds: 1000));
@@ -2378,6 +2387,16 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
                             HapticFeedback.mediumImpact();
                             await Future.delayed(
                                 const Duration(milliseconds: 1000));
+
+                            await currentUserReference!.update({
+                              ...mapToFirestore(
+                                {
+                                  'Credits': FieldValue.increment(
+                                      -(functions.textCount(
+                                          _model.newpodData1!.dialogue)!)),
+                                },
+                              ),
+                            });
                             HapticFeedback.mediumImpact();
                             FFAppState().stillWorking = false;
                             FFAppState().update(() {});

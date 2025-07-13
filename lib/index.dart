@@ -3,7 +3,8 @@ export '/core/textto_speech/textto_speech_widget.dart' show TexttoSpeechWidget;
 export '/pages/home/home_widget.dart' show HomeWidget;
 export '/pages/voices/voices_widget.dart' show VoicesWidget;
 export '/core/record_audio/record_audio_widget.dart' show RecordAudioWidget;
-export '/pages/notification/notification_widget.dart' show NotificationWidget;
+export '/pages/transcripthistrory/transcripthistrory_widget.dart'
+    show TranscripthistroryWidget;
 export '/onboarding/onboarding_widget.dart' show OnboardingWidget;
 export '/create_account/create_account_widget.dart' show CreateAccountWidget;
 export '/signin/signin_widget.dart' show SigninWidget;
@@ -22,3 +23,7 @@ export '/choosetype/choosetype_widget.dart' show ChoosetypeWidget;
 export '/podplaynew/podplaynew_widget.dart' show PodplaynewWidget;
 export '/pricing/pricing_widget.dart' show PricingWidget;
 export '/copytocb/copytocb_widget.dart' show CopytocbWidget;
+export '/pages/podcasthistrory/podcasthistrory_widget.dart'
+    show PodcasthistroryWidget;
+export '/managesub/managesub_widget.dart' show ManagesubWidget;
+export '/forgot_pass/forgot_pass_widget.dart' show ForgotPassWidget;

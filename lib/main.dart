@@ -20,8 +20,6 @@ import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
 import 'flutter_flow/revenue_cat_util.dart' as revenue_cat;
 
-import '/backend/firebase_dynamic_links/firebase_dynamic_links.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GoRouter.optionURLReflectsImperativeAPIs = true;
@@ -37,7 +35,7 @@ void main() async {
   await appState.initializePersistedState();
 
   await revenue_cat.initialize(
-    "appl_lCGttWYgapcSwdSHLyVGDpTCQCJ",
+    "appl_eUnzAMvJVLEPBRXifdiHKcTwAOr",
     "",
     loadDataAfterLaunch: true,
   );
@@ -157,10 +155,6 @@ class _MyAppState extends State<MyApp> {
       ),
       themeMode: _themeMode,
       routerConfig: _router,
-      builder: (_, child) => DynamicLinksHandler(
-        router: _router,
-        child: child!,
-      ),
     );
   }
 }

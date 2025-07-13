@@ -258,7 +258,7 @@ class _SingleWidgetState extends State<SingleWidget> {
                                   fillColor: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
                                   icon: Icon(
-                                    Icons.download_rounded,
+                                    Icons.text_snippet_rounded,
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryText,
                                     size: 27.0,
@@ -292,74 +292,93 @@ class _SingleWidgetState extends State<SingleWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 6.0, 0.0, 0.0),
-                                  child: Container(
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(0.0),
-                                    ),
-                                    child: Stack(
-                                      alignment: AlignmentDirectional(0.0, 1.0),
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  9.0, 8.0, 9.0, 0.0),
-                                          child: Container(
-                                            width: double.infinity,
-                                            child: TextFormField(
-                                              controller:
-                                                  _model.textController ??=
-                                                      TextEditingController(
-                                                text: valueOrDefault<String>(
-                                                  singleTranscriptionsRecord
-                                                      .translatedTranscript,
-                                                  'Welcome to the show, Joyce! Today we\'re diving into how to succeed before turning 30. Thanks for having me, Ekex! I\'m really excited to share some game-changing tips. Let\'s start with the big question: what\'s the one thing to absolutely avoid if you want success by 30?Procrastination is a silent killer. Waiting for the \'perfect moment\' just wastes precious time. That makes so much sense! What about a must-do for young achievers? Build genuine relationships. Your network can open doors you didn\'t even know existed. Incredible advice, Joyce. Here\'s to making the most of every opportunity before 30!',
-                                                ),
-                                              ),
-                                              focusNode:
-                                                  _model.textFieldFocusNode,
-                                              onChanged: (_) =>
-                                                  EasyDebounce.debounce(
-                                                '_model.textController',
-                                                Duration(milliseconds: 2000),
-                                                () => safeSetState(() {}),
-                                              ),
-                                              onFieldSubmitted: (_) async {
-                                                await Clipboard.setData(ClipboardData(
-                                                    text: singleTranscriptionsRecord
-                                                        .translatedTranscript));
-                                                HapticFeedback.lightImpact();
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  SnackBar(
-                                                    content: Text(
-                                                      'Copied!',
-                                                      style: TextStyle(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                      ),
-                                                    ),
-                                                    duration: Duration(
-                                                        milliseconds: 4000),
-                                                    backgroundColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondary,
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      await Clipboard.setData(ClipboardData(
+                                          text: singleTranscriptionsRecord
+                                              .translatedTranscript));
+                                      HapticFeedback.lightImpact();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Copied!',
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 4000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(0.0),
+                                      ),
+                                      child: Stack(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 1.0),
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    9.0, 8.0, 9.0, 0.0),
+                                            child: Container(
+                                              width: double.infinity,
+                                              child: TextFormField(
+                                                controller:
+                                                    _model.textController ??=
+                                                        TextEditingController(
+                                                  text: valueOrDefault<String>(
+                                                    '${valueOrDefault<String>(
+                                                      singleTranscriptionsRecord
+                                                          .translatedTranscript,
+                                                      'Welcome to the show, Joyce! Today we\'re diving into how to succeed before turning 30. Thanks for having me, Ekex! I\'m really excited to share some game-changing tips. Let\'s start with the big question: what\'s the one thing to absolutely avoid if you want success by 30?Procrastination is a silent killer. Waiting for the \'perfect moment\' just wastes precious time. That makes so much sense! What about a must-do for young achievers? Build genuine relationships. Your network can open doors you didn\'t even know existed. Incredible advice, Joyce. Here\'s to making the most of every opportunity before 30!',
+                                                    )}                                                                                                                              ',
+                                                    'Not text!',
                                                   ),
-                                                );
-                                              },
-                                              autofocus: false,
-                                              readOnly: true,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                isDense: true,
-                                                labelStyle: FlutterFlowTheme.of(
-                                                        context)
-                                                    .labelMedium
-                                                    .override(
-                                                      font: GoogleFonts.manrope(
+                                                ),
+                                                focusNode:
+                                                    _model.textFieldFocusNode,
+                                                onChanged: (_) =>
+                                                    EasyDebounce.debounce(
+                                                  '_model.textController',
+                                                  Duration(milliseconds: 2000),
+                                                  () => safeSetState(() {}),
+                                                ),
+                                                autofocus: false,
+                                                readOnly: true,
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  isDense: true,
+                                                  labelStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        font:
+                                                            GoogleFonts.manrope(
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        fontSize: 15.0,
+                                                        letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.w600,
                                                         fontStyle:
@@ -368,21 +387,22 @@ class _SingleWidgetState extends State<SingleWidget> {
                                                                 .labelMedium
                                                                 .fontStyle,
                                                       ),
-                                                      fontSize: 15.0,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .fontStyle,
-                                                    ),
-                                                hintStyle: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      font: GoogleFonts.manrope(
+                                                  hintStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font:
+                                                            GoogleFonts.manrope(
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        fontSize: 22.0,
+                                                        letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.w600,
                                                         fontStyle:
@@ -391,27 +411,33 @@ class _SingleWidgetState extends State<SingleWidget> {
                                                                 .bodyMedium
                                                                 .fontStyle,
                                                       ),
-                                                      fontSize: 22.0,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontStyle:
+                                                  enabledBorder:
+                                                      InputBorder.none,
+                                                  focusedBorder:
+                                                      InputBorder.none,
+                                                  errorBorder: InputBorder.none,
+                                                  focusedErrorBorder:
+                                                      InputBorder.none,
+                                                ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.manrope(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyMedium
-                                                              .fontStyle,
-                                                    ),
-                                                enabledBorder: InputBorder.none,
-                                                focusedBorder: InputBorder.none,
-                                                errorBorder: InputBorder.none,
-                                                focusedErrorBorder:
-                                                    InputBorder.none,
-                                              ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    font: GoogleFonts.manrope(
+                                                              .secondaryText,
+                                                      fontSize: 20.0,
+                                                      letterSpacing: 0.0,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontStyle:
@@ -420,59 +446,51 @@ class _SingleWidgetState extends State<SingleWidget> {
                                                               .bodyMedium
                                                               .fontStyle,
                                                     ),
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    fontSize: 20.0,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                              textAlign: TextAlign.start,
-                                              maxLines: 14,
-                                              cursorColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              validator: _model
-                                                  .textControllerValidator
-                                                  .asValidator(context),
+                                                textAlign: TextAlign.start,
+                                                maxLines: 14,
+                                                cursorColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                validator: _model
+                                                    .textControllerValidator
+                                                    .asValidator(context),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, 1.0),
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            elevation: 0.0,
-                                            child: Container(
-                                              width: double.infinity,
-                                              height: 100.0,
-                                              decoration: BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  colors: [
-                                                    FlutterFlowTheme.of(context)
-                                                        .customColor2,
-                                                    FlutterFlowTheme.of(context)
-                                                        .customColor3,
-                                                    FlutterFlowTheme.of(context)
-                                                        .customColor3
-                                                  ],
-                                                  stops: [0.0, 0.8, 1.0],
-                                                  begin: AlignmentDirectional(
-                                                      0.0, -1.0),
-                                                  end: AlignmentDirectional(
-                                                      0, 1.0),
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 1.0),
+                                            child: Material(
+                                              color: Colors.transparent,
+                                              elevation: 0.0,
+                                              child: Container(
+                                                width: double.infinity,
+                                                height: 100.0,
+                                                decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .customColor2,
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .customColor3,
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .customColor3
+                                                    ],
+                                                    stops: [0.0, 0.8, 1.0],
+                                                    begin: AlignmentDirectional(
+                                                        0.0, -1.0),
+                                                    end: AlignmentDirectional(
+                                                        0, 1.0),
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

@@ -94,7 +94,7 @@ class _EmptylistWidgetState extends State<EmptylistWidget> {
                 ),
                 Text(
                   FFLocalizations.of(context).getText(
-                    'qsq2q6kl' /* Your list is empty. Add some i... */,
+                    'qsq2q6kl' /* it looks empty here. create so... */,
                   ),
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodyMedium.override(

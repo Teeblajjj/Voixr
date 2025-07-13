@@ -9,10 +9,12 @@ import 'dart:ui';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:utility_functions_library_8g4bud/app_constants.dart'
     as utility_functions_library_8g4bud_app_constant;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
@@ -97,8 +99,67 @@ class _LibrarypageWidgetState extends State<LibrarypageWidget>
         }
       }
 
-      _model.networklib = await actions.checkInternetConnection();
-      if (_model.networklib != true) {
+      HapticFeedback.lightImpact();
+      _model.network7 = await actions.checkInternetConnection();
+      if (_model.network7 == true) {
+        await actions.logInRevenueCatUser();
+        if ((valueOrDefault<bool>(currentUserDocument?.firsttimeUser, false) ==
+                true) ||
+            valueOrDefault<bool>(
+              valueOrDefault<bool>(currentUserDocument?.firsttimeUser, false) ==
+                  null,
+              true,
+            )) {
+          await currentUserReference!.update({
+            ...createUsersRecordData(
+              fName: currentUserDisplayName,
+              firsttimeUser: false,
+              isfree: true,
+              isAdmin: false,
+              subTitle: 'Free',
+              subcredit: 1000,
+              subAmount: 0.00,
+              subDesc: 'Perfect for beginners',
+              entitledto: 'Free',
+              subDate: getCurrentTimestamp,
+              expired: false,
+              initialCRbal: 1000,
+            ),
+            ...mapToFirestore(
+              {
+                'Credits': FieldValue.increment(1000),
+              },
+            ),
+          });
+
+          await currentUserReference!.update(createUsersRecordData(
+            subExpireDate:
+                functions.oneMonthDate(currentUserDocument!.subDate!),
+          ));
+
+          context.goNamed(HomeWidget.routeName);
+        } else {
+          if (valueOrDefault<bool>(currentUserDocument?.expired, false) ==
+              false) {
+            if ((functions
+                        .howManyDay(getCurrentTimestamp,
+                            currentUserDocument!.subExpireDate!)
+                        .toString() ==
+                    '0') ==
+                true) {
+              await currentUserReference!.update(createUsersRecordData(
+                subTitle: 'Free',
+                subcredit: 1000,
+                subAmount: 0.00,
+                subDesc: 'You do noy have any active plan',
+                credits: 0,
+                entitledto: 'Free',
+                initialCRbal: 0,
+              ));
+            }
+          }
+        }
+      } else {
         await showModalBottomSheet(
           isScrollControlled: true,
           backgroundColor: Colors.transparent,
@@ -1627,6 +1688,9 @@ class _LibrarypageWidgetState extends State<LibrarypageWidget>
                                       List<SpeechDataRecord>
                                           columnSpeechDataRecordList =
                                           snapshot.data!;
+                                      if (columnSpeechDataRecordList.isEmpty) {
+                                        return EmptylistWidget();
+                                      }
 
                                       return SingleChildScrollView(
                                         primary: false,

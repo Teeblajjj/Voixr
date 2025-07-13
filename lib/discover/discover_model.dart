@@ -8,6 +8,7 @@ import 'dart:ui';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'discover_widget.dart' show DiscoverWidget;
 import 'package:badges/badges.dart' as badges;
@@ -31,7 +32,7 @@ class DiscoverModel extends FlutterFlowModel<DiscoverWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Custom Action - checkInternetConnection] action in Discover widget.
-  bool? networkdisc;
+  bool? network4;
   // State field(s) for main widget.
   ScrollController? main;
   // State field(s) for TextField widget.

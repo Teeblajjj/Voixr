@@ -15,6 +15,7 @@ import 'dart:convert';
 import 'dart:ui';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
 import '/flutter_flow/random_data_util.dart' as random_data;
 import '/index.dart';
@@ -82,6 +83,8 @@ class RecordAudioModel extends FlutterFlowModel<RecordAudioWidget> {
   ApiCallResponse? stsresult;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   SpeechDataRecord? stssaved;
+  // Stores action output result for [Backend Call - API (Transcription)] action in Button widget.
+  ApiCallResponse? tr;
   // Model for loadingScreen component.
   late LoadingScreenModel loadingScreenModel;
 

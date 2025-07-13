@@ -137,7 +137,7 @@ final parametersBuilderMap =
           'id': getParameter<String>(data, 'id'),
         },
       ),
-  'notification': ParameterData.none(),
+  'transcripthistrory': ParameterData.none(),
   'Onboarding': ParameterData.none(),
   'CreateAccount': ParameterData.none(),
   'Signin': ParameterData.none(),
@@ -175,6 +175,9 @@ final parametersBuilderMap =
           'textCountNum': getParameter<int>(data, 'textCountNum'),
         },
       ),
+  'podcasthistrory': ParameterData.none(),
+  'managesub': ParameterData.none(),
+  'forgotPass': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

@@ -1,49 +1,42 @@
 {
   "project_info": {
-    "project_number": "852801047875",
-    "firebase_url": "https://iconic-54951-default-rtdb.firebaseio.com",
-    "project_id": "iconic-54951",
-    "storage_bucket": "iconic-54951.appspot.com"
+    "project_number": "211748842595",
+    "firebase_url": "https://voixr-ai-default-rtdb.firebaseio.com",
+    "project_id": "voixr-ai",
+    "storage_bucket": "voixr-ai.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:852801047875:android:69eb7896aa2ea2d80333f6",
+        "mobilesdk_app_id": "1:211748842595:android:7b14314f963ba1c136dc56",
         "android_client_info": {
           "package_name": "com.voixr.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "852801047875-3jf4h6bs37gnc56v0i6vjt8m9rvpqnso.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.voixr.app",
-            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
-          }
-        },
-        {
-          "client_id": "852801047875-eqlje3g9gstdpqc0f84mitgs279bder9.apps.googleusercontent.com",
+          "client_id": "211748842595-eug042f8d9jdpa0bgabon84psr4a6dme.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBfn5NyozXCGjFB7O790p7Wz6Oi4luTGp0"
+          "current_key": "AIzaSyD_eYX3v-wF0hyy4HQUoafIixAXb0-w-Wk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "852801047875-eqlje3g9gstdpqc0f84mitgs279bder9.apps.googleusercontent.com",
+              "client_id": "211748842595-eug042f8d9jdpa0bgabon84psr4a6dme.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "852801047875-2bp9pc717j1a71cqldbs2faituih3ia6.apps.googleusercontent.com",
+              "client_id": "211748842595-756tv32sv4mb5jp9i5lhv0n35nmebiv6.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.qwikai.app"
+                "bundle_id": "com.voixr.app",
+                "app_store_id": "6744642291"
               }
             }
           ]

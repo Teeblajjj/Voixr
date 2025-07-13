@@ -36,7 +36,7 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.googleusercontent.apps.852801047875-j6nmkv98bsh5lp2mba5vnjat54q2upns</string>
+                <string>com.googleusercontent.apps.211748842595-756tv32sv4mb5jp9i5lhv0n35nmebiv6</string>
                 
             </array>
         </dict>
@@ -45,15 +45,15 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>voixr</string>
+        <string>voixrai.com</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>com.voixr.app</string>
+        <string>voixr</string>
         </array>
         </dict>
     </array>
     <key>FlutterDeepLinkingEnabled</key>
-    <false/>
+    <true/>
 
 
 	<key>CFBundleVersion</key>

@@ -1,8 +1,8 @@
+import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
-import '/index.dart';
 import 'copytocb_widget.dart' show CopytocbWidget;
 import 'package:utility_functions_library_8g4bud/app_constants.dart'
     as utility_functions_library_8g4bud_app_constant;
@@ -16,8 +16,10 @@ class CopytocbModel extends FlutterFlowModel<CopytocbWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextField widget.
+  final textFieldKey = GlobalKey();
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
+  String? textFieldSelectedOption;
   String? Function(BuildContext, String?)? textControllerValidator;
 
   @override
@@ -26,6 +28,5 @@ class CopytocbModel extends FlutterFlowModel<CopytocbWidget> {
   @override
   void dispose() {
     textFieldFocusNode?.dispose();
-    textController?.dispose();
   }
 }

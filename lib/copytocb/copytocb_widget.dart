@@ -1,8 +1,8 @@
+import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
-import '/index.dart';
 import 'package:utility_functions_library_8g4bud/app_constants.dart'
     as utility_functions_library_8g4bud_app_constant;
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
@@ -46,7 +46,6 @@ class _CopytocbWidgetState extends State<CopytocbWidget> {
       widget!.text,
       '🔸 Creator Plan – ₦5,000/month Best For: Podcasters, creators & content marketers  Includes:  Up to 50,000 characters/month  AI voice changer (Speech-to-Speech)  Generate multi-voice dialogues  Save projects in cloud  Priority audio generation  🟣 Pro Studio Plan – ₦15,000/month Best For: Agencies, studios, educators  Includes:  Up to 200,000 characters/month  Batch processing (e.g., for podcast episodes)  Podcast script + audio generation  Audio transcription & subtitling  Priority support  ⚡ Enterprise or Bulk Plans Contact Sales for custom pricing  Tailored solutions with:  Dedicated account support  API access for automation  White-labeling options  Higher character volumes (1M+)  Let me know if you want to update the price points, features, or add a \"Free Trial\" plan too.        You said: i need a flutter flowaction that can take in string text and returns a downloadable pdf file or save the text as pdf   ChatGPT said: Sure! Here\'s a FlutterFlow custom action that takes in a String (text input) and returns a downloadable .pdf file, saving it locally on the device or optionally uploading it to Firebase Storage.  ✅ Custom Action Name: generatePdfFromText ✅ Input Parameter: textInput → String  ✅ Output: pdfPath → String (local file path of the generated PDF)',
     ));
-    _model.textFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -131,108 +130,187 @@ class _CopytocbWidgetState extends State<CopytocbWidget> {
                             EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                         child: Container(
                           width: double.infinity,
-                          child: TextFormField(
-                            controller: _model.textController,
-                            focusNode: _model.textFieldFocusNode,
-                            autofocus: false,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              isDense: true,
-                              labelStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    font: GoogleFonts.manrope(
+                          child: Autocomplete<String>(
+                            initialValue: TextEditingValue(
+                                text: valueOrDefault<String>(
+                              widget!.text,
+                              '🔸 Creator Plan – ₦5,000/month Best For: Podcasters, creators & content marketers  Includes:  Up to 50,000 characters/month  AI voice changer (Speech-to-Speech)  Generate multi-voice dialogues  Save projects in cloud  Priority audio generation  🟣 Pro Studio Plan – ₦15,000/month Best For: Agencies, studios, educators  Includes:  Up to 200,000 characters/month  Batch processing (e.g., for podcast episodes)  Podcast script + audio generation  Audio transcription & subtitling  Priority support  ⚡ Enterprise or Bulk Plans Contact Sales for custom pricing  Tailored solutions with:  Dedicated account support  API access for automation  White-labeling options  Higher character volumes (1M+)  Let me know if you want to update the price points, features, or add a \"Free Trial\" plan too.        You said: i need a flutter flowaction that can take in string text and returns a downloadable pdf file or save the text as pdf   ChatGPT said: Sure! Here\'s a FlutterFlow custom action that takes in a String (text input) and returns a downloadable .pdf file, saving it locally on the device or optionally uploading it to Firebase Storage.  ✅ Custom Action Name: generatePdfFromText ✅ Input Parameter: textInput → String  ✅ Output: pdfPath → String (local file path of the generated PDF)',
+                            )),
+                            optionsBuilder: (textEditingValue) {
+                              if (textEditingValue.text == '') {
+                                return const Iterable<String>.empty();
+                              }
+                              return [
+                                FFLocalizations.of(context).getText(
+                                  '5z7bi7zs' /* Option 1 */,
+                                )
+                              ].where((option) {
+                                final lowercaseOption = option.toLowerCase();
+                                return lowercaseOption.contains(
+                                    textEditingValue.text.toLowerCase());
+                              });
+                            },
+                            optionsViewBuilder: (context, onSelected, options) {
+                              return AutocompleteOptionsList(
+                                textFieldKey: _model.textFieldKey,
+                                textController: _model.textController!,
+                                options: options.toList(),
+                                onSelected: onSelected,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      font: GoogleFonts.manrope(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                      letterSpacing: 0.0,
                                       fontWeight: FlutterFlowTheme.of(context)
-                                          .labelMedium
+                                          .bodyMedium
                                           .fontWeight,
                                       fontStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
+                                          .bodyMedium
                                           .fontStyle,
                                     ),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .fontStyle,
+                                textHighlightStyle: TextStyle(),
+                                elevation: 4.0,
+                                optionBackgroundColor:
+                                    FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                optionHighlightColor:
+                                    FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                maxHeight: 200.0,
+                              );
+                            },
+                            onSelected: (String selection) {
+                              safeSetState(() =>
+                                  _model.textFieldSelectedOption = selection);
+                              FocusScope.of(context).unfocus();
+                            },
+                            fieldViewBuilder: (
+                              context,
+                              textEditingController,
+                              focusNode,
+                              onEditingComplete,
+                            ) {
+                              _model.textFieldFocusNode = focusNode;
+
+                              _model.textController = textEditingController;
+                              return TextFormField(
+                                key: _model.textFieldKey,
+                                controller: textEditingController,
+                                focusNode: focusNode,
+                                onEditingComplete: onEditingComplete,
+                                autofocus: true,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        font: GoogleFonts.manrope(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .fontStyle,
+                                      ),
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        font: GoogleFonts.manrope(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .fontStyle,
+                                      ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
                                   ),
-                              hintStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    font: GoogleFonts.manrope(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .fontWeight,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      font: GoogleFonts.manrope(
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                      fontSize: 18.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.bold,
                                       fontStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
+                                          .bodyMedium
                                           .fontStyle,
                                     ),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .fontStyle,
-                                  ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  font: GoogleFonts.manrope(
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
-                                  fontSize: 18.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .fontStyle,
-                                ),
-                            maxLines: 20,
-                            minLines: 5,
-                            cursorColor:
-                                FlutterFlowTheme.of(context).primaryText,
-                            validator: _model.textControllerValidator
-                                .asValidator(context),
+                                maxLines: 20,
+                                minLines: 5,
+                                cursorColor:
+                                    FlutterFlowTheme.of(context).primaryText,
+                                validator: _model.textControllerValidator
+                                    .asValidator(context),
+                              );
+                            },
                           ),
                         ),
                       ),
                     ]
+                        .divide(SizedBox(height: 100.0))
                         .addToStart(SizedBox(height: 20.0))
-                        .addToEnd(SizedBox(height: 33.0)),
+                        .addToEnd(SizedBox(height: 100.0)),
                   ),
                 ),
               ),
@@ -271,29 +349,38 @@ class _CopytocbWidgetState extends State<CopytocbWidget> {
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                        child: Text(
-                          '${formatNumber(
-                            widget!.textCountNum,
-                            formatType: FormatType.decimal,
-                            decimalType: DecimalType.automatic,
-                          )} Characters',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                font: GoogleFonts.manrope(
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            '${formatNumber(
+                              widget!.textCountNum,
+                              formatType: FormatType.decimal,
+                              decimalType: DecimalType.automatic,
+                            )} Characters',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.manrope(
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.bold,
                                   fontStyle: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .fontStyle,
                                 ),
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .fontStyle,
-                              ),
+                          ),
                         ),
                       ),
                       InkWell(
@@ -341,7 +428,23 @@ class _CopytocbWidgetState extends State<CopytocbWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
-                                  context.pushNamed(PricingWidget.routeName);
+                                  await Clipboard.setData(
+                                      ClipboardData(text: widget!.text));
+                                  HapticFeedback.lightImpact();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Copied',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondary,
+                                    ),
+                                  );
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,

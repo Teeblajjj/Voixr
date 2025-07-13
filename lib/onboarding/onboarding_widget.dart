@@ -172,13 +172,13 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                             16.0, 12.0, 16.0, 16.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            context.pushNamed(CreateAccountWidget.routeName);
+                            context.pushNamed(SigninWidget.routeName);
                           },
                           text: FFLocalizations.of(context).getText(
-                            'h6zxvauu' /* Sign up with e-mail */,
+                            'h6zxvauu' /* Sign in */,
                           ),
                           icon: Icon(
-                            Icons.mail_outline_outlined,
+                            Icons.mail_outline,
                             size: 24.0,
                           ),
                           options: FFButtonOptions(
@@ -188,9 +188,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 12.0, 0.0),
-                            iconColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            color: FlutterFlowTheme.of(context).primaryText,
+                            color: Color(0xFF070707),
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleLarge
                                 .override(
@@ -200,8 +198,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                         .titleLarge
                                         .fontStyle,
                                   ),
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
+                                  color: Colors.white,
                                   fontSize: 18.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.bold,
@@ -211,8 +208,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                 ),
                             elevation: 0.0,
                             borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              width: 2.0,
+                              color: Color(0xFF222324),
+                              width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(50.0),
                             hoverColor:
@@ -238,11 +235,11 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                 HomeWidget.routeName, context.mounted);
                           },
                           text: FFLocalizations.of(context).getText(
-                            'o7r22byq' /* Sign up with Google */,
+                            'o7r22byq' /* Google */,
                           ),
                           icon: FaIcon(
                             FontAwesomeIcons.google,
-                            size: 20.0,
+                            size: 19.0,
                           ),
                           options: FFButtonOptions(
                             width: double.infinity,
@@ -251,9 +248,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 12.0, 0.0),
-                            iconColor: FlutterFlowTheme.of(context).primaryText,
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            color: Colors.white,
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleLarge
                                 .override(
@@ -263,6 +258,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                         .titleLarge
                                         .fontStyle,
                                   ),
+                                  color: Color(0xFF060606),
                                   fontSize: 18.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.bold,
@@ -272,7 +268,6 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                 ),
                             elevation: 0.0,
                             borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(50.0),
@@ -289,7 +284,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            context.pushNamed(SigninWidget.routeName);
+                            context.pushNamed(CreateAccountWidget.routeName);
                           },
                           child: RichText(
                             textScaler: MediaQuery.of(context).textScaler,
@@ -297,13 +292,13 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                               children: [
                                 TextSpan(
                                   text: FFLocalizations.of(context).getText(
-                                    '4wnqsxlw' /* Already have an account? */,
+                                    '4wnqsxlw' /* Don't have an account? */,
                                   ),
                                   style: TextStyle(),
                                 ),
                                 TextSpan(
                                   text: FFLocalizations.of(context).getText(
-                                    '66jxaqg2' /*  Log In! */,
+                                    '66jxaqg2' /*  Sign up! */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
@@ -317,6 +312,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                         ),
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
+                                        fontSize: 18.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.bold,
                                         fontStyle: FlutterFlowTheme.of(context)

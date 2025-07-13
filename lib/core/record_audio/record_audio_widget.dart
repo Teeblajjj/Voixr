@@ -15,6 +15,7 @@ import 'dart:convert';
 import 'dart:ui';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
 import '/flutter_flow/random_data_util.dart' as random_data;
 import '/index.dart';
@@ -230,7 +231,7 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                               .transparent,
                                                           onTap: () async {
                                                             context.pushNamed(
-                                                                PricingWidget
+                                                                ManagesubWidget
                                                                     .routeName);
                                                           },
                                                           child: Text(
@@ -294,7 +295,7 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
-                                                                  4.0,
+                                                                  8.0,
                                                                   0.0),
                                                       child: InkWell(
                                                         splashColor:
@@ -307,7 +308,7 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                             Colors.transparent,
                                                         onTap: () async {
                                                           context.pushNamed(
-                                                              PricingWidget
+                                                              ManagesubWidget
                                                                   .routeName);
                                                         },
                                                         child: Icon(
@@ -1524,6 +1525,29 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                 _model.audtitle =
                                                     _model.stssaved?.title;
                                                 safeSetState(() {});
+                                                _model.tr =
+                                                    await TranscriptionCall
+                                                        .call(
+                                                  audio: FFAppState()
+                                                      .InstlyRecorded,
+                                                  language: 'en',
+                                                );
+
+                                                await currentUserReference!
+                                                    .update({
+                                                  ...mapToFirestore(
+                                                    {
+                                                      'Credits': FieldValue
+                                                          .increment(-(functions
+                                                              .textCount(
+                                                                  TranscriptionCall
+                                                                      .defaultENG(
+                                                        (_model.tr?.jsonBody ??
+                                                            ''),
+                                                      )!)!)),
+                                                    },
+                                                  ),
+                                                });
                                                 await Future.delayed(
                                                     const Duration(
                                                         milliseconds: 1000));
@@ -1559,6 +1583,10 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                             },
                                       text: FFLocalizations.of(context).getText(
                                         'a9r6zer6' /* Generate Speech */,
+                                      ),
+                                      icon: Icon(
+                                        Icons.auto_awesome_sharp,
+                                        size: 15.0,
                                       ),
                                       options: FFButtonOptions(
                                         width:

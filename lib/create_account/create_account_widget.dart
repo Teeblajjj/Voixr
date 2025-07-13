@@ -1,9 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:math';
 import 'dart:ui';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
@@ -15,7 +13,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'create_account_model.dart';
@@ -31,13 +28,10 @@ class CreateAccountWidget extends StatefulWidget {
   State<CreateAccountWidget> createState() => _CreateAccountWidgetState();
 }
 
-class _CreateAccountWidgetState extends State<CreateAccountWidget>
-    with TickerProviderStateMixin {
+class _CreateAccountWidgetState extends State<CreateAccountWidget> {
   late CreateAccountModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -64,43 +58,6 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
 
     _model.confirmpasswordTextController ??= TextEditingController();
     _model.confirmpasswordFocusNode ??= FocusNode();
-
-    animationsMap.addAll({
-      'containerOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 300.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 300.0.ms,
-            begin: Offset(0.0, 140.0),
-            end: Offset(0.0, 0.0),
-          ),
-          ScaleEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 300.0.ms,
-            begin: Offset(0.9, 1.0),
-            end: Offset(1.0, 1.0),
-          ),
-          TiltEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 300.0.ms,
-            begin: Offset(-0.349, 0),
-            end: Offset(0, 0),
-          ),
-        ],
-      ),
-    });
   }
 
   @override
@@ -200,7 +157,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                             maxWidth: 570.0,
                           ),
                           decoration: BoxDecoration(
-                            color: Color(0xFF080808),
+                            color: Color(0xCC000000),
                             boxShadow: [
                               BoxShadow(
                                 blurRadius: 4.0,
@@ -222,33 +179,36 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 22.0),
-                                    child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        '3bb1d85e' /* Sign up */,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .displaySmall
-                                          .override(
-                                            font: GoogleFonts.outfit(
+                                  Align(
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 0.0, 0.0, 22.0),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          '3bb1d85e' /* Sign up */,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .displaySmall
+                                            .override(
+                                              font: GoogleFonts.outfit(
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .displaySmall
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFFEDF0F3),
+                                              fontSize: 25.0,
+                                              letterSpacing: 0.0,
                                               fontWeight: FontWeight.bold,
                                               fontStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .displaySmall
                                                       .fontStyle,
                                             ),
-                                            color: Color(0xFFEDF0F3),
-                                            fontSize: 25.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .displaySmall
-                                                    .fontStyle,
-                                          ),
+                                      ),
                                     ),
                                   ),
                                   Padding(
@@ -297,7 +257,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                             borderSide: BorderSide(
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
+                                                      .secondaryBackground,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -412,7 +372,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                             borderSide: BorderSide(
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
+                                                      .secondaryBackground,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -527,7 +487,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                             borderSide: BorderSide(
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
+                                                      .secondaryBackground,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -642,7 +602,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                             borderSide: BorderSide(
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
+                                                      .secondaryBackground,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -775,7 +735,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                             borderSide: BorderSide(
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
+                                                      .secondaryBackground,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -907,6 +867,14 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                                   .firstNameTextController.text,
                                               lName: _model
                                                   .lastNameTextController.text,
+                                              credits: 0,
+                                              isAdmin: false,
+                                              firsttimeUser: true,
+                                              isfree: true,
+                                              subTitle: 'Free',
+                                              subAmount: 0.00,
+                                              subcredit: 1000,
+                                              subDesc: 'Perfect for beginners',
                                             ));
 
                                         context.goNamedAuth(
@@ -925,21 +893,23 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                             EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
-                                            .primary,
+                                            .primaryText,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
                                               font: GoogleFonts.manrope(
-                                                fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.bold,
                                                 fontStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .titleSmall
                                                         .fontStyle,
                                               ),
-                                              color: Colors.white,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
                                               fontSize: 16.0,
                                               letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.bold,
                                               fontStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
@@ -1048,8 +1018,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                               ),
                             ),
                           ),
-                        ).animateOnPageLoad(
-                            animationsMap['containerOnPageLoadAnimation']!),
+                        ),
                       ),
                     ],
                   ),

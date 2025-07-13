@@ -182,7 +182,7 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                           Colors.transparent,
                                                       onTap: () async {
                                                         context.pushNamed(
-                                                            PricingWidget
+                                                            ManagesubWidget
                                                                 .routeName);
                                                       },
                                                       child: Text(
@@ -242,7 +242,7 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          0.0, 0.0, 4.0, 0.0),
+                                                          0.0, 0.0, 8.0, 0.0),
                                                   child: InkWell(
                                                     splashColor:
                                                         Colors.transparent,
@@ -254,7 +254,7 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       context.pushNamed(
-                                                          PricingWidget
+                                                          ManagesubWidget
                                                               .routeName);
                                                     },
                                                     child: Icon(
@@ -276,15 +276,8 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                     Colors.transparent,
                                                 onTap: () async {
                                                   context.pushNamed(
-                                                    LibrarypageWidget.routeName,
-                                                    queryParameters: {
-                                                      'tabControl':
-                                                          serializeParam(
-                                                        't',
-                                                        ParamType.String,
-                                                      ),
-                                                    }.withoutNulls,
-                                                  );
+                                                      TranscripthistroryWidget
+                                                          .routeName);
                                                 },
                                                 child: Container(
                                                   width: 40.0,
@@ -1405,7 +1398,7 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                   Expanded(
                                     child: Container(
                                       width: double.infinity,
-                                      height: 60.0,
+                                      height: 50.0,
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
                                           colors: [
@@ -1519,6 +1512,22 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                         ),
                                                       ),
                                                       transcriptionsRecordReference);
+
+                                              await currentUserReference!
+                                                  .update({
+                                                ...mapToFirestore(
+                                                  {
+                                                    'Credits': FieldValue
+                                                        .increment(-(functions
+                                                            .textCount(_model
+                                                                .fulltransx!
+                                                                .translatedTranscript)!)),
+                                                  },
+                                                ),
+                                              });
+                                              _model.created = true;
+                                              _model.isworking = false;
+                                              safeSetState(() {});
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
                                                 SnackBar(
@@ -1539,9 +1548,6 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                           .secondary,
                                                 ),
                                               );
-                                              _model.created = true;
-                                              _model.isworking = false;
-                                              safeSetState(() {});
                                             } else {
                                               _model.created = false;
                                               _model.isworking = false;
@@ -1599,7 +1605,7 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                         ),
                                         icon: Icon(
                                           Icons.auto_awesome_rounded,
-                                          size: 24.0,
+                                          size: 15.0,
                                         ),
                                         options: FFButtonOptions(
                                           width: double.infinity,

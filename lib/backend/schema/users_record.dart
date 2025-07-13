@@ -64,11 +64,6 @@ class UsersRecord extends FirestoreRecord {
   int get credits => _credits ?? 0;
   bool hasCredits() => _credits != null;
 
-  // "firsttime" field.
-  bool? _firsttime;
-  bool get firsttime => _firsttime ?? false;
-  bool hasFirsttime() => _firsttime != null;
-
   // "isAdmin" field.
   bool? _isAdmin;
   bool get isAdmin => _isAdmin ?? false;
@@ -79,15 +74,60 @@ class UsersRecord extends FirestoreRecord {
   List<String> get myFavs => _myFavs ?? const [];
   bool hasMyFavs() => _myFavs != null;
 
-  // "subscribers" field.
-  List<DocumentReference>? _subscribers;
-  List<DocumentReference> get subscribers => _subscribers ?? const [];
-  bool hasSubscribers() => _subscribers != null;
+  // "firsttimeUser" field.
+  bool? _firsttimeUser;
+  bool get firsttimeUser => _firsttimeUser ?? false;
+  bool hasFirsttimeUser() => _firsttimeUser != null;
 
-  // "subNum" field.
-  int? _subNum;
-  int get subNum => _subNum ?? 0;
-  bool hasSubNum() => _subNum != null;
+  // "isfree" field.
+  bool? _isfree;
+  bool get isfree => _isfree ?? false;
+  bool hasIsfree() => _isfree != null;
+
+  // "SubTitle" field.
+  String? _subTitle;
+  String get subTitle => _subTitle ?? '';
+  bool hasSubTitle() => _subTitle != null;
+
+  // "Subcredit" field.
+  int? _subcredit;
+  int get subcredit => _subcredit ?? 0;
+  bool hasSubcredit() => _subcredit != null;
+
+  // "SubDesc" field.
+  String? _subDesc;
+  String get subDesc => _subDesc ?? '';
+  bool hasSubDesc() => _subDesc != null;
+
+  // "SubAmount" field.
+  double? _subAmount;
+  double get subAmount => _subAmount ?? 0.0;
+  bool hasSubAmount() => _subAmount != null;
+
+  // "entitledto" field.
+  String? _entitledto;
+  String get entitledto => _entitledto ?? '';
+  bool hasEntitledto() => _entitledto != null;
+
+  // "subDate" field.
+  DateTime? _subDate;
+  DateTime? get subDate => _subDate;
+  bool hasSubDate() => _subDate != null;
+
+  // "subExpireDate" field.
+  DateTime? _subExpireDate;
+  DateTime? get subExpireDate => _subExpireDate;
+  bool hasSubExpireDate() => _subExpireDate != null;
+
+  // "Expired" field.
+  bool? _expired;
+  bool get expired => _expired ?? false;
+  bool hasExpired() => _expired != null;
+
+  // "initialCRbal" field.
+  int? _initialCRbal;
+  int get initialCRbal => _initialCRbal ?? 0;
+  bool hasInitialCRbal() => _initialCRbal != null;
 
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
@@ -99,11 +139,19 @@ class UsersRecord extends FirestoreRecord {
     _fName = snapshotData['FName'] as String?;
     _lName = snapshotData['LName'] as String?;
     _credits = castToType<int>(snapshotData['Credits']);
-    _firsttime = snapshotData['firsttime'] as bool?;
     _isAdmin = snapshotData['isAdmin'] as bool?;
     _myFavs = getDataList(snapshotData['myFavs']);
-    _subscribers = getDataList(snapshotData['subscribers']);
-    _subNum = castToType<int>(snapshotData['subNum']);
+    _firsttimeUser = snapshotData['firsttimeUser'] as bool?;
+    _isfree = snapshotData['isfree'] as bool?;
+    _subTitle = snapshotData['SubTitle'] as String?;
+    _subcredit = castToType<int>(snapshotData['Subcredit']);
+    _subDesc = snapshotData['SubDesc'] as String?;
+    _subAmount = castToType<double>(snapshotData['SubAmount']);
+    _entitledto = snapshotData['entitledto'] as String?;
+    _subDate = snapshotData['subDate'] as DateTime?;
+    _subExpireDate = snapshotData['subExpireDate'] as DateTime?;
+    _expired = snapshotData['Expired'] as bool?;
+    _initialCRbal = castToType<int>(snapshotData['initialCRbal']);
   }
 
   static CollectionReference get collection =>
@@ -149,9 +197,18 @@ Map<String, dynamic> createUsersRecordData({
   String? fName,
   String? lName,
   int? credits,
-  bool? firsttime,
   bool? isAdmin,
-  int? subNum,
+  bool? firsttimeUser,
+  bool? isfree,
+  String? subTitle,
+  int? subcredit,
+  String? subDesc,
+  double? subAmount,
+  String? entitledto,
+  DateTime? subDate,
+  DateTime? subExpireDate,
+  bool? expired,
+  int? initialCRbal,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -164,9 +221,18 @@ Map<String, dynamic> createUsersRecordData({
       'FName': fName,
       'LName': lName,
       'Credits': credits,
-      'firsttime': firsttime,
       'isAdmin': isAdmin,
-      'subNum': subNum,
+      'firsttimeUser': firsttimeUser,
+      'isfree': isfree,
+      'SubTitle': subTitle,
+      'Subcredit': subcredit,
+      'SubDesc': subDesc,
+      'SubAmount': subAmount,
+      'entitledto': entitledto,
+      'subDate': subDate,
+      'subExpireDate': subExpireDate,
+      'Expired': expired,
+      'initialCRbal': initialCRbal,
     }.withoutNulls,
   );
 
@@ -188,11 +254,19 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.fName == e2?.fName &&
         e1?.lName == e2?.lName &&
         e1?.credits == e2?.credits &&
-        e1?.firsttime == e2?.firsttime &&
         e1?.isAdmin == e2?.isAdmin &&
         listEquality.equals(e1?.myFavs, e2?.myFavs) &&
-        listEquality.equals(e1?.subscribers, e2?.subscribers) &&
-        e1?.subNum == e2?.subNum;
+        e1?.firsttimeUser == e2?.firsttimeUser &&
+        e1?.isfree == e2?.isfree &&
+        e1?.subTitle == e2?.subTitle &&
+        e1?.subcredit == e2?.subcredit &&
+        e1?.subDesc == e2?.subDesc &&
+        e1?.subAmount == e2?.subAmount &&
+        e1?.entitledto == e2?.entitledto &&
+        e1?.subDate == e2?.subDate &&
+        e1?.subExpireDate == e2?.subExpireDate &&
+        e1?.expired == e2?.expired &&
+        e1?.initialCRbal == e2?.initialCRbal;
   }
 
   @override
@@ -206,11 +280,19 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.fName,
         e?.lName,
         e?.credits,
-        e?.firsttime,
         e?.isAdmin,
         e?.myFavs,
-        e?.subscribers,
-        e?.subNum
+        e?.firsttimeUser,
+        e?.isfree,
+        e?.subTitle,
+        e?.subcredit,
+        e?.subDesc,
+        e?.subAmount,
+        e?.entitledto,
+        e?.subDate,
+        e?.subExpireDate,
+        e?.expired,
+        e?.initialCRbal
       ]);
 
   @override

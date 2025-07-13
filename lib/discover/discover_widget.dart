@@ -8,6 +8,7 @@ import 'dart:ui';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:utility_functions_library_8g4bud/app_constants.dart'
@@ -51,8 +52,66 @@ class _DiscoverWidgetState extends State<DiscoverWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       HapticFeedback.lightImpact();
-      _model.networkdisc = await actions.checkInternetConnection();
-      if (_model.networkdisc != true) {
+      _model.network4 = await actions.checkInternetConnection();
+      if (_model.network4 == true) {
+        await actions.logInRevenueCatUser();
+        if ((valueOrDefault<bool>(currentUserDocument?.firsttimeUser, false) ==
+                true) ||
+            valueOrDefault<bool>(
+              valueOrDefault<bool>(currentUserDocument?.firsttimeUser, false) ==
+                  null,
+              true,
+            )) {
+          await currentUserReference!.update({
+            ...createUsersRecordData(
+              fName: currentUserDisplayName,
+              firsttimeUser: false,
+              isfree: true,
+              isAdmin: false,
+              subTitle: 'Free',
+              subcredit: 1000,
+              subAmount: 0.00,
+              subDesc: 'Perfect for beginners',
+              entitledto: 'Free',
+              subDate: getCurrentTimestamp,
+              expired: false,
+              initialCRbal: 1000,
+            ),
+            ...mapToFirestore(
+              {
+                'Credits': FieldValue.increment(1000),
+              },
+            ),
+          });
+
+          await currentUserReference!.update(createUsersRecordData(
+            subExpireDate:
+                functions.oneMonthDate(currentUserDocument!.subDate!),
+          ));
+
+          context.goNamed(HomeWidget.routeName);
+        } else {
+          if (valueOrDefault<bool>(currentUserDocument?.expired, false) ==
+              false) {
+            if ((functions
+                        .howManyDay(getCurrentTimestamp,
+                            currentUserDocument!.subExpireDate!)
+                        .toString() ==
+                    '0') ==
+                true) {
+              await currentUserReference!.update(createUsersRecordData(
+                subTitle: 'Free',
+                subcredit: 1000,
+                subAmount: 0.00,
+                subDesc: 'You do noy have any active plan',
+                credits: 0,
+                entitledto: 'Free',
+                initialCRbal: 0,
+              ));
+            }
+          }
+        }
+      } else {
         await showModalBottomSheet(
           isScrollControlled: true,
           backgroundColor: Colors.transparent,

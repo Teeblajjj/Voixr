@@ -9,11 +9,13 @@ import 'dart:ui';
 import "package:utility_functions_library_8g4bud/backend/schema/structs/index.dart"
     as utility_functions_library_8g4bud_data_schema;
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'librarypage_widget.dart' show LibrarypageWidget;
 import 'package:utility_functions_library_8g4bud/app_constants.dart'
     as utility_functions_library_8g4bud_app_constant;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +36,7 @@ class LibrarypageModel extends FlutterFlowModel<LibrarypageWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Custom Action - checkInternetConnection] action in LIBRARYPAGE widget.
-  bool? networklib;
+  bool? network7;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
