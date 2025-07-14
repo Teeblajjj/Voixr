@@ -90,3 +90,8 @@ double getDecimal(int pecentResult) {
   // a function that divides and integer from my perimeter pecentResult by 100 return a double
   return pecentResult / 100.0; // Divide the integer by 100 to get a double
 }
+
+int divide(int number) {
+  // function that divides a number from my number input perimeter by 3 then returns answer as integer
+  return (number / 3).toInt(); // Divide the number by 3 and return as integer
+}

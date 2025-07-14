@@ -47,61 +47,23 @@ class _Profile0WidgetState extends State<Profile0Widget> {
       HapticFeedback.lightImpact();
       _model.network5 = await actions.checkInternetConnection();
       if (_model.network5 == true) {
-        await actions.logInRevenueCatUser();
-        if ((valueOrDefault<bool>(currentUserDocument?.firsttimeUser, false) ==
-                true) ||
-            valueOrDefault<bool>(
-              valueOrDefault<bool>(currentUserDocument?.firsttimeUser, false) ==
-                  null,
-              true,
-            )) {
-          await currentUserReference!.update({
-            ...createUsersRecordData(
-              fName: currentUserDisplayName,
-              firsttimeUser: false,
-              isfree: true,
-              isAdmin: false,
+        if (valueOrDefault<bool>(currentUserDocument?.expired, false) ==
+            false) {
+          if ((functions
+                      .howManyDay(getCurrentTimestamp,
+                          currentUserDocument!.subExpireDate!)
+                      .toString() ==
+                  '0') ==
+              true) {
+            await currentUserReference!.update(createUsersRecordData(
               subTitle: 'Free',
               subcredit: 1000,
               subAmount: 0.00,
-              subDesc: 'Perfect for beginners',
+              subDesc: 'You do noy have any active plan',
+              credits: 0,
               entitledto: 'Free',
-              subDate: getCurrentTimestamp,
-              expired: false,
-              initialCRbal: 1000,
-            ),
-            ...mapToFirestore(
-              {
-                'Credits': FieldValue.increment(1000),
-              },
-            ),
-          });
-
-          await currentUserReference!.update(createUsersRecordData(
-            subExpireDate:
-                functions.oneMonthDate(currentUserDocument!.subDate!),
-          ));
-
-          context.goNamed(HomeWidget.routeName);
-        } else {
-          if (valueOrDefault<bool>(currentUserDocument?.expired, false) ==
-              false) {
-            if ((functions
-                        .howManyDay(getCurrentTimestamp,
-                            currentUserDocument!.subExpireDate!)
-                        .toString() ==
-                    '0') ==
-                true) {
-              await currentUserReference!.update(createUsersRecordData(
-                subTitle: 'Free',
-                subcredit: 1000,
-                subAmount: 0.00,
-                subDesc: 'You do noy have any active plan',
-                credits: 0,
-                entitledto: 'Free',
-                initialCRbal: 0,
-              ));
-            }
+              initialCRbal: 0,
+            ));
           }
         }
       } else {
@@ -353,7 +315,7 @@ class _Profile0WidgetState extends State<Profile0Widget> {
                         children: [
                           Text(
                             FFLocalizations.of(context).getText(
-                              'byzbwusz' /* Switch to Light Mode */,
+                              'byzbwusz' /* Switch to theme */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -587,7 +549,7 @@ class _Profile0WidgetState extends State<Profile0Widget> {
                                         12.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       FFLocalizations.of(context).getText(
-                                        '6ijffmpn' /* Manage plan */,
+                                        '6ijffmpn' /* Manage pass */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
@@ -619,7 +581,7 @@ class _Profile0WidgetState extends State<Profile0Widget> {
                                                 currentUserDocument?.subTitle,
                                                 ''),
                                             'Free',
-                                          )} plan',
+                                          )} pass',
                                           textAlign: TextAlign.end,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyLarge
@@ -660,66 +622,6 @@ class _Profile0WidgetState extends State<Profile0Widget> {
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
-                  child: Container(
-                    width: double.infinity,
-                    height: 60.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: BorderRadius.circular(12.0),
-                      shape: BoxShape.rectangle,
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Icon(
-                            Icons.notifications_none,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 24.0,
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 0.0, 0.0, 0.0),
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  'kvrp50a6' /* Notification Settings */,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyLarge
-                                    .override(
-                                      font: GoogleFonts.manrope(
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .fontStyle,
-                                      ),
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyLarge
-                                          .fontStyle,
-                                    ),
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional(0.9, 0.0),
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 18.0,
-                            ),
-                          ),
-                        ],
                       ),
                     ),
                   ),
@@ -1111,7 +1013,7 @@ class _Profile0WidgetState extends State<Profile0Widget> {
                             ),
                             Icon(
                               Icons.logout,
-                              color: FlutterFlowTheme.of(context).secondaryText,
+                              color: Color(0xFFE90B22),
                               size: 18.0,
                             ),
                           ],

@@ -4,6 +4,7 @@ import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/components/created_audio_history_widget.dart';
 import '/components/loading_screen_widget.dart';
+import '/components/sub_notifyer_f_r_o_n_widget.dart';
 import '/flutter_flow/flutter_flow_audio_player.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
@@ -230,9 +231,20 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                           highlightColor: Colors
                                                               .transparent,
                                                           onTap: () async {
-                                                            context.pushNamed(
-                                                                ManagesubWidget
-                                                                    .routeName);
+                                                            if (valueOrDefault<
+                                                                        bool>(
+                                                                    currentUserDocument
+                                                                        ?.isfree,
+                                                                    false) ==
+                                                                true) {
+                                                              context.pushNamed(
+                                                                  PricingWidget
+                                                                      .routeName);
+                                                            } else {
+                                                              context.pushNamed(
+                                                                  ManagesubWidget
+                                                                      .routeName);
+                                                            }
                                                           },
                                                           child: Text(
                                                             valueOrDefault<
@@ -307,9 +319,20 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                         highlightColor:
                                                             Colors.transparent,
                                                         onTap: () async {
-                                                          context.pushNamed(
-                                                              ManagesubWidget
-                                                                  .routeName);
+                                                          if (valueOrDefault<
+                                                                      bool>(
+                                                                  currentUserDocument
+                                                                      ?.isfree,
+                                                                  false) ==
+                                                              true) {
+                                                            context.pushNamed(
+                                                                PricingWidget
+                                                                    .routeName);
+                                                          } else {
+                                                            context.pushNamed(
+                                                                ManagesubWidget
+                                                                    .routeName);
+                                                          }
                                                         },
                                                         child: Icon(
                                                           Icons.toll_outlined,
@@ -331,6 +354,8 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                                     highlightColor:
                                                         Colors.transparent,
                                                     onTap: () async {
+                                                      _model.soundPlayer
+                                                          ?.stop();
                                                       await showModalBottomSheet(
                                                         isScrollControlled:
                                                             true,
@@ -766,260 +791,228 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                               ),
                                             ),
                                           ),
-                                          Container(
-                                            width: 73.0,
-                                            height: 73.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                              image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: Image.asset(
-                                                  'assets/images/photo-1621707854626-ffa306e32745?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw2fHxqYW1lc3xlbnwwfHx8fDE3NDQ2NzI2MDh8MA&ixlib=rb-4.0.3&q=80&w=1080',
-                                                ).image,
-                                              ),
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Stack(
-                                              children: [
-                                                if (FFAppState()
-                                                        .isrecordingNow ==
-                                                    false)
-                                                  FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 40.0,
-                                                    borderWidth: 1.0,
-                                                    buttonSize: 80.0,
-                                                    fillColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                    icon: Icon(
-                                                      Icons.mic,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .error,
-                                                      size: 32.0,
-                                                    ),
-                                                    onPressed: () async {
-                                                      unawaited(
-                                                        () async {
-                                                          await requestPermission(
-                                                              microphonePermission);
-                                                        }(),
-                                                      );
-                                                      _model.timerController
-                                                          .onResetTimer();
-
-                                                      FFAppState()
-                                                              .isrecordingNow =
-                                                          true;
-                                                      FFAppState()
-                                                          .update(() {});
-                                                      await startAudioRecording(
-                                                        context,
-                                                        audioRecorder: _model
-                                                                .audioRecorder ??=
-                                                            AudioRecorder(),
-                                                      );
-
-                                                      _model.timerController
-                                                          .onStartTimer();
-                                                      ScaffoldMessenger.of(
+                                          Stack(
+                                            children: [
+                                              if (FFAppState().isrecordingNow ==
+                                                  false)
+                                                FlutterFlowIconButton(
+                                                  borderColor:
+                                                      Colors.transparent,
+                                                  borderRadius: 40.0,
+                                                  borderWidth: 1.0,
+                                                  buttonSize: 80.0,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
                                                               context)
-                                                          .showSnackBar(
-                                                        SnackBar(
-                                                          content: Text(
-                                                            '...Recording!',
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                          ),
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                                  4000),
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .secondary,
-                                                        ),
-                                                      );
-                                                    },
+                                                          .primaryBackground,
+                                                  icon: Icon(
+                                                    Icons.mic,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    size: 32.0,
                                                   ),
-                                                if (FFAppState()
-                                                        .isrecordingNow ==
-                                                    true)
-                                                  FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 40.0,
-                                                    borderWidth: 1.0,
-                                                    buttonSize: 80.0,
-                                                    fillColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                    icon: Icon(
-                                                      Icons.stop_rounded,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .error,
-                                                      size: 35.0,
-                                                    ),
-                                                    onPressed: () async {
-                                                      await stopAudioRecording(
-                                                        audioRecorder: _model
-                                                            .audioRecorder,
-                                                        audioName:
-                                                            'recordedFileBytes',
-                                                        onRecordingComplete:
-                                                            (audioFilePath,
-                                                                audioBytes) {
-                                                          _model.fullaudio =
-                                                              audioFilePath;
-                                                          _model.recordedFileBytes =
-                                                              audioBytes;
-                                                        },
-                                                      );
+                                                  onPressed: () async {
+                                                    unawaited(
+                                                      () async {
+                                                        await requestPermission(
+                                                            microphonePermission);
+                                                      }(),
+                                                    );
+                                                    _model.timerController
+                                                        .onResetTimer();
 
-                                                      HapticFeedback
-                                                          .lightImpact();
-                                                      _model.timerController
-                                                          .onStopTimer();
-                                                      FFAppState()
-                                                              .isrecordingNow =
-                                                          false;
-                                                      safeSetState(() {});
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .clearSnackBars();
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                        SnackBar(
-                                                          content: Text(
-                                                            '...Please wait! Saving audio file.',
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 18.0,
-                                                            ),
+                                                    FFAppState()
+                                                        .isrecordingNow = true;
+                                                    FFAppState().update(() {});
+                                                    await startAudioRecording(
+                                                      context,
+                                                      audioRecorder: _model
+                                                              .audioRecorder ??=
+                                                          AudioRecorder(),
+                                                    );
+
+                                                    _model.timerController
+                                                        .onStartTimer();
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          '...Recording!',
+                                                          style: TextStyle(
+                                                            color: Colors.white,
                                                           ),
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                                  4000),
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .primary,
                                                         ),
-                                                      );
-                                                      {
-                                                        safeSetState(() => _model
-                                                                .isDataUploading_odogwumGtb =
-                                                            true);
-                                                        var selectedUploadedFiles =
-                                                            <FFUploadedFile>[];
-                                                        var selectedFiles =
-                                                            <SelectedFile>[];
-                                                        var downloadUrls =
-                                                            <String>[];
-                                                        try {
-                                                          showUploadMessage(
-                                                            context,
-                                                            'Uploading file...',
-                                                            showLoading: true,
-                                                          );
-                                                          selectedUploadedFiles = _model
-                                                                  .recordedFileBytes
-                                                                  .bytes!
-                                                                  .isNotEmpty
-                                                              ? [
-                                                                  _model
-                                                                      .recordedFileBytes
-                                                                ]
-                                                              : <FFUploadedFile>[];
-                                                          selectedFiles =
-                                                              selectedFilesFromUploadedFiles(
-                                                            selectedUploadedFiles,
-                                                          );
-                                                          downloadUrls =
-                                                              (await Future
-                                                                      .wait(
-                                                            selectedFiles.map(
-                                                              (f) async =>
-                                                                  await uploadData(
-                                                                      f.storagePath,
-                                                                      f.bytes),
-                                                            ),
-                                                          ))
-                                                                  .where((u) =>
-                                                                      u != null)
-                                                                  .map(
-                                                                      (u) => u!)
-                                                                  .toList();
-                                                        } finally {
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .hideCurrentSnackBar();
-                                                          _model.isDataUploading_odogwumGtb =
-                                                              false;
-                                                        }
-                                                        if (selectedUploadedFiles
-                                                                    .length ==
-                                                                selectedFiles
-                                                                    .length &&
-                                                            downloadUrls
-                                                                    .length ==
-                                                                selectedFiles
-                                                                    .length) {
-                                                          safeSetState(() {
-                                                            _model.uploadedLocalFile_odogwumGtb =
-                                                                selectedUploadedFiles
-                                                                    .first;
-                                                            _model.uploadedFileUrl_odogwumGtb =
-                                                                downloadUrls
-                                                                    .first;
-                                                          });
-                                                          showUploadMessage(
-                                                            context,
-                                                            'Success!',
-                                                          );
-                                                        } else {
-                                                          safeSetState(() {});
-                                                          showUploadMessage(
-                                                            context,
-                                                            'Failed to upload file',
-                                                          );
-                                                          return;
-                                                        }
+                                                        duration: Duration(
+                                                            milliseconds: 4000),
+                                                        backgroundColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondary,
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              if (FFAppState().isrecordingNow ==
+                                                  true)
+                                                FlutterFlowIconButton(
+                                                  borderColor:
+                                                      Colors.transparent,
+                                                  borderRadius: 40.0,
+                                                  borderWidth: 1.0,
+                                                  buttonSize: 80.0,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                  icon: Icon(
+                                                    Icons.stop_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    size: 35.0,
+                                                  ),
+                                                  onPressed: () async {
+                                                    await stopAudioRecording(
+                                                      audioRecorder:
+                                                          _model.audioRecorder,
+                                                      audioName:
+                                                          'recordedFileBytes',
+                                                      onRecordingComplete:
+                                                          (audioFilePath,
+                                                              audioBytes) {
+                                                        _model.fullaudio =
+                                                            audioFilePath;
+                                                        _model.recordedFileBytes =
+                                                            audioBytes;
+                                                      },
+                                                    );
+
+                                                    HapticFeedback
+                                                        .lightImpact();
+                                                    _model.timerController
+                                                        .onStopTimer();
+                                                    FFAppState()
+                                                        .isrecordingNow = false;
+                                                    safeSetState(() {});
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .clearSnackBars();
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          '...Please wait! Saving audio file.',
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 18.0,
+                                                          ),
+                                                        ),
+                                                        duration: Duration(
+                                                            milliseconds: 4000),
+                                                        backgroundColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                      ),
+                                                    );
+                                                    {
+                                                      safeSetState(() => _model
+                                                              .isDataUploading_odogwumGtb =
+                                                          true);
+                                                      var selectedUploadedFiles =
+                                                          <FFUploadedFile>[];
+                                                      var selectedFiles =
+                                                          <SelectedFile>[];
+                                                      var downloadUrls =
+                                                          <String>[];
+                                                      try {
+                                                        showUploadMessage(
+                                                          context,
+                                                          'Uploading file...',
+                                                          showLoading: true,
+                                                        );
+                                                        selectedUploadedFiles = _model
+                                                                .recordedFileBytes
+                                                                .bytes!
+                                                                .isNotEmpty
+                                                            ? [
+                                                                _model
+                                                                    .recordedFileBytes
+                                                              ]
+                                                            : <FFUploadedFile>[];
+                                                        selectedFiles =
+                                                            selectedFilesFromUploadedFiles(
+                                                          selectedUploadedFiles,
+                                                        );
+                                                        downloadUrls =
+                                                            (await Future.wait(
+                                                          selectedFiles.map(
+                                                            (f) async =>
+                                                                await uploadData(
+                                                                    f.storagePath,
+                                                                    f.bytes),
+                                                          ),
+                                                        ))
+                                                                .where((u) =>
+                                                                    u != null)
+                                                                .map((u) => u!)
+                                                                .toList();
+                                                      } finally {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .hideCurrentSnackBar();
+                                                        _model.isDataUploading_odogwumGtb =
+                                                            false;
                                                       }
+                                                      if (selectedUploadedFiles
+                                                                  .length ==
+                                                              selectedFiles
+                                                                  .length &&
+                                                          downloadUrls.length ==
+                                                              selectedFiles
+                                                                  .length) {
+                                                        safeSetState(() {
+                                                          _model.uploadedLocalFile_odogwumGtb =
+                                                              selectedUploadedFiles
+                                                                  .first;
+                                                          _model.uploadedFileUrl_odogwumGtb =
+                                                              downloadUrls
+                                                                  .first;
+                                                        });
+                                                        showUploadMessage(
+                                                          context,
+                                                          'Success!',
+                                                        );
+                                                      } else {
+                                                        safeSetState(() {});
+                                                        showUploadMessage(
+                                                          context,
+                                                          'Failed to upload file',
+                                                        );
+                                                        return;
+                                                      }
+                                                    }
 
-                                                      FFAppState()
-                                                              .InstlyRecorded =
-                                                          _model
-                                                              .uploadedFileUrl_odogwumGtb;
-                                                      FFAppState()
-                                                              .isrecordingNow =
-                                                          false;
-                                                      FFAppState()
-                                                              .UploadedAudio =
-                                                          _model
-                                                              .uploadedFileUrl_odogwumGtb;
-                                                      safeSetState(() {});
-                                                      HapticFeedback
-                                                          .lightImpact();
+                                                    FFAppState()
+                                                            .InstlyRecorded =
+                                                        _model
+                                                            .uploadedFileUrl_odogwumGtb;
+                                                    FFAppState()
+                                                        .isrecordingNow = false;
+                                                    FFAppState().UploadedAudio =
+                                                        _model
+                                                            .uploadedFileUrl_odogwumGtb;
+                                                    safeSetState(() {});
+                                                    HapticFeedback
+                                                        .lightImpact();
 
-                                                      safeSetState(() {});
-                                                    },
-                                                  ),
-                                              ],
-                                            ),
+                                                    safeSetState(() {});
+                                                  },
+                                                ),
+                                            ],
                                           ),
                                           Container(
                                             width: 73.0,
@@ -1028,12 +1021,6 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
-                                              image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: Image.asset(
-                                                  'assets/images/photo-1621707854626-ffa306e32745?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw2fHxqYW1lc3xlbnwwfHx8fDE3NDQ2NzI2MDh8MA&ixlib=rb-4.0.3&q=80&w=1080',
-                                                ).image,
-                                              ),
                                               shape: BoxShape.circle,
                                             ),
                                             child: Stack(
@@ -1440,143 +1427,196 @@ class _RecordAudioWidgetState extends State<RecordAudioWidget> {
                                           ? null
                                           : () async {
                                               _model.soundPlayer?.stop();
-                                              await Future.delayed(
-                                                  const Duration(
-                                                      milliseconds: 500));
-                                              HapticFeedback.mediumImpact();
                                               _model.isgen = true;
                                               safeSetState(() {});
-                                              _model.stsresult =
-                                                  await BuildshipVoiceChangerCall
-                                                      .call(
+                                              HapticFeedback.mediumImpact();
+                                              _model.tr =
+                                                  await TranscriptionCall.call(
                                                 audio:
                                                     FFAppState().InstlyRecorded,
-                                                voiceId: widget!.id,
+                                                language: 'en',
                                               );
 
-                                              if ((_model.stsresult
-                                                          ?.succeeded ??
-                                                      true) ==
-                                                  true) {
-                                                var speechDataRecordReference =
-                                                    SpeechDataRecord.collection
-                                                        .doc();
-                                                await speechDataRecordReference
-                                                    .set(
-                                                        createSpeechDataRecordData(
-                                                  originalAudioUrl: _model
-                                                      .uploadedFileUrl_uploadDataVdr,
-                                                  modifiedAudioUrl: (_model
-                                                          .stsresult
-                                                          ?.bodyText ??
-                                                      ''),
-                                                  sourceType: 'STS',
-                                                  voiceId: widget!.id,
-                                                  createdAt:
-                                                      getCurrentTimestamp,
-                                                  userId:
-                                                      currentUserReference?.id,
-                                                  newAudio: utility_functions_library_8g4bud_functions
-                                                      .convertStringToAudioPath(
-                                                          (_model.stsresult
-                                                                  ?.bodyText ??
-                                                              '')),
-                                                  title:
-                                                      'Voixr - ${random_data.randomInteger(0, 10000).toString()}',
-                                                  byname:
-                                                      currentUserDisplayName,
-                                                ));
-                                                _model.stssaved = SpeechDataRecord
-                                                    .getDocumentFromData(
-                                                        createSpeechDataRecordData(
-                                                          originalAudioUrl: _model
-                                                              .uploadedFileUrl_uploadDataVdr,
-                                                          modifiedAudioUrl: (_model
-                                                                  .stsresult
-                                                                  ?.bodyText ??
-                                                              ''),
-                                                          sourceType: 'STS',
-                                                          voiceId: widget!.id,
-                                                          createdAt:
-                                                              getCurrentTimestamp,
-                                                          userId:
-                                                              currentUserReference
-                                                                  ?.id,
-                                                          newAudio: utility_functions_library_8g4bud_functions
-                                                              .convertStringToAudioPath((_model
-                                                                      .stsresult
-                                                                      ?.bodyText ??
-                                                                  '')),
-                                                          title:
-                                                              'Voixr - ${random_data.randomInteger(0, 10000).toString()}',
-                                                          byname:
-                                                              currentUserDisplayName,
-                                                        ),
-                                                        speechDataRecordReference);
-                                                _model.newAUPath = null;
-                                                _model.audtitle = null;
-                                                safeSetState(() {});
-                                                _model.newAUPath =
-                                                    utility_functions_library_8g4bud_functions
-                                                        .convertStringToAudioPath(
-                                                            (_model.stsresult
-                                                                    ?.bodyText ??
-                                                                ''));
-                                                _model.audtitle =
-                                                    _model.stssaved?.title;
-                                                safeSetState(() {});
-                                                _model.tr =
-                                                    await TranscriptionCall
+                                              if (valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.credits,
+                                                      0) >=
+                                                  functions.textCount(
+                                                      TranscriptionCall
+                                                          .defaultENG(
+                                                    (_model.tr?.jsonBody ?? ''),
+                                                  )!)!) {
+                                                _model.stsresult =
+                                                    await BuildshipVoiceChangerCall
                                                         .call(
                                                   audio: FFAppState()
                                                       .InstlyRecorded,
-                                                  language: 'en',
+                                                  voiceId: widget!.id,
                                                 );
 
-                                                await currentUserReference!
-                                                    .update({
-                                                  ...mapToFirestore(
-                                                    {
-                                                      'Credits': FieldValue
-                                                          .increment(-(functions
-                                                              .textCount(
-                                                                  TranscriptionCall
-                                                                      .defaultENG(
-                                                        (_model.tr?.jsonBody ??
-                                                            ''),
-                                                      )!)!)),
-                                                    },
-                                                  ),
-                                                });
-                                                await Future.delayed(
-                                                    const Duration(
-                                                        milliseconds: 1000));
-                                                _model.isgen = false;
-                                                safeSetState(() {});
-                                                HapticFeedback.mediumImpact();
+                                                if ((_model.stsresult
+                                                            ?.succeeded ??
+                                                        true) ==
+                                                    true) {
+                                                  var speechDataRecordReference =
+                                                      SpeechDataRecord
+                                                          .collection
+                                                          .doc();
+                                                  await speechDataRecordReference
+                                                      .set(
+                                                          createSpeechDataRecordData(
+                                                    originalAudioUrl: _model
+                                                        .uploadedFileUrl_uploadDataVdr,
+                                                    modifiedAudioUrl: (_model
+                                                            .stsresult
+                                                            ?.bodyText ??
+                                                        ''),
+                                                    sourceType: 'STS',
+                                                    voiceId: widget!.id,
+                                                    createdAt:
+                                                        getCurrentTimestamp,
+                                                    userId: currentUserReference
+                                                        ?.id,
+                                                    newAudio: utility_functions_library_8g4bud_functions
+                                                        .convertStringToAudioPath(
+                                                            (_model.stsresult
+                                                                    ?.bodyText ??
+                                                                '')),
+                                                    title:
+                                                        'Voixr - ${random_data.randomInteger(0, 10000).toString()}',
+                                                    byname:
+                                                        currentUserDisplayName,
+                                                  ));
+                                                  _model.stssaved = SpeechDataRecord
+                                                      .getDocumentFromData(
+                                                          createSpeechDataRecordData(
+                                                            originalAudioUrl: _model
+                                                                .uploadedFileUrl_uploadDataVdr,
+                                                            modifiedAudioUrl: (_model
+                                                                    .stsresult
+                                                                    ?.bodyText ??
+                                                                ''),
+                                                            sourceType: 'STS',
+                                                            voiceId: widget!.id,
+                                                            createdAt:
+                                                                getCurrentTimestamp,
+                                                            userId:
+                                                                currentUserReference
+                                                                    ?.id,
+                                                            newAudio: utility_functions_library_8g4bud_functions
+                                                                .convertStringToAudioPath((_model
+                                                                        .stsresult
+                                                                        ?.bodyText ??
+                                                                    '')),
+                                                            title:
+                                                                'Voixr - ${random_data.randomInteger(0, 10000).toString()}',
+                                                            byname:
+                                                                currentUserDisplayName,
+                                                          ),
+                                                          speechDataRecordReference);
+                                                  _model.newAUPath = null;
+                                                  _model.audtitle = null;
+                                                  safeSetState(() {});
+                                                  _model.newAUPath =
+                                                      utility_functions_library_8g4bud_functions
+                                                          .convertStringToAudioPath(
+                                                              (_model.stsresult
+                                                                      ?.bodyText ??
+                                                                  ''));
+                                                  _model.audtitle =
+                                                      _model.stssaved?.title;
+                                                  safeSetState(() {});
+
+                                                  await currentUserReference!
+                                                      .update({
+                                                    ...mapToFirestore(
+                                                      {
+                                                        'Credits': FieldValue.increment(
+                                                            -(functions.textCount(
+                                                                TranscriptionCall
+                                                                    .defaultENG(
+                                                          (_model.tr
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                        )!)!)),
+                                                      },
+                                                    ),
+                                                  });
+                                                  await Future.delayed(
+                                                      const Duration(
+                                                          milliseconds: 1000));
+                                                  _model.isgen = false;
+                                                  safeSetState(() {});
+                                                  HapticFeedback.mediumImpact();
+                                                } else {
+                                                  _model.isgen = false;
+                                                  safeSetState(() {});
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                        'Oops! check your audio and try again.',
+                                                        style: TextStyle(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
+                                                      ),
+                                                      duration: Duration(
+                                                          milliseconds: 4000),
+                                                      backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondary,
+                                                    ),
+                                                  );
+                                                }
                                               } else {
                                                 _model.isgen = false;
                                                 safeSetState(() {});
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  SnackBar(
-                                                    content: Text(
-                                                      'Oops! check your audio and try again.',
-                                                      style: TextStyle(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
+                                                HapticFeedback.lightImpact();
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        FocusScope.of(context)
+                                                            .unfocus();
+                                                        FocusManager.instance
+                                                            .primaryFocus
+                                                            ?.unfocus();
+                                                      },
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child:
+                                                            SubNotifyerFRONWidget(
+                                                          creditamount: functions
+                                                              .textCount(
+                                                                  TranscriptionCall
+                                                                      .defaultENG(
+                                                            (_model.tr
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                          )!)!,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    duration: Duration(
-                                                        milliseconds: 4000),
-                                                    backgroundColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondary,
-                                                  ),
-                                                );
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+
+                                                await Future.delayed(
+                                                    const Duration(
+                                                        milliseconds: 2500));
+
+                                                context.pushNamed(
+                                                    ManagesubWidget.routeName);
                                               }
 
                                               safeSetState(() {});

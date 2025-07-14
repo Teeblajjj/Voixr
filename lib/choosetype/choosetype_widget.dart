@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/components/pass_notifyer_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -408,10 +410,42 @@ class _ChoosetypeWidgetState extends State<ChoosetypeWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 22.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        if (Navigator.of(context).canPop()) {
-                          context.pop();
+                        if ((valueOrDefault(
+                                    currentUserDocument?.subTitle, '') ==
+                                'Pulse') ||
+                            (valueOrDefault(
+                                    currentUserDocument?.subTitle, '') ==
+                                'Prime')) {
+                          if (Navigator.of(context).canPop()) {
+                            context.pop();
+                          }
+                          context.pushNamed(PodcaststudioWidget.routeName);
+                        } else {
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            useSafeArea: true,
+                            context: context,
+                            builder: (context) {
+                              return GestureDetector(
+                                onTap: () {
+                                  FocusScope.of(context).unfocus();
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                },
+                                child: Padding(
+                                  padding: MediaQuery.viewInsetsOf(context),
+                                  child: PassNotifyerWidget(),
+                                ),
+                              );
+                            },
+                          ).then((value) => safeSetState(() {}));
+
+                          HapticFeedback.lightImpact();
+                          await Future.delayed(
+                              const Duration(milliseconds: 2700));
+
+                          context.pushNamed(ManagesubWidget.routeName);
                         }
-                        context.pushNamed(PodcaststudioWidget.routeName);
                       },
                       text: FFLocalizations.of(context).getText(
                         '64plpvoa' /* Continue */,

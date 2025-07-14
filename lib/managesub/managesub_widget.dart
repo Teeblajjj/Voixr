@@ -273,7 +273,7 @@ class _ManagesubWidgetState extends State<ManagesubWidget> {
                                         children: [
                                           Text(
                                             FFLocalizations.of(context).getText(
-                                              '5ajhvvp6' /* Credits Balance */,
+                                              '5ajhvvp6' /* Credit Balance */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .titleLarge
@@ -438,7 +438,7 @@ class _ManagesubWidgetState extends State<ManagesubWidget> {
                             width: double.infinity,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               borderRadius: BorderRadius.circular(12.0),
                               border: Border.all(
                                 color: FlutterFlowTheme.of(context)
@@ -725,8 +725,8 @@ class _ManagesubWidgetState extends State<ManagesubWidget> {
                                   ),
                                   Divider(
                                     thickness: 1.0,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
                                   ),
                                   AuthUserStreamWidget(
                                     builder: (context) => FFButtonWidget(
@@ -745,13 +745,13 @@ class _ManagesubWidgetState extends State<ManagesubWidget> {
                                                       currentUserDocument
                                                           ?.subTitle,
                                                       '') ==
-                                                  'Voixr Pro')) {
+                                                  'Pulse')) {
                                             return 'Upgrade pass';
                                           } else if (valueOrDefault(
                                                   currentUserDocument?.subTitle,
                                                   '') ==
-                                              'Voixr Plus') {
-                                            return 'Plus Pass is active';
+                                              'Prime') {
+                                            return 'Prime Pass is active';
                                           } else {
                                             return 'Purchase a pass';
                                           }
@@ -766,7 +766,7 @@ class _ManagesubWidgetState extends State<ManagesubWidget> {
                                             EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
+                                            .primaryText,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
@@ -779,7 +779,7 @@ class _ManagesubWidgetState extends State<ManagesubWidget> {
                                               ),
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryText,
+                                                      .primaryBackground,
                                               fontSize: 16.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.bold,
@@ -1054,10 +1054,10 @@ class _ManagesubWidgetState extends State<ManagesubWidget> {
                                     _model.topup5000 = await revenue_cat
                                         .purchasePackage(valueOrDefault<String>(
                                       revenue_cat.offerings!.current!
-                                          .getPackage('topup_5000')!
+                                          .getPackage('spark')!
                                           .storeProduct
                                           .identifier,
-                                      'topup_5000',
+                                      'spark',
                                     ));
                                     if (_model.topup5000!) {
                                       await currentUserReference!.update({
@@ -1308,10 +1308,10 @@ class _ManagesubWidgetState extends State<ManagesubWidget> {
                                     _model.topup10000 = await revenue_cat
                                         .purchasePackage(valueOrDefault<String>(
                                       revenue_cat.offerings!.current!
-                                          .getPackage('topup_10000')!
+                                          .getPackage('boost')!
                                           .storeProduct
                                           .identifier,
-                                      'topup_10000',
+                                      'boost',
                                     ));
                                     if (_model.topup10000!) {
                                       await currentUserReference!.update({
@@ -1563,10 +1563,10 @@ class _ManagesubWidgetState extends State<ManagesubWidget> {
                                     _model.topup15000 = await revenue_cat
                                         .purchasePackage(valueOrDefault<String>(
                                       revenue_cat.offerings!.current!
-                                          .getPackage('topup_15000')!
+                                          .getPackage('mega')!
                                           .storeProduct
                                           .identifier,
-                                      'topup_15000',
+                                      'mega',
                                     ));
                                     if (_model.topup15000!) {
                                       await currentUserReference!.update({

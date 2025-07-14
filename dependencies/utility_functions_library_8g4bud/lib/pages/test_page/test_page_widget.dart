@@ -5,32 +5,32 @@ import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'home_page_model.dart';
-export 'home_page_model.dart';
+import 'test_page_model.dart';
+export 'test_page_model.dart';
 
-class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({super.key});
+class TestPageWidget extends StatefulWidget {
+  const TestPageWidget({super.key});
 
-  static String routeName = 'HomePage';
-  static String routePath = '/homePage';
+  static String routeName = 'TestPage';
+  static String routePath = '/testUtilityPage';
   static void maybeSetRouteName(String? updatedRouteName) =>
       routeName = updatedRouteName ?? routeName;
   static void maybeSetRoutePath(String? updatedRoutePath) =>
       routePath = updatedRoutePath ?? routePath;
 
   @override
-  State<HomePageWidget> createState() => _HomePageWidgetState();
+  State<TestPageWidget> createState() => _TestPageWidgetState();
 }
 
-class _HomePageWidgetState extends State<HomePageWidget> {
-  late HomePageModel _model;
+class _TestPageWidgetState extends State<TestPageWidget> {
+  late TestPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomePageModel());
+    _model = createModel(context, () => TestPageModel());
   }
 
   @override

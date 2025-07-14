@@ -3,6 +3,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/components/choosepodcaster1_widget.dart';
 import '/components/loading_screen_widget.dart';
+import '/components/sub_notifyer_f_r_o_n_widget.dart';
 import '/flutter_flow/flutter_flow_audio_player.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -1770,7 +1771,7 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
                                         : () async {
                                             await downloadFile(
                                               filename:
-                                                  'Voixr- ${'${_model.newpodDataDIALOGUE?.hostName} x  ${_model.newpodDataDIALOGUE?.guestName}'}${getCurrentTimestamp.toString()}.mp3',
+                                                  'Voixr- ${getCurrentTimestamp.toString()}.mp3',
                                               url: valueOrDefault<String>(
                                                 _model.audio,
                                                 'audio',
@@ -1934,75 +1935,9 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
 
                           if ((_model.apiResultpodcastscpt?.succeeded ??
                               true)) {
-                            _model.thePodcast = await MAinPodcastAudioCall.call(
-                              voiceID1: FFAppState().HostVid,
-                              voiceID2: FFAppState().GuestVid,
-                              text1: getJsonField(
-                                (_model.apiResultpodcastscpt?.jsonBody ?? ''),
-                                r'''$..[0].text''',
-                              ).toString(),
-                              text2: getJsonField(
-                                (_model.apiResultpodcastscpt?.jsonBody ?? ''),
-                                r'''$..[1].text''',
-                              ).toString(),
-                              text3: getJsonField(
-                                (_model.apiResultpodcastscpt?.jsonBody ?? ''),
-                                r'''$..[2].text''',
-                              ).toString(),
-                              text4: getJsonField(
-                                (_model.apiResultpodcastscpt?.jsonBody ?? ''),
-                                r'''$..[3].text''',
-                              ).toString(),
-                              text5: getJsonField(
-                                (_model.apiResultpodcastscpt?.jsonBody ?? ''),
-                                r'''$..[4].text''',
-                              ).toString(),
-                              text6: getJsonField(
-                                (_model.apiResultpodcastscpt?.jsonBody ?? ''),
-                                r'''$..[5].text''',
-                              ).toString(),
-                              text7: getJsonField(
-                                (_model.apiResultpodcastscpt?.jsonBody ?? ''),
-                                r'''$..[6].text''',
-                              ).toString(),
-                              outputFilePath:
-                                  '/voice${random_data.randomInteger(1, 10).toString()}ai.mp3',
-                              text8: getJsonField(
-                                (_model.apiResultpodcastscpt?.jsonBody ?? ''),
-                                r'''$..[7].text''',
-                              ).toString(),
-                              text9: getJsonField(
-                                (_model.apiResultpodcastscpt?.jsonBody ?? ''),
-                                r'''$..[8].text''',
-                              ).toString(),
-                              text10: getJsonField(
-                                (_model.apiResultpodcastscpt?.jsonBody ?? ''),
-                                r'''$..[9].text''',
-                              ).toString(),
-                              text11: getJsonField(
-                                (_model.apiResultpodcastscpt?.jsonBody ?? ''),
-                                r'''$..[10].text''',
-                              ).toString(),
-                              text12: getJsonField(
-                                (_model.apiResultpodcastscpt?.jsonBody ?? ''),
-                                r'''$..[11].text''',
-                              ).toString(),
-                              text13: getJsonField(
-                                (_model.apiResultpodcastscpt?.jsonBody ?? ''),
-                                r'''$..[12].text''',
-                              ).toString(),
-                            );
-
-                            if ((_model.thePodcast?.succeeded ?? true)) {
-                              var podcastsRecordReference =
-                                  PodcastsRecord.collection.doc();
-                              await podcastsRecordReference
-                                  .set(createPodcastsRecordData(
-                                topic: _model.textController1.text,
-                                hostName: _model.textController3.text,
-                                guestName: _model.textController4.text,
-                                createdAt: getCurrentTimestamp,
-                                dialogue: '${getJsonField(
+                            if (valueOrDefault(
+                                    currentUserDocument?.credits, 0) >=
+                                functions.textCount('${getJsonField(
                                   (_model.apiResultpodcastscpt?.jsonBody ?? ''),
                                   r'''$..[0].text''',
                                 ).toString()}  ${getJsonField(
@@ -2041,34 +1976,332 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
                                 ).toString()}${getJsonField(
                                   (_model.apiResultpodcastscpt?.jsonBody ?? ''),
                                   r'''$..[12].text''',
-                                ).toString()}',
-                                description:
-                                    _model.descriptionTextController.text,
-                                language: _model.choiceChipsValue,
-                                userRefId: currentUserReference?.id,
-                                userref: currentUserReference,
-                                audioUrl2: (_model.thePodcast?.bodyText ?? ''),
-                                audioUrl:
-                                    utility_functions_library_8g4bud_functions
-                                        .convertStringToAudioPath(
-                                            (_model.thePodcast?.bodyText ??
-                                                '')),
-                                playa: random_data.randomInteger(2, 10),
-                                byname: currentUserDisplayName,
-                                image:
-                                    'https://images.unsplash.com/photo-1589903308904-1010c2294adc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTEwMDc1MDl8&ixlib=rb-4.1.0&q=80&w=1080',
-                                like: 0,
-                                featured: false,
-                                trending: false,
-                              ));
-                              _model.newpodDataDIALOGUE =
-                                  PodcastsRecord.getDocumentFromData(
-                                      createPodcastsRecordData(
-                                        topic: _model.textController1.text,
-                                        hostName: _model.textController3.text,
-                                        guestName: _model.textController4.text,
-                                        createdAt: getCurrentTimestamp,
-                                        dialogue: '${getJsonField(
+                                ).toString()}')!) {
+                              _model.thePodcast =
+                                  await MAinPodcastAudioCall.call(
+                                voiceID1: FFAppState().HostVid,
+                                voiceID2: FFAppState().GuestVid,
+                                text1: getJsonField(
+                                  (_model.apiResultpodcastscpt?.jsonBody ?? ''),
+                                  r'''$..[0].text''',
+                                ).toString(),
+                                text2: getJsonField(
+                                  (_model.apiResultpodcastscpt?.jsonBody ?? ''),
+                                  r'''$..[1].text''',
+                                ).toString(),
+                                text3: getJsonField(
+                                  (_model.apiResultpodcastscpt?.jsonBody ?? ''),
+                                  r'''$..[2].text''',
+                                ).toString(),
+                                text4: getJsonField(
+                                  (_model.apiResultpodcastscpt?.jsonBody ?? ''),
+                                  r'''$..[3].text''',
+                                ).toString(),
+                                text5: getJsonField(
+                                  (_model.apiResultpodcastscpt?.jsonBody ?? ''),
+                                  r'''$..[4].text''',
+                                ).toString(),
+                                text6: getJsonField(
+                                  (_model.apiResultpodcastscpt?.jsonBody ?? ''),
+                                  r'''$..[5].text''',
+                                ).toString(),
+                                text7: getJsonField(
+                                  (_model.apiResultpodcastscpt?.jsonBody ?? ''),
+                                  r'''$..[6].text''',
+                                ).toString(),
+                                outputFilePath:
+                                    '/voice${random_data.randomInteger(1, 10).toString()}ai.mp3',
+                                text8: getJsonField(
+                                  (_model.apiResultpodcastscpt?.jsonBody ?? ''),
+                                  r'''$..[7].text''',
+                                ).toString(),
+                                text9: getJsonField(
+                                  (_model.apiResultpodcastscpt?.jsonBody ?? ''),
+                                  r'''$..[8].text''',
+                                ).toString(),
+                                text10: getJsonField(
+                                  (_model.apiResultpodcastscpt?.jsonBody ?? ''),
+                                  r'''$..[9].text''',
+                                ).toString(),
+                                text11: getJsonField(
+                                  (_model.apiResultpodcastscpt?.jsonBody ?? ''),
+                                  r'''$..[10].text''',
+                                ).toString(),
+                                text12: getJsonField(
+                                  (_model.apiResultpodcastscpt?.jsonBody ?? ''),
+                                  r'''$..[11].text''',
+                                ).toString(),
+                                text13: getJsonField(
+                                  (_model.apiResultpodcastscpt?.jsonBody ?? ''),
+                                  r'''$..[12].text''',
+                                ).toString(),
+                              );
+
+                              if ((_model.thePodcast?.succeeded ?? true)) {
+                                var podcastsRecordReference =
+                                    PodcastsRecord.collection.doc();
+                                await podcastsRecordReference
+                                    .set(createPodcastsRecordData(
+                                  topic: _model.textController1.text,
+                                  hostName: _model.textController3.text,
+                                  guestName: _model.textController4.text,
+                                  createdAt: getCurrentTimestamp,
+                                  dialogue: '${getJsonField(
+                                    (_model.apiResultpodcastscpt?.jsonBody ??
+                                        ''),
+                                    r'''$..[0].text''',
+                                  ).toString()}  ${getJsonField(
+                                    (_model.apiResultpodcastscpt?.jsonBody ??
+                                        ''),
+                                    r'''$..[1].text''',
+                                  ).toString()}  ${getJsonField(
+                                    (_model.apiResultpodcastscpt?.jsonBody ??
+                                        ''),
+                                    r'''$..[2].text''',
+                                  ).toString()}${getJsonField(
+                                    (_model.apiResultpodcastscpt?.jsonBody ??
+                                        ''),
+                                    r'''$..[3].text''',
+                                  ).toString()}  ${getJsonField(
+                                    (_model.apiResultpodcastscpt?.jsonBody ??
+                                        ''),
+                                    r'''$..[4].text''',
+                                  ).toString()}  ${getJsonField(
+                                    (_model.apiResultpodcastscpt?.jsonBody ??
+                                        ''),
+                                    r'''$..[5].text''',
+                                  ).toString()}  ${getJsonField(
+                                    (_model.apiResultpodcastscpt?.jsonBody ??
+                                        ''),
+                                    r'''$..[6].text''',
+                                  ).toString()} ${getJsonField(
+                                    (_model.apiResultpodcastscpt?.jsonBody ??
+                                        ''),
+                                    r'''$..[7].text''',
+                                  ).toString()}${getJsonField(
+                                    (_model.apiResultpodcastscpt?.jsonBody ??
+                                        ''),
+                                    r'''$..[8].text''',
+                                  ).toString()}${getJsonField(
+                                    (_model.apiResultpodcastscpt?.jsonBody ??
+                                        ''),
+                                    r'''$..[9].text''',
+                                  ).toString()}${getJsonField(
+                                    (_model.apiResultpodcastscpt?.jsonBody ??
+                                        ''),
+                                    r'''$..[10].text''',
+                                  ).toString()}${getJsonField(
+                                    (_model.apiResultpodcastscpt?.jsonBody ??
+                                        ''),
+                                    r'''$..[11].text''',
+                                  ).toString()}${getJsonField(
+                                    (_model.apiResultpodcastscpt?.jsonBody ??
+                                        ''),
+                                    r'''$..[12].text''',
+                                  ).toString()}',
+                                  description:
+                                      _model.descriptionTextController.text,
+                                  language: _model.choiceChipsValue,
+                                  userRefId: currentUserReference?.id,
+                                  userref: currentUserReference,
+                                  audioUrl2:
+                                      (_model.thePodcast?.bodyText ?? ''),
+                                  audioUrl:
+                                      utility_functions_library_8g4bud_functions
+                                          .convertStringToAudioPath(
+                                              (_model.thePodcast?.bodyText ??
+                                                  '')),
+                                  playa: random_data.randomInteger(2, 10),
+                                  byname: currentUserDisplayName,
+                                  image:
+                                      'https://images.unsplash.com/photo-1589903308904-1010c2294adc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTEwMDc1MDl8&ixlib=rb-4.1.0&q=80&w=1080',
+                                  like: 0,
+                                  featured: false,
+                                  trending: false,
+                                ));
+                                _model.newpodDataDIALOGUE =
+                                    PodcastsRecord.getDocumentFromData(
+                                        createPodcastsRecordData(
+                                          topic: _model.textController1.text,
+                                          hostName: _model.textController3.text,
+                                          guestName:
+                                              _model.textController4.text,
+                                          createdAt: getCurrentTimestamp,
+                                          dialogue: '${getJsonField(
+                                            (_model.apiResultpodcastscpt
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$..[0].text''',
+                                          ).toString()}  ${getJsonField(
+                                            (_model.apiResultpodcastscpt
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$..[1].text''',
+                                          ).toString()}  ${getJsonField(
+                                            (_model.apiResultpodcastscpt
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$..[2].text''',
+                                          ).toString()}${getJsonField(
+                                            (_model.apiResultpodcastscpt
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$..[3].text''',
+                                          ).toString()}  ${getJsonField(
+                                            (_model.apiResultpodcastscpt
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$..[4].text''',
+                                          ).toString()}  ${getJsonField(
+                                            (_model.apiResultpodcastscpt
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$..[5].text''',
+                                          ).toString()}  ${getJsonField(
+                                            (_model.apiResultpodcastscpt
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$..[6].text''',
+                                          ).toString()} ${getJsonField(
+                                            (_model.apiResultpodcastscpt
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$..[7].text''',
+                                          ).toString()}${getJsonField(
+                                            (_model.apiResultpodcastscpt
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$..[8].text''',
+                                          ).toString()}${getJsonField(
+                                            (_model.apiResultpodcastscpt
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$..[9].text''',
+                                          ).toString()}${getJsonField(
+                                            (_model.apiResultpodcastscpt
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$..[10].text''',
+                                          ).toString()}${getJsonField(
+                                            (_model.apiResultpodcastscpt
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$..[11].text''',
+                                          ).toString()}${getJsonField(
+                                            (_model.apiResultpodcastscpt
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$..[12].text''',
+                                          ).toString()}',
+                                          description: _model
+                                              .descriptionTextController.text,
+                                          language: _model.choiceChipsValue,
+                                          userRefId: currentUserReference?.id,
+                                          userref: currentUserReference,
+                                          audioUrl2:
+                                              (_model.thePodcast?.bodyText ??
+                                                  ''),
+                                          audioUrl:
+                                              utility_functions_library_8g4bud_functions
+                                                  .convertStringToAudioPath(
+                                                      (_model.thePodcast
+                                                              ?.bodyText ??
+                                                          '')),
+                                          playa:
+                                              random_data.randomInteger(2, 10),
+                                          byname: currentUserDisplayName,
+                                          image:
+                                              'https://images.unsplash.com/photo-1589903308904-1010c2294adc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTEwMDc1MDl8&ixlib=rb-4.1.0&q=80&w=1080',
+                                          like: 0,
+                                          featured: false,
+                                          trending: false,
+                                        ),
+                                        podcastsRecordReference);
+                                _model.title = null;
+                                _model.audio = null;
+                                _model.previewAudio = null;
+                                safeSetState(() {});
+                                _model.title =
+                                    '${_model.textController3.text} x  ${_model.textController4.text}';
+                                _model.previewAudio =
+                                    _model.newpodDataDIALOGUE?.audioUrl;
+                                _model.audio =
+                                    _model.newpodDataDIALOGUE?.audioUrl2;
+                                safeSetState(() {});
+
+                                await currentUserReference!.update({
+                                  ...mapToFirestore(
+                                    {
+                                      'Credits': FieldValue.increment(
+                                          -(valueOrDefault<int>(
+                                        functions.textCount(_model
+                                            .newpodDataDIALOGUE!.dialogue),
+                                        0,
+                                      ))),
+                                    },
+                                  ),
+                                });
+                                HapticFeedback.mediumImpact();
+                                await Future.delayed(
+                                    const Duration(milliseconds: 1000));
+                                HapticFeedback.mediumImpact();
+                                FFAppState().stillWorking = false;
+                                FFAppState().update(() {});
+                                ScaffoldMessenger.of(context).clearSnackBars();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Your Podcast Is READY!',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).secondary,
+                                  ),
+                                );
+                              } else {
+                                FFAppState().stillWorking = false;
+                                FFAppState().update(() {});
+                                HapticFeedback.mediumImpact();
+                                ScaffoldMessenger.of(context).clearSnackBars();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Oops!!!Network Error, Try Again.',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).error,
+                                  ),
+                                );
+                              }
+                            } else {
+                              FFAppState().stillWorking = false;
+                              safeSetState(() {});
+                              await showModalBottomSheet(
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
+                                useSafeArea: true,
+                                context: context,
+                                builder: (context) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      FocusScope.of(context).unfocus();
+                                      FocusManager.instance.primaryFocus
+                                          ?.unfocus();
+                                    },
+                                    child: Padding(
+                                      padding: MediaQuery.viewInsetsOf(context),
+                                      child: SubNotifyerFRONWidget(
+                                        creditamount:
+                                            functions.textCount('${getJsonField(
                                           (_model.apiResultpodcastscpt
                                                   ?.jsonBody ??
                                               ''),
@@ -2133,93 +2366,18 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
                                                   ?.jsonBody ??
                                               ''),
                                           r'''$..[12].text''',
-                                        ).toString()}',
-                                        description: _model
-                                            .descriptionTextController.text,
-                                        language: _model.choiceChipsValue,
-                                        userRefId: currentUserReference?.id,
-                                        userref: currentUserReference,
-                                        audioUrl2:
-                                            (_model.thePodcast?.bodyText ?? ''),
-                                        audioUrl:
-                                            utility_functions_library_8g4bud_functions
-                                                .convertStringToAudioPath(
-                                                    (_model.thePodcast
-                                                            ?.bodyText ??
-                                                        '')),
-                                        playa: random_data.randomInteger(2, 10),
-                                        byname: currentUserDisplayName,
-                                        image:
-                                            'https://images.unsplash.com/photo-1589903308904-1010c2294adc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTEwMDc1MDl8&ixlib=rb-4.1.0&q=80&w=1080',
-                                        like: 0,
-                                        featured: false,
-                                        trending: false,
+                                        ).toString()}')!,
                                       ),
-                                      podcastsRecordReference);
-                              _model.title = null;
-                              _model.audio = null;
-                              _model.previewAudio = null;
-                              safeSetState(() {});
-                              _model.title =
-                                  '${_model.newpodDataDIALOGUE?.hostName} x  ${_model.newpodDataDIALOGUE?.guestName}';
-                              _model.previewAudio =
-                                  _model.newpodDataDIALOGUE?.audioUrl;
-                              _model.audio =
-                                  _model.newpodDataDIALOGUE?.audioUrl2;
-                              safeSetState(() {});
+                                    ),
+                                  );
+                                },
+                              ).then((value) => safeSetState(() {}));
 
-                              await currentUserReference!.update({
-                                ...mapToFirestore(
-                                  {
-                                    'Credits': FieldValue.increment(
-                                        -(valueOrDefault<int>(
-                                      functions.textCount(
-                                          _model.newpodDataDIALOGUE!.dialogue),
-                                      0,
-                                    ))),
-                                  },
-                                ),
-                              });
-                              HapticFeedback.mediumImpact();
+                              HapticFeedback.lightImpact();
                               await Future.delayed(
-                                  const Duration(milliseconds: 1000));
-                              HapticFeedback.mediumImpact();
-                              FFAppState().stillWorking = false;
-                              FFAppState().update(() {});
-                              ScaffoldMessenger.of(context).clearSnackBars();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Your Podcast Is READY!',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).secondary,
-                                ),
-                              );
-                            } else {
-                              FFAppState().stillWorking = false;
-                              FFAppState().update(() {});
-                              HapticFeedback.mediumImpact();
-                              ScaffoldMessenger.of(context).clearSnackBars();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Oops!!!Network Error, Try Again.',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).error,
-                                ),
-                              );
+                                  const Duration(milliseconds: 2500));
+
+                              context.pushNamed(ManagesubWidget.routeName);
                             }
                           } else {
                             FFAppState().stillWorking = false;
@@ -2291,149 +2449,186 @@ class _PodcaststudioWidgetState extends State<PodcaststudioWidget> {
                             safeSetState(() => _model.formpod1 = false);
                             return;
                           }
-                          HapticFeedback.lightImpact();
                           FFAppState().stillWorking = true;
                           safeSetState(() {});
-                          _model.apiResultwp5 =
-                              await PodcastStudioSoloCall.call(
-                            topic: _model.textController1.text,
-                            description: _model.descriptionTextController.text,
-                            host: _model.textController3.text,
-                            language: _model.choiceChipsValue,
-                            voiceID: FFAppState().HostVid,
-                            outputFormat:
-                                '${_model.textController3.text}-Voixr${random_data.randomInteger(0, 10000).toString()}.mp3',
-                          );
-
-                          if ((_model.apiResultwp5?.succeeded ?? true)) {
-                            var podcastsRecordReference =
-                                PodcastsRecord.collection.doc();
-                            await podcastsRecordReference
-                                .set(createPodcastsRecordData(
+                          await Future.delayed(
+                              const Duration(milliseconds: 1000));
+                          if (valueOrDefault(currentUserDocument?.credits, 0) >=
+                              3000) {
+                            HapticFeedback.lightImpact();
+                            _model.apiResultwp5 =
+                                await PodcastStudioSoloCall.call(
                               topic: _model.textController1.text,
-                              hostName: _model.textController3.text,
-                              createdAt: getCurrentTimestamp,
-                              dialogue: getJsonField(
-                                (_model.apiResultwp5?.jsonBody ?? ''),
-                                r'''$..response''',
-                              ).toString(),
                               description:
                                   _model.descriptionTextController.text,
+                              host: _model.textController3.text,
                               language: _model.choiceChipsValue,
-                              userRefId: currentUserReference?.id,
-                              userref: currentUserReference,
-                              audioUrl2: getJsonField(
-                                (_model.apiResultwp5?.jsonBody ?? ''),
-                                r'''$..textToSpeechSaveToFile''',
-                              ).toString(),
-                              audioUrl:
-                                  utility_functions_library_8g4bud_functions
-                                      .convertStringToAudioPath(getJsonField(
-                                (_model.apiResultwp5?.jsonBody ?? ''),
-                                r'''$..textToSpeechSaveToFile''',
-                              ).toString()),
-                              playa: random_data.randomInteger(2, 10),
-                              byname: currentUserDisplayName,
-                              image:
-                                  'https://images.unsplash.com/photo-1589903308904-1010c2294adc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTEwMDc1MDl8&ixlib=rb-4.1.0&q=80&w=1080',
-                              like: 0,
-                              featured: false,
-                              trending: false,
-                            ));
-                            _model.newpodData1 =
-                                PodcastsRecord.getDocumentFromData(
-                                    createPodcastsRecordData(
-                                      topic: _model.textController1.text,
-                                      hostName: _model.textController3.text,
-                                      createdAt: getCurrentTimestamp,
-                                      dialogue: getJsonField(
-                                        (_model.apiResultwp5?.jsonBody ?? ''),
-                                        r'''$..response''',
-                                      ).toString(),
-                                      description:
-                                          _model.descriptionTextController.text,
-                                      language: _model.choiceChipsValue,
-                                      userRefId: currentUserReference?.id,
-                                      userref: currentUserReference,
-                                      audioUrl2: getJsonField(
-                                        (_model.apiResultwp5?.jsonBody ?? ''),
-                                        r'''$..textToSpeechSaveToFile''',
-                                      ).toString(),
-                                      audioUrl:
-                                          utility_functions_library_8g4bud_functions
-                                              .convertStringToAudioPath(
-                                                  getJsonField(
-                                        (_model.apiResultwp5?.jsonBody ?? ''),
-                                        r'''$..textToSpeechSaveToFile''',
-                                      ).toString()),
-                                      playa: random_data.randomInteger(2, 10),
-                                      byname: currentUserDisplayName,
-                                      image:
-                                          'https://images.unsplash.com/photo-1589903308904-1010c2294adc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTEwMDc1MDl8&ixlib=rb-4.1.0&q=80&w=1080',
-                                      like: 0,
-                                      featured: false,
-                                      trending: false,
-                                    ),
-                                    podcastsRecordReference);
-                            _model.title = null;
-                            _model.audio = null;
-                            _model.previewAudio = null;
-                            safeSetState(() {});
-                            _model.title =
-                                '${_model.newpodDataDIALOGUE?.hostName} x  Voixr';
-                            _model.audio = _model.newpodData1?.audioUrl2;
-                            _model.previewAudio = _model.newpodData1?.audioUrl;
-                            safeSetState(() {});
-                            HapticFeedback.mediumImpact();
-                            await Future.delayed(
-                                const Duration(milliseconds: 1000));
-
-                            await currentUserReference!.update({
-                              ...mapToFirestore(
-                                {
-                                  'Credits': FieldValue.increment(
-                                      -(functions.textCount(
-                                          _model.newpodData1!.dialogue)!)),
-                                },
-                              ),
-                            });
-                            HapticFeedback.mediumImpact();
-                            FFAppState().stillWorking = false;
-                            FFAppState().update(() {});
-                            ScaffoldMessenger.of(context).clearSnackBars();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Your Podcast Is READY!',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                duration: Duration(milliseconds: 4000),
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).secondary,
-                              ),
+                              voiceID: FFAppState().HostVid,
+                              outputFormat:
+                                  '${_model.textController3.text}-Voixr${random_data.randomInteger(0, 10000).toString()}.mp3',
                             );
+
+                            if ((_model.apiResultwp5?.succeeded ?? true)) {
+                              var podcastsRecordReference =
+                                  PodcastsRecord.collection.doc();
+                              await podcastsRecordReference
+                                  .set(createPodcastsRecordData(
+                                topic: _model.textController1.text,
+                                hostName: _model.textController3.text,
+                                createdAt: getCurrentTimestamp,
+                                dialogue: getJsonField(
+                                  (_model.apiResultwp5?.jsonBody ?? ''),
+                                  r'''$..response''',
+                                ).toString(),
+                                description:
+                                    _model.descriptionTextController.text,
+                                language: _model.choiceChipsValue,
+                                userRefId: currentUserReference?.id,
+                                userref: currentUserReference,
+                                audioUrl2: getJsonField(
+                                  (_model.apiResultwp5?.jsonBody ?? ''),
+                                  r'''$..textToSpeechSaveToFile''',
+                                ).toString(),
+                                audioUrl:
+                                    utility_functions_library_8g4bud_functions
+                                        .convertStringToAudioPath(getJsonField(
+                                  (_model.apiResultwp5?.jsonBody ?? ''),
+                                  r'''$..textToSpeechSaveToFile''',
+                                ).toString()),
+                                playa: random_data.randomInteger(2, 10),
+                                byname: currentUserDisplayName,
+                                image:
+                                    'https://images.unsplash.com/photo-1589903308904-1010c2294adc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTEwMDc1MDl8&ixlib=rb-4.1.0&q=80&w=1080',
+                                like: 0,
+                                featured: false,
+                                trending: false,
+                              ));
+                              _model.newpodData1 =
+                                  PodcastsRecord.getDocumentFromData(
+                                      createPodcastsRecordData(
+                                        topic: _model.textController1.text,
+                                        hostName: _model.textController3.text,
+                                        createdAt: getCurrentTimestamp,
+                                        dialogue: getJsonField(
+                                          (_model.apiResultwp5?.jsonBody ?? ''),
+                                          r'''$..response''',
+                                        ).toString(),
+                                        description: _model
+                                            .descriptionTextController.text,
+                                        language: _model.choiceChipsValue,
+                                        userRefId: currentUserReference?.id,
+                                        userref: currentUserReference,
+                                        audioUrl2: getJsonField(
+                                          (_model.apiResultwp5?.jsonBody ?? ''),
+                                          r'''$..textToSpeechSaveToFile''',
+                                        ).toString(),
+                                        audioUrl:
+                                            utility_functions_library_8g4bud_functions
+                                                .convertStringToAudioPath(
+                                                    getJsonField(
+                                          (_model.apiResultwp5?.jsonBody ?? ''),
+                                          r'''$..textToSpeechSaveToFile''',
+                                        ).toString()),
+                                        playa: random_data.randomInteger(2, 10),
+                                        byname: currentUserDisplayName,
+                                        image:
+                                            'https://images.unsplash.com/photo-1589903308904-1010c2294adc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTEwMDc1MDl8&ixlib=rb-4.1.0&q=80&w=1080',
+                                        like: 0,
+                                        featured: false,
+                                        trending: false,
+                                      ),
+                                      podcastsRecordReference);
+                              _model.title = null;
+                              _model.audio = null;
+                              _model.previewAudio = null;
+                              safeSetState(() {});
+                              _model.title =
+                                  '${_model.textController3.text} x  Voixr';
+                              _model.audio = _model.newpodData1?.audioUrl2;
+                              _model.previewAudio =
+                                  _model.newpodData1?.audioUrl;
+                              safeSetState(() {});
+                              HapticFeedback.mediumImpact();
+                              await Future.delayed(
+                                  const Duration(milliseconds: 1000));
+
+                              await currentUserReference!.update({
+                                ...mapToFirestore(
+                                  {
+                                    'Credits': FieldValue.increment(
+                                        -(functions.textCount(
+                                            _model.newpodData1!.dialogue)!)),
+                                  },
+                                ),
+                              });
+                              HapticFeedback.mediumImpact();
+                              FFAppState().stillWorking = false;
+                              FFAppState().update(() {});
+                              ScaffoldMessenger.of(context).clearSnackBars();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Your Podcast Is READY!',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).secondary,
+                                ),
+                              );
+                            } else {
+                              FFAppState().stillWorking = false;
+                              FFAppState().update(() {});
+                              HapticFeedback.mediumImpact();
+                              ScaffoldMessenger.of(context).clearSnackBars();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Oops!!!Network Error, Try Again.',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).error,
+                                ),
+                              );
+                            }
                           } else {
                             FFAppState().stillWorking = false;
-                            FFAppState().update(() {});
-                            HapticFeedback.mediumImpact();
-                            ScaffoldMessenger.of(context).clearSnackBars();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Oops!!!Network Error, Try Again.',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
+                            safeSetState(() {});
+                            await showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              useSafeArea: true,
+                              context: context,
+                              builder: (context) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    FocusScope.of(context).unfocus();
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                  },
+                                  child: Padding(
+                                    padding: MediaQuery.viewInsetsOf(context),
+                                    child: SubNotifyerFRONWidget(
+                                      creditamount: 3000,
+                                    ),
                                   ),
-                                ),
-                                duration: Duration(milliseconds: 4000),
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).error,
-                              ),
-                            );
+                                );
+                              },
+                            ).then((value) => safeSetState(() {}));
+
+                            HapticFeedback.lightImpact();
+                            await Future.delayed(
+                                const Duration(milliseconds: 2500));
+
+                            context.pushNamed(ManagesubWidget.routeName);
                           }
 
                           safeSetState(() {});

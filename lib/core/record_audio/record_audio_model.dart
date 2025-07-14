@@ -4,6 +4,7 @@ import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/components/created_audio_history_widget.dart';
 import '/components/loading_screen_widget.dart';
+import '/components/sub_notifyer_f_r_o_n_widget.dart';
 import '/flutter_flow/flutter_flow_audio_player.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
@@ -79,12 +80,12 @@ class RecordAudioModel extends FlutterFlowModel<RecordAudioWidget> {
   String uploadedFileUrl_odogwumGtb = '';
 
   AudioPlayer? soundPlayer;
+  // Stores action output result for [Backend Call - API (Transcription)] action in Button widget.
+  ApiCallResponse? tr;
   // Stores action output result for [Backend Call - API (Buildship VoiceChanger)] action in Button widget.
   ApiCallResponse? stsresult;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   SpeechDataRecord? stssaved;
-  // Stores action output result for [Backend Call - API (Transcription)] action in Button widget.
-  ApiCallResponse? tr;
   // Model for loadingScreen component.
   late LoadingScreenModel loadingScreenModel;
 

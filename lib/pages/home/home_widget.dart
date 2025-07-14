@@ -61,23 +61,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
       HapticFeedback.lightImpact();
       _model.network = await actions.checkInternetConnection();
       if (_model.network == true) {
-        await actions.logInRevenueCatUser();
-        if (!valueOrDefault<bool>(
-          valueOrDefault<bool>(currentUserDocument?.firsttimeUser, false) !=
-              null,
-          true,
-        )) {
-          await currentUserReference!.update(createUsersRecordData(
-            firsttimeUser: true,
-          ));
-        }
-        if ((valueOrDefault<bool>(currentUserDocument?.firsttimeUser, false) ==
-                true) ||
-            valueOrDefault<bool>(
-              valueOrDefault<bool>(currentUserDocument?.firsttimeUser, false) ==
-                  null,
-              true,
-            )) {
+        if (valueOrDefault<bool>(currentUserDocument?.firsttimeUser, false) ==
+            true) {
           await currentUserReference!.update({
             ...createUsersRecordData(
               fName: currentUserDisplayName,
@@ -85,13 +70,13 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
               isfree: true,
               isAdmin: false,
               subTitle: 'Free',
-              subcredit: 1000,
+              subcredit: 5000,
               subAmount: 0.00,
               subDesc: 'Perfect for beginners',
               entitledto: 'Free',
               subDate: getCurrentTimestamp,
               expired: false,
-              initialCRbal: 1000,
+              initialCRbal: 5000,
             ),
             ...mapToFirestore(
               {
@@ -104,8 +89,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
             subExpireDate:
                 functions.oneMonthDate(currentUserDocument!.subDate!),
           ));
-
-          context.goNamed(HomeWidget.routeName);
         } else {
           if (valueOrDefault<bool>(currentUserDocument?.expired, false) ==
               false) {
@@ -117,12 +100,13 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                 true) {
               await currentUserReference!.update(createUsersRecordData(
                 subTitle: 'Free',
-                subcredit: 1000,
+                subcredit: 5000,
                 subAmount: 0.00,
                 subDesc: 'You do noy have any active plan',
                 credits: 0,
                 entitledto: 'Free',
                 initialCRbal: 0,
+                isfree: true,
               ));
             }
           }
@@ -704,7 +688,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     ),
                                     Text(
                                       FFLocalizations.of(context).getText(
-                                        'uyrj41k9' /* Create the Speech from Text. */,
+                                        'uyrj41k9' /* Generate real Speech from Text... */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -882,7 +866,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     ),
                                     Text(
                                       FFLocalizations.of(context).getText(
-                                        'fbxx4i64' /* Create the Speech from audio. */,
+                                        'fbxx4i64' /* Change Your voice, sound like ... */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -1066,7 +1050,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       ),
                                       Text(
                                         FFLocalizations.of(context).getText(
-                                          'iomqytlg' /* generates a concise podcast in... */,
+                                          'iomqytlg' /* Generates real  podcast in 1mi... */,
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium

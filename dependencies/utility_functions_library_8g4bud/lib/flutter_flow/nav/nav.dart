@@ -42,27 +42,27 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => HomePageWidget(),
+      errorBuilder: (context, state) => TestPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => HomePageWidget(),
+          builder: (context, _) => TestPageWidget(),
         ),
         FFRoute(
-          name: HomePageWidget.routeName,
-          path: HomePageWidget.routePath,
-          builder: (context, params) => HomePageWidget(),
+          name: TestPageWidget.routeName,
+          path: TestPageWidget.routePath,
+          builder: (context, params) => TestPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 
 void initializeRoutes({
-  String? homePageWidgetName,
-  String? homePageWidgetPath,
+  String? testPageWidgetName,
+  String? testPageWidgetPath,
 }) {
-  HomePageWidget.maybeSetRouteName(homePageWidgetName);
-  HomePageWidget.maybeSetRoutePath(homePageWidgetPath);
+  TestPageWidget.maybeSetRouteName(testPageWidgetName);
+  TestPageWidget.maybeSetRoutePath(testPageWidgetPath);
 }
 
 extension NavParamExtensions on Map<String, String?> {

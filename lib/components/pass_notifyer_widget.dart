@@ -6,24 +6,19 @@ import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'sub_notifyer_f_r_o_n_model.dart';
-export 'sub_notifyer_f_r_o_n_model.dart';
+import 'pass_notifyer_model.dart';
+export 'pass_notifyer_model.dart';
 
 /// Create a component no internet notification
-class SubNotifyerFRONWidget extends StatefulWidget {
-  const SubNotifyerFRONWidget({
-    super.key,
-    int? creditamount,
-  }) : this.creditamount = creditamount ?? 1000;
-
-  final int creditamount;
+class PassNotifyerWidget extends StatefulWidget {
+  const PassNotifyerWidget({super.key});
 
   @override
-  State<SubNotifyerFRONWidget> createState() => _SubNotifyerFRONWidgetState();
+  State<PassNotifyerWidget> createState() => _PassNotifyerWidgetState();
 }
 
-class _SubNotifyerFRONWidgetState extends State<SubNotifyerFRONWidget> {
-  late SubNotifyerFRONModel _model;
+class _PassNotifyerWidgetState extends State<PassNotifyerWidget> {
+  late PassNotifyerModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -34,7 +29,7 @@ class _SubNotifyerFRONWidgetState extends State<SubNotifyerFRONWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => SubNotifyerFRONModel());
+    _model = createModel(context, () => PassNotifyerModel());
   }
 
   @override
@@ -78,7 +73,7 @@ class _SubNotifyerFRONWidgetState extends State<SubNotifyerFRONWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.sync_problem_sharp,
+                    Icons.lock,
                     color: FlutterFlowTheme.of(context).primary,
                     size: 26.0,
                   ),
@@ -88,10 +83,32 @@ class _SubNotifyerFRONWidgetState extends State<SubNotifyerFRONWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Oops! You’ve run out of credits. You need at least ${valueOrDefault<String>(
-                            widget!.creditamount.toString(),
-                            '1000',
-                          )} credits to continue. Top up now to unlock more voice magic .',
+                          FFLocalizations.of(context).getText(
+                            'b0wq50bk' /* Get Full Access */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.manrope(
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    fontSize: 16.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                    lineHeight: 1.144,
+                                  ),
+                        ),
+                        Text(
+                          FFLocalizations.of(context).getText(
+                            'ukftortg' /* You need a Voixr Pass to use t... */,
+                          ),
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     font: GoogleFonts.manrope(

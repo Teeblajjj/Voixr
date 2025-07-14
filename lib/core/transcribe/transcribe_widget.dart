@@ -3,6 +3,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/components/loading_screentranscript_widget.dart';
+import '/components/sub_notifyer_f_r_o_n_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
@@ -128,6 +129,8 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                 ),
                                 onPressed: () async {
                                   context.pushNamed(HomeWidget.routeName);
+
+                                  _model.soundPlayer?.stop();
                                 },
                               ),
                             ),
@@ -181,9 +184,20 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
-                                                        context.pushNamed(
-                                                            ManagesubWidget
-                                                                .routeName);
+                                                        if (valueOrDefault<
+                                                                    bool>(
+                                                                currentUserDocument
+                                                                    ?.isfree,
+                                                                false) ==
+                                                            true) {
+                                                          context.pushNamed(
+                                                              PricingWidget
+                                                                  .routeName);
+                                                        } else {
+                                                          context.pushNamed(
+                                                              ManagesubWidget
+                                                                  .routeName);
+                                                        }
                                                       },
                                                       child: Text(
                                                         valueOrDefault<String>(
@@ -1164,6 +1178,8 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    _model.soundPlayer?.stop();
+
                                     context.pushNamed(
                                       SingleWidget.routeName,
                                       queryParameters: {
@@ -1423,155 +1439,204 @@ class _TranscribeWidgetState extends State<TranscribeWidget> {
                                                   null &&
                                               FFAppState().InstlyRecorded !=
                                                   '') {
-                                            _model.created = false;
-                                            _model.isworking = true;
-                                            safeSetState(() {});
-                                            _model.tr =
-                                                await TranscriptionCall.call(
-                                              audio:
-                                                  FFAppState().InstlyRecorded,
-                                              language: valueOrDefault<String>(
-                                                _model.language,
-                                                'en',
-                                              ),
-                                            );
-
-                                            if ((_model.tr?.succeeded ??
-                                                true)) {
-                                              var transcriptionsRecordReference =
-                                                  TranscriptionsRecord
-                                                      .collection
-                                                      .doc();
-                                              await transcriptionsRecordReference
-                                                  .set(
-                                                      createTranscriptionsRecordData(
-                                                userId:
-                                                    currentUserReference?.id,
-                                                transcript: TranscriptionCall
-                                                    .defaultENG(
-                                                  (_model.tr?.jsonBody ?? ''),
-                                                ),
+                                            if (valueOrDefault(
+                                                    currentUserDocument
+                                                        ?.credits,
+                                                    0) >=
+                                                2000) {
+                                              _model.soundPlayer?.stop();
+                                              _model.created = false;
+                                              _model.isworking = true;
+                                              safeSetState(() {});
+                                              _model.tr =
+                                                  await TranscriptionCall.call(
                                                 audio:
                                                     FFAppState().InstlyRecorded,
-                                                language: _model.dropDownValue,
-                                                createdTime:
-                                                    getCurrentTimestamp,
-                                                translatedTranscript:
-                                                    TranscriptionCall
-                                                        .translated(
-                                                  (_model.tr?.jsonBody ?? ''),
+                                                language:
+                                                    valueOrDefault<String>(
+                                                  _model.language,
+                                                  'en',
                                                 ),
-                                                audioDuration: 3000,
-                                                numberOfWords:
-                                                    valueOrDefault<int>(
-                                                  functions.textCount(
+                                              );
+
+                                              if ((_model.tr?.succeeded ??
+                                                  true)) {
+                                                var transcriptionsRecordReference =
+                                                    TranscriptionsRecord
+                                                        .collection
+                                                        .doc();
+                                                await transcriptionsRecordReference
+                                                    .set(
+                                                        createTranscriptionsRecordData(
+                                                  userId:
+                                                      currentUserReference?.id,
+                                                  transcript: TranscriptionCall
+                                                      .defaultENG(
+                                                    (_model.tr?.jsonBody ?? ''),
+                                                  ),
+                                                  audio: FFAppState()
+                                                      .InstlyRecorded,
+                                                  language:
+                                                      _model.dropDownValue,
+                                                  createdTime:
+                                                      getCurrentTimestamp,
+                                                  translatedTranscript:
                                                       TranscriptionCall
                                                           .translated(
                                                     (_model.tr?.jsonBody ?? ''),
-                                                  )!),
-                                                  0,
-                                                ),
-                                              ));
-                                              _model.fulltransx = TranscriptionsRecord
-                                                  .getDocumentFromData(
-                                                      createTranscriptionsRecordData(
-                                                        userId:
-                                                            currentUserReference
-                                                                ?.id,
-                                                        transcript:
-                                                            TranscriptionCall
-                                                                .defaultENG(
-                                                          (_model.tr
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                        ),
-                                                        audio: FFAppState()
-                                                            .InstlyRecorded,
-                                                        language: _model
-                                                            .dropDownValue,
-                                                        createdTime:
-                                                            getCurrentTimestamp,
-                                                        translatedTranscript:
-                                                            TranscriptionCall
-                                                                .translated(
-                                                          (_model.tr
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                        ),
-                                                        audioDuration: 3000,
-                                                        numberOfWords:
-                                                            valueOrDefault<int>(
-                                                          functions.textCount(
+                                                  ),
+                                                  audioDuration: 3000,
+                                                  numberOfWords:
+                                                      valueOrDefault<int>(
+                                                    functions.textCount(
+                                                        TranscriptionCall
+                                                            .translated(
+                                                      (_model.tr?.jsonBody ??
+                                                          ''),
+                                                    )!),
+                                                    0,
+                                                  ),
+                                                ));
+                                                _model.fulltransx = TranscriptionsRecord
+                                                    .getDocumentFromData(
+                                                        createTranscriptionsRecordData(
+                                                          userId:
+                                                              currentUserReference
+                                                                  ?.id,
+                                                          transcript:
+                                                              TranscriptionCall
+                                                                  .defaultENG(
+                                                            (_model.tr
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                          ),
+                                                          audio: FFAppState()
+                                                              .InstlyRecorded,
+                                                          language: _model
+                                                              .dropDownValue,
+                                                          createdTime:
+                                                              getCurrentTimestamp,
+                                                          translatedTranscript:
                                                               TranscriptionCall
                                                                   .translated(
                                                             (_model.tr
                                                                     ?.jsonBody ??
                                                                 ''),
-                                                          )!),
-                                                          0,
+                                                          ),
+                                                          audioDuration: 3000,
+                                                          numberOfWords:
+                                                              valueOrDefault<
+                                                                  int>(
+                                                            functions.textCount(
+                                                                TranscriptionCall
+                                                                    .translated(
+                                                              (_model.tr
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                            )!),
+                                                            0,
+                                                          ),
                                                         ),
-                                                      ),
-                                                      transcriptionsRecordReference);
+                                                        transcriptionsRecordReference);
 
-                                              await currentUserReference!
-                                                  .update({
-                                                ...mapToFirestore(
-                                                  {
-                                                    'Credits': FieldValue
-                                                        .increment(-(functions
-                                                            .textCount(_model
-                                                                .fulltransx!
-                                                                .translatedTranscript)!)),
-                                                  },
-                                                ),
-                                              });
-                                              _model.created = true;
-                                              _model.isworking = false;
-                                              safeSetState(() {});
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    'Your Transcript is Ready!',
-                                                    style: TextStyle(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                    ),
+                                                await currentUserReference!
+                                                    .update({
+                                                  ...mapToFirestore(
+                                                    {
+                                                      'Credits': FieldValue
+                                                          .increment(-(functions
+                                                              .divide(functions
+                                                                  .textCount(_model
+                                                                      .fulltransx!
+                                                                      .translatedTranscript)!))),
+                                                    },
                                                   ),
-                                                  duration: Duration(
-                                                      milliseconds: 4000),
-                                                  backgroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondary,
-                                                ),
-                                              );
+                                                });
+                                                _model.created = true;
+                                                _model.isworking = false;
+                                                safeSetState(() {});
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'Your Transcript is Ready!',
+                                                      style: TextStyle(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                      ),
+                                                    ),
+                                                    duration: Duration(
+                                                        milliseconds: 4000),
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondary,
+                                                  ),
+                                                );
+                                              } else {
+                                                _model.created = false;
+                                                _model.isworking = false;
+                                                safeSetState(() {});
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'Internet Error Try Again!',
+                                                      style: TextStyle(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                      ),
+                                                    ),
+                                                    duration: Duration(
+                                                        milliseconds: 4000),
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondary,
+                                                  ),
+                                                );
+                                              }
                                             } else {
-                                              _model.created = false;
-                                              _model.isworking = false;
-                                              safeSetState(() {});
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    'Internet Error Try Again!',
-                                                    style: TextStyle(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
+                                              HapticFeedback.lightImpact();
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                useSafeArea: true,
+                                                context: context,
+                                                builder: (context) {
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(context)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
+                                                    },
+                                                    child: Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child:
+                                                          SubNotifyerFRONWidget(
+                                                        creditamount: 2000,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  duration: Duration(
-                                                      milliseconds: 4000),
-                                                  backgroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondary,
-                                                ),
-                                              );
+                                                  );
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
+
+                                              await Future.delayed(
+                                                  const Duration(
+                                                      milliseconds: 2500));
+
+                                              context.pushNamed(
+                                                  ManagesubWidget.routeName);
                                             }
                                           } else {
                                             ScaffoldMessenger.of(context)

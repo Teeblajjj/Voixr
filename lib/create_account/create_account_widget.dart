@@ -875,6 +875,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                               subAmount: 0.00,
                                               subcredit: 1000,
                                               subDesc: 'Perfect for beginners',
+                                              initialCRbal: 0,
                                             ));
 
                                         context.goNamedAuth(

@@ -296,7 +296,7 @@ class _CopytocbWidgetState extends State<CopytocbWidget> {
                                           .bodyMedium
                                           .fontStyle,
                                     ),
-                                maxLines: 20,
+                                maxLines: null,
                                 minLines: 5,
                                 cursorColor:
                                     FlutterFlowTheme.of(context).primaryText,

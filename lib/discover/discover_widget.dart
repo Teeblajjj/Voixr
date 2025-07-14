@@ -54,61 +54,23 @@ class _DiscoverWidgetState extends State<DiscoverWidget> {
       HapticFeedback.lightImpact();
       _model.network4 = await actions.checkInternetConnection();
       if (_model.network4 == true) {
-        await actions.logInRevenueCatUser();
-        if ((valueOrDefault<bool>(currentUserDocument?.firsttimeUser, false) ==
-                true) ||
-            valueOrDefault<bool>(
-              valueOrDefault<bool>(currentUserDocument?.firsttimeUser, false) ==
-                  null,
-              true,
-            )) {
-          await currentUserReference!.update({
-            ...createUsersRecordData(
-              fName: currentUserDisplayName,
-              firsttimeUser: false,
-              isfree: true,
-              isAdmin: false,
+        if (valueOrDefault<bool>(currentUserDocument?.expired, false) ==
+            false) {
+          if ((functions
+                      .howManyDay(getCurrentTimestamp,
+                          currentUserDocument!.subExpireDate!)
+                      .toString() ==
+                  '0') ==
+              true) {
+            await currentUserReference!.update(createUsersRecordData(
               subTitle: 'Free',
               subcredit: 1000,
               subAmount: 0.00,
-              subDesc: 'Perfect for beginners',
+              subDesc: 'You do noy have any active plan',
+              credits: 0,
               entitledto: 'Free',
-              subDate: getCurrentTimestamp,
-              expired: false,
-              initialCRbal: 1000,
-            ),
-            ...mapToFirestore(
-              {
-                'Credits': FieldValue.increment(1000),
-              },
-            ),
-          });
-
-          await currentUserReference!.update(createUsersRecordData(
-            subExpireDate:
-                functions.oneMonthDate(currentUserDocument!.subDate!),
-          ));
-
-          context.goNamed(HomeWidget.routeName);
-        } else {
-          if (valueOrDefault<bool>(currentUserDocument?.expired, false) ==
-              false) {
-            if ((functions
-                        .howManyDay(getCurrentTimestamp,
-                            currentUserDocument!.subExpireDate!)
-                        .toString() ==
-                    '0') ==
-                true) {
-              await currentUserReference!.update(createUsersRecordData(
-                subTitle: 'Free',
-                subcredit: 1000,
-                subAmount: 0.00,
-                subDesc: 'You do noy have any active plan',
-                credits: 0,
-                entitledto: 'Free',
-                initialCRbal: 0,
-              ));
-            }
+              initialCRbal: 0,
+            ));
           }
         }
       } else {

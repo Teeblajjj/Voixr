@@ -224,7 +224,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '文本转语音',
     },
     'uyrj41k9': {
-      'en': 'Create the Speech from Text.',
+      'en': 'Generate real Speech from Text.',
       'fr': 'Créer le discours à partir du texte.',
       'hi': 'पाठ से भाषण बनाएँ.',
       'sw': 'Unda Hotuba kutoka kwa maandishi.',
@@ -245,7 +245,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '人工智能语音转换器',
     },
     'fbxx4i64': {
-      'en': 'Create the Speech from audio.',
+      'en': 'Change Your voice, sound like a pro',
       'fr': 'Créez le discours à partir de l\'audio.',
       'hi': 'ऑडियो से भाषण बनाएं.',
       'sw': 'Unda Hotuba kutoka kwa sauti.',
@@ -266,7 +266,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '人工智能语音转换器',
     },
     'iomqytlg': {
-      'en': 'generates a concise podcast in 1minute.',
+      'en': 'Generates real  podcast in 1minute.',
       'fr': 'Créez le discours à partir de l\'audio.',
       'hi': 'ऑडियो से भाषण बनाएं.',
       'sw': 'Unda Hotuba kutoka kwa sauti.',
@@ -590,7 +590,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '沃伊克斯',
     },
     'aagduu72': {
-      'en': 'Used by millions of the best creators\n',
+      'en': 'Tap in. Speak out. Be heard.',
       'fr': 'Utilisé par des millions des meilleurs créateurs',
       'hi': 'लाखों सर्वश्रेष्ठ रचनाकारों द्वारा उपयोग किया गया',
       'sw': 'Inatumiwa na mamilioni ya watayarishi bora',
@@ -602,13 +602,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hi': 'ईमेल के लिए साइन इन करें',
       'sw': 'Jisajili kwa barua pepe',
       'zh_Hans': '使用电子邮件注册',
-    },
-    'o7r22byq': {
-      'en': 'Google',
-      'fr': 'Inscrivez-vous avec Google',
-      'hi': 'गूगल के साथ साइन अप करें',
-      'sw': 'Jisajili na Google',
-      'zh_Hans': '使用 Google 注册',
     },
     '4wnqsxlw': {
       'en': 'Don\'t have an account?',
@@ -756,13 +749,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'sw': 'Ingia',
       'zh_Hans': '登入',
     },
-    '6qe3b9at': {
-      'en': 'Sign in with Google',
-      'fr': 'Connectez-vous avec Google',
-      'hi': 'Google के साथ साइन इन करें',
-      'sw': 'Ingia kwa kutumia Google',
-      'zh_Hans': '使用 Google 登录',
-    },
     '0f9mnhh8': {
       'en': 'Forgot password? ',
       'fr': 'Vous n\'avez pas de compte ?',
@@ -802,7 +788,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // Profile0
   {
     'byzbwusz': {
-      'en': 'Switch to Light Mode',
+      'en': 'Switch to theme',
       'fr': 'Passer en mode clair',
       'hi': 'लाइट मोड पर स्विच करें',
       'sw': 'Badili hadi Hali ya Mwanga',
@@ -816,18 +802,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '帐户',
     },
     '6ijffmpn': {
-      'en': 'Manage plan',
+      'en': 'Manage pass',
       'fr': 'Gérer le plan',
       'hi': 'योजना प्रबंधित करें',
       'sw': 'Dhibiti mpango',
       'zh_Hans': '管理计划',
-    },
-    'kvrp50a6': {
-      'en': 'Notification Settings',
-      'fr': 'Paramètres de notification',
-      'hi': 'अधिसूचना सेटिंग्स',
-      'sw': 'Mipangilio ya Arifa',
-      'zh_Hans': '通知设置',
     },
     'hwls3mcz': {
       'en': 'Edit Profile',
@@ -1582,7 +1561,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '',
     },
     '8cbzje0y': {
-      'en': 'Voixr Pro',
+      'en': 'Pulse',
       'fr': '',
       'hi': '',
       'sw': '',
@@ -1618,7 +1597,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '',
     },
     'sbh4kl9t': {
-      'en': 'Voixr Plus',
+      'en': 'Prime',
       'fr': '',
       'hi': '',
       'sw': '',
@@ -1654,7 +1633,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'thew2vlp': {
       'en':
-          'Unlock a full year of power of Voixr with plus. long-term access to all Voixr’s advanced voice features at the best value. Unlimited credit top up  access.',
+          'Unlock a full year  power access with Prime. long-term access to all Voixr’s advanced voice features at the best value. Unlimited credit top up  access.',
       'fr': '',
       'hi': '',
       'sw': '',
@@ -1734,7 +1713,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '',
     },
     '5ajhvvp6': {
-      'en': 'Credits Balance',
+      'en': 'Credit Balance',
       'fr': '',
       'hi': '',
       'sw': '',
@@ -2152,11 +2131,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '',
     },
   },
-  // subNotifyerFRON
+  // PassNotifyer
   {
-    '2fzdvmch': {
+    'b0wq50bk': {
+      'en': 'Get Full Access',
+      'fr': '',
+      'hi': '',
+      'sw': '',
+      'zh_Hans': '',
+    },
+    'ukftortg': {
       'en':
-          'You already have an active pass. You can purchase a new one once your current pass expires.',
+          'You need a Voixr Pass to use this feature.\nUpgrade now and explore the full power of Voixr Studio.',
       'fr': '',
       'hi': '',
       'sw': '',

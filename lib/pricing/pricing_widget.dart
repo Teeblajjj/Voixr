@@ -179,7 +179,7 @@ class _PricingWidgetState extends State<PricingWidget> {
                                         children: [
                                           Text(
                                             FFLocalizations.of(context).getText(
-                                              '8cbzje0y' /* Voixr Pro */,
+                                              '8cbzje0y' /* Pulse */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .titleLarge
@@ -395,32 +395,32 @@ class _PricingWidgetState extends State<PricingWidget> {
                                                         currentUserDocument
                                                             ?.subTitle,
                                                         '') ==
-                                                    'Voixr Pro') ||
+                                                    'Pulse') ||
                                                 (valueOrDefault(
                                                         currentUserDocument
                                                             ?.subTitle,
                                                         '') ==
-                                                    'Voixr Plus'))) {
+                                                    'Prime'))) {
                                               _model.proSub = await revenue_cat
                                                   .purchasePackage(
                                                       valueOrDefault<String>(
                                                 revenue_cat.offerings!.current!
-                                                    .getPackage('voixr_pro_11')!
+                                                    .getPackage('pulse')!
                                                     .storeProduct
                                                     .identifier,
-                                                'voixr_pro_11',
+                                                'pulse',
                                               ));
                                               if (_model.proSub!) {
                                                 await currentUserReference!
                                                     .update({
                                                   ...createUsersRecordData(
                                                     isfree: false,
-                                                    subTitle: 'Voixr Pro',
+                                                    subTitle: 'Pulse',
                                                     subcredit: 20000,
                                                     subDesc:
                                                         'Get creative every month with Voixr Pro',
                                                     subAmount: 9.99,
-                                                    entitledto: 'voixr_pro_11',
+                                                    entitledto: 'pulse',
                                                     subDate:
                                                         getCurrentTimestamp,
                                                   ),
@@ -501,16 +501,16 @@ class _PricingWidgetState extends State<PricingWidget> {
                                                     currentUserDocument
                                                         ?.subTitle,
                                                     '') ==
-                                                'Voixr Pro') {
+                                                'Pulse') {
                                               return 'Current pass';
                                             } else if (valueOrDefault(
                                                     currentUserDocument
                                                         ?.subTitle,
                                                     '') ==
-                                                'Voixr Plus') {
-                                              return 'Downgrade to Pro';
+                                                'Prime') {
+                                              return 'Downgrade to Pulse';
                                             } else {
-                                              return 'Buy Pro pass';
+                                              return 'Buy Now';
                                             }
                                           }(),
                                           icon: Icon(
@@ -597,7 +597,7 @@ class _PricingWidgetState extends State<PricingWidget> {
                                               Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  'sbh4kl9t' /* Voixr Plus */,
+                                                  'sbh4kl9t' /* Prime */,
                                                 ),
                                                 style: FlutterFlowTheme.of(
                                                         context)
@@ -685,7 +685,7 @@ class _PricingWidgetState extends State<PricingWidget> {
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
-                                                      112.0, 9.0, 0.0, 0.0),
+                                                      73.0, 9.0, 0.0, 0.0),
                                               child: Container(
                                                 width: 60.0,
                                                 decoration: BoxDecoration(
@@ -848,7 +848,7 @@ class _PricingWidgetState extends State<PricingWidget> {
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
-                                                    'thew2vlp' /* Unlock a full year of power of... */,
+                                                    'thew2vlp' /* Unlock a full year  power acce... */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -892,31 +892,29 @@ class _PricingWidgetState extends State<PricingWidget> {
                                                     currentUserDocument
                                                         ?.subTitle,
                                                     '') !=
-                                                'Voixr Plus') {
+                                                'Prime') {
                                               _model.voixrPlusYearlySub =
                                                   await revenue_cat
                                                       .purchasePackage(
                                                           valueOrDefault<
                                                               String>(
                                                 revenue_cat.offerings!.current!
-                                                    .getPackage(
-                                                        'voixr_plus_11')!
+                                                    .getPackage('prime')!
                                                     .storeProduct
                                                     .identifier,
-                                                'voixr_plus_11',
+                                                'prime',
                                               ));
                                               if (_model.voixrPlusYearlySub!) {
                                                 await currentUserReference!
                                                     .update({
                                                   ...createUsersRecordData(
                                                     isfree: false,
-                                                    subTitle: 'Voixr Plus',
+                                                    subTitle: 'Prime',
                                                     subcredit: 200000,
                                                     subAmount: 99.99,
                                                     subDesc:
                                                         'Designed for active creators, podcasters, and freelancers',
-                                                    entitledto:
-                                                        'voixr_plus_plan',
+                                                    entitledto: 'prime',
                                                     subDate:
                                                         getCurrentTimestamp,
                                                   ),
@@ -997,16 +995,16 @@ class _PricingWidgetState extends State<PricingWidget> {
                                                     currentUserDocument
                                                         ?.subTitle,
                                                     '') ==
-                                                'Voixr Plus') {
+                                                'Prime') {
                                               return 'Current pass';
                                             } else if (valueOrDefault(
                                                     currentUserDocument
                                                         ?.subTitle,
                                                     '') ==
-                                                'Voixr Pro') {
-                                              return 'Upgrade to Plus';
+                                                'Pulse') {
+                                              return 'Upgrade to Prime';
                                             } else {
-                                              return 'Buy Plus pass';
+                                              return 'Buy Now';
                                             }
                                           }(),
                                           icon: Icon(

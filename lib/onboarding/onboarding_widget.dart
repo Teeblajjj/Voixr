@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
@@ -10,7 +9,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'onboarding_model.dart';
@@ -96,7 +94,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                   'assets/images/APP_pa_SgeCREEN12.gif',
                                   width: double.infinity,
                                   height: 210.0,
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.fitWidth,
                                 ),
                               ),
                             ),
@@ -111,7 +109,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .displayMedium
                                     .override(
-                                      font: GoogleFonts.raleway(
+                                      font: GoogleFonts.ubuntu(
                                         fontWeight: FontWeight.bold,
                                         fontStyle: FlutterFlowTheme.of(context)
                                             .displayMedium
@@ -132,7 +130,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                   24.0, 12.0, 24.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
-                                  'aagduu72' /* Used by millions of the best c... */,
+                                  'aagduu72' /* Tap in. Speak out. Be heard. */,
                                 ),
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
@@ -154,7 +152,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                     ),
                               ),
                             ),
-                          ],
+                          ].addToEnd(SizedBox(height: 44.0)),
                         ),
                       ),
                     ),
@@ -178,17 +176,18 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                             'h6zxvauu' /* Sign in */,
                           ),
                           icon: Icon(
-                            Icons.mail_outline,
-                            size: 24.0,
+                            Icons.arrow_circle_right_outlined,
+                            size: 18.0,
                           ),
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 50.0,
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
+                            iconAlignment: IconAlignment.end,
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 12.0, 0.0),
-                            color: Color(0xFF070707),
+                            color: FlutterFlowTheme.of(context).primaryText,
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleLarge
                                 .override(
@@ -198,8 +197,9 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                         .titleLarge
                                         .fontStyle,
                                   ),
-                                  color: Colors.white,
-                                  fontSize: 18.0,
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  fontSize: 19.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.bold,
                                   fontStyle: FlutterFlowTheme.of(context)
@@ -208,7 +208,6 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                 ),
                             elevation: 0.0,
                             borderSide: BorderSide(
-                              color: Color(0xFF222324),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(50.0),
@@ -216,62 +215,6 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                 FlutterFlowTheme.of(context).primaryText,
                             hoverTextColor: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 8.0, 16.0, 16.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            GoRouter.of(context).prepareAuthEvent();
-                            final user =
-                                await authManager.signInWithGoogle(context);
-                            if (user == null) {
-                              return;
-                            }
-
-                            context.goNamedAuth(
-                                HomeWidget.routeName, context.mounted);
-                          },
-                          text: FFLocalizations.of(context).getText(
-                            'o7r22byq' /* Google */,
-                          ),
-                          icon: FaIcon(
-                            FontAwesomeIcons.google,
-                            size: 19.0,
-                          ),
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 50.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 12.0, 0.0),
-                            color: Colors.white,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  font: GoogleFonts.outfit(
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleLarge
-                                        .fontStyle,
-                                  ),
-                                  color: Color(0xFF060606),
-                                  fontSize: 18.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .fontStyle,
-                                ),
-                            elevation: 0.0,
-                            borderSide: BorderSide(
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(50.0),
-                            hoverColor: FlutterFlowTheme.of(context).alternate,
                           ),
                         ),
                       ),

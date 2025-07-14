@@ -88,8 +88,8 @@ class AppStateNotifier extends ChangeNotifier {
 
 GoRouter createRouter(AppStateNotifier appStateNotifier) {
   $utility_functions_library_8g4bud.initializeRoutes(
-    homePageWidgetName: 'utility_functions_library_8g4bud.HomePage',
-    homePageWidgetPath: 'homePage',
+    testPageWidgetName: 'utility_functions_library_8g4bud.TestPage',
+    testPageWidgetPath: 'homePage',
   );
 
   return GoRouter(
@@ -316,11 +316,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) {
             builder: (context, params) => ForgotPassWidget(),
           ),
           FFRoute(
-            name: $utility_functions_library_8g4bud.HomePageWidget.routeName,
-            path: $utility_functions_library_8g4bud.HomePageWidget.routePath,
+            name: $utility_functions_library_8g4bud.TestPageWidget.routeName,
+            path: $utility_functions_library_8g4bud.TestPageWidget.routePath,
             requireAuth: true,
             builder: (context, params) =>
-                $utility_functions_library_8g4bud.HomePageWidget(),
+                $utility_functions_library_8g4bud.TestPageWidget(),
           )
         ].map((r) => r.toRoute(appStateNotifier)).toList(),
       ),

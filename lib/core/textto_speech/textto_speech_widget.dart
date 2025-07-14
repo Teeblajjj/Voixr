@@ -3,6 +3,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/components/created_audio_history_widget.dart';
 import '/components/loading_screen_widget.dart';
+import '/components/sub_notifyer_f_r_o_n_widget.dart';
 import '/flutter_flow/flutter_flow_audio_player.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -868,137 +869,200 @@ class _TexttoSpeechWidgetState extends State<TexttoSpeechWidget> {
                                                             '')
                                                     ? null
                                                     : () async {
-                                                        await Future.delayed(
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    500));
-                                                        _model.isgen = true;
-                                                        safeSetState(() {});
-                                                        HapticFeedback
-                                                            .mediumImpact();
-                                                        _model.bsresult =
-                                                            await BuildshipCall
-                                                                .call(
-                                                          text: _model
-                                                              .textController
-                                                              .text,
-                                                          voiceId: widget!.id,
-                                                        );
-
-                                                        if ((_model.bsresult
-                                                                ?.succeeded ??
-                                                            true)) {
-                                                          var speechDataRecordReference =
-                                                              SpeechDataRecord
-                                                                  .collection
-                                                                  .doc();
-                                                          await speechDataRecordReference
-                                                              .set(
-                                                                  createSpeechDataRecordData(
-                                                            originalText: _model
-                                                                .textController
-                                                                .text,
-                                                            modifiedAudioUrl:
-                                                                (_model.bsresult
-                                                                        ?.bodyText ??
-                                                                    ''),
-                                                            sourceType: 'TTS',
-                                                            voiceId: widget!.id,
-                                                            createdAt:
-                                                                getCurrentTimestamp,
-                                                            userId:
-                                                                currentUserReference
-                                                                    ?.id,
-                                                            title:
-                                                                'Voixr - ${random_data.randomInteger(0, 10000).toString()}',
-                                                            byname:
-                                                                currentUserDisplayName,
-                                                            newAudio: utility_functions_library_8g4bud_functions
-                                                                .convertStringToAudioPath((_model
-                                                                        .bsresult
-                                                                        ?.bodyText ??
-                                                                    '')),
-                                                          ));
-                                                          _model.newCreation =
-                                                              SpeechDataRecord
-                                                                  .getDocumentFromData(
-                                                                      createSpeechDataRecordData(
-                                                                        originalText: _model
-                                                                            .textController
-                                                                            .text,
-                                                                        modifiedAudioUrl:
-                                                                            (_model.bsresult?.bodyText ??
-                                                                                ''),
-                                                                        sourceType:
-                                                                            'TTS',
-                                                                        voiceId:
-                                                                            widget!.id,
-                                                                        createdAt:
-                                                                            getCurrentTimestamp,
-                                                                        userId:
-                                                                            currentUserReference?.id,
-                                                                        title:
-                                                                            'Voixr - ${random_data.randomInteger(0, 10000).toString()}',
-                                                                        byname:
-                                                                            currentUserDisplayName,
-                                                                        newAudio:
-                                                                            utility_functions_library_8g4bud_functions.convertStringToAudioPath((_model.bsresult?.bodyText ??
-                                                                                '')),
-                                                                      ),
-                                                                      speechDataRecordReference);
-
-                                                          await currentUserReference!
-                                                              .update({
-                                                            ...mapToFirestore(
-                                                              {
-                                                                'Credits': FieldValue
-                                                                    .increment(-(functions
-                                                                        .textCount(
-                                                                            valueOrDefault<String>(
-                                                                  _model
-                                                                      .newCreation
-                                                                      ?.originalText,
-                                                                  'Original text',
-                                                                ))!)),
-                                                              },
-                                                            ),
-                                                          });
-                                                          _model.newaudiopath =
-                                                              (_model.bsresult
-                                                                      ?.bodyText ??
-                                                                  '');
-                                                          _model.audiotitle =
-                                                              _model.newCreation
-                                                                  ?.title;
-                                                          _model.isgen = false;
+                                                        if (valueOrDefault(
+                                                                currentUserDocument
+                                                                    ?.credits,
+                                                                0) >=
+                                                            functions.textCount(
+                                                                _model
+                                                                    .textController
+                                                                    .text)!) {
+                                                          await Future.delayed(
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      500));
+                                                          _model.isgen = true;
                                                           safeSetState(() {});
                                                           HapticFeedback
                                                               .mediumImpact();
-                                                        } else {
-                                                          _model.isgen = false;
-                                                          safeSetState(() {});
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                            SnackBar(
-                                                              content: Text(
-                                                                'Ooops! Please click on change voice to select another voice and try again.',
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryText,
-                                                                ),
-                                                              ),
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      4000),
-                                                              backgroundColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondary,
-                                                            ),
+                                                          _model.bsresult =
+                                                              await BuildshipCall
+                                                                  .call(
+                                                            text: _model
+                                                                .textController
+                                                                .text,
+                                                            voiceId: widget!.id,
                                                           );
+
+                                                          if ((_model.bsresult
+                                                                  ?.succeeded ??
+                                                              true)) {
+                                                            var speechDataRecordReference =
+                                                                SpeechDataRecord
+                                                                    .collection
+                                                                    .doc();
+                                                            await speechDataRecordReference
+                                                                .set(
+                                                                    createSpeechDataRecordData(
+                                                              originalText: _model
+                                                                  .textController
+                                                                  .text,
+                                                              modifiedAudioUrl:
+                                                                  (_model.bsresult
+                                                                          ?.bodyText ??
+                                                                      ''),
+                                                              sourceType: 'TTS',
+                                                              voiceId:
+                                                                  widget!.id,
+                                                              createdAt:
+                                                                  getCurrentTimestamp,
+                                                              userId:
+                                                                  currentUserReference
+                                                                      ?.id,
+                                                              title:
+                                                                  'Voixr - ${random_data.randomInteger(0, 10000).toString()}',
+                                                              byname:
+                                                                  currentUserDisplayName,
+                                                              newAudio: utility_functions_library_8g4bud_functions
+                                                                  .convertStringToAudioPath((_model
+                                                                          .bsresult
+                                                                          ?.bodyText ??
+                                                                      '')),
+                                                            ));
+                                                            _model.newCreation =
+                                                                SpeechDataRecord
+                                                                    .getDocumentFromData(
+                                                                        createSpeechDataRecordData(
+                                                                          originalText: _model
+                                                                              .textController
+                                                                              .text,
+                                                                          modifiedAudioUrl:
+                                                                              (_model.bsresult?.bodyText ?? ''),
+                                                                          sourceType:
+                                                                              'TTS',
+                                                                          voiceId:
+                                                                              widget!.id,
+                                                                          createdAt:
+                                                                              getCurrentTimestamp,
+                                                                          userId:
+                                                                              currentUserReference?.id,
+                                                                          title:
+                                                                              'Voixr - ${random_data.randomInteger(0, 10000).toString()}',
+                                                                          byname:
+                                                                              currentUserDisplayName,
+                                                                          newAudio:
+                                                                              utility_functions_library_8g4bud_functions.convertStringToAudioPath((_model.bsresult?.bodyText ?? '')),
+                                                                        ),
+                                                                        speechDataRecordReference);
+
+                                                            await currentUserReference!
+                                                                .update({
+                                                              ...mapToFirestore(
+                                                                {
+                                                                  'Credits': FieldValue.increment(
+                                                                      -(functions
+                                                                          .textCount(
+                                                                              valueOrDefault<String>(
+                                                                    _model
+                                                                        .newCreation
+                                                                        ?.originalText,
+                                                                    'Original text',
+                                                                  ))!)),
+                                                                },
+                                                              ),
+                                                            });
+                                                            _model.newaudiopath =
+                                                                (_model.bsresult
+                                                                        ?.bodyText ??
+                                                                    '');
+                                                            _model.audiotitle =
+                                                                _model
+                                                                    .newCreation
+                                                                    ?.title;
+                                                            _model.isgen =
+                                                                false;
+                                                            safeSetState(() {});
+                                                            HapticFeedback
+                                                                .mediumImpact();
+                                                          } else {
+                                                            _model.isgen =
+                                                                false;
+                                                            safeSetState(() {});
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              SnackBar(
+                                                                content: Text(
+                                                                  'Ooops! Please click on change voice to select another voice and try again.',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
+                                                                  ),
+                                                                ),
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        4000),
+                                                                backgroundColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondary,
+                                                              ),
+                                                            );
+                                                          }
+                                                        } else {
+                                                          HapticFeedback
+                                                              .lightImpact();
+                                                          await showModalBottomSheet(
+                                                            isScrollControlled:
+                                                                true,
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            useSafeArea: true,
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return GestureDetector(
+                                                                onTap: () {
+                                                                  FocusScope.of(
+                                                                          context)
+                                                                      .unfocus();
+                                                                  FocusManager
+                                                                      .instance
+                                                                      .primaryFocus
+                                                                      ?.unfocus();
+                                                                },
+                                                                child: Padding(
+                                                                  padding: MediaQuery
+                                                                      .viewInsetsOf(
+                                                                          context),
+                                                                  child:
+                                                                      SubNotifyerFRONWidget(
+                                                                    creditamount:
+                                                                        valueOrDefault<
+                                                                            int>(
+                                                                      functions.textCount(_model
+                                                                          .textController
+                                                                          .text),
+                                                                      1000,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                          ).then((value) =>
+                                                              safeSetState(
+                                                                  () {}));
+
+                                                          await Future.delayed(
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      2500));
+
+                                                          context.pushNamed(
+                                                              ManagesubWidget
+                                                                  .routeName);
                                                         }
 
                                                         safeSetState(() {});
